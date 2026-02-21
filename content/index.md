@@ -1,21 +1,18 @@
 ---
 seo:
-  title: Nuxt Docs Template
-  description: Create stunning, fast and SEO-optimized documentation sites with Nuxt UI.
+  title: MavonEngine — Multiplayer 3D Game Engine
+  description: Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking.
 ---
 
 ::u-page-hero{class="dark:bg-gradient-to-b from-neutral-900 to-neutral-950"}
 ---
 orientation: horizontal
 ---
-#top
-:hero-background
-
 #title
-Ship Beautiful [Documentation]{.text-primary}.
+Multiplayer 3D [Game Engine]{.text-primary}
 
 #description
-Build professional documentation with Nuxt UI's powerful components, enhanced typography, and seamless Nuxt Content integration. The same system trusted by the entire [Nuxt ecosystem](https://nuxt.com).
+Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking.
 
 #links
   :::u-button
@@ -29,171 +26,164 @@ Build professional documentation with Nuxt UI's powerful components, enhanced ty
 
   :::u-button
   ---
-  icon: i-simple-icons-github
   color: neutral
   variant: outline
   size: xl
-  to: https://github.com/nuxt-ui-templates/docs
-  target: _blank
+  to: /community
   ---
-  Use this template
+  Join the community
   :::
 
 #default
   :::prose-pre
   ---
   code: |
-    export default defineNuxtConfig({
-      modules: [
-        '@nuxt/ui',
-        '@nuxt/content',
-        'nuxt-og-image',
-        'nuxt-llms'
-      ],
+    import { MavonServer, MavonClient, Entity } from 'mavonengine'
 
-      css: ['~/assets/css/main.css']
+    // Server-side game world
+    const server = new MavonServer()
+
+    server.onPlayerJoin((player) => {
+      const entity = new Entity({ position: [0, 1, 0] })
+      server.world.add(entity)
+      server.sync(player, entity)
     })
-  filename: nuxt.config.ts
+
+    server.start(3000)
+  filename: server.ts
   ---
 
-  ```ts [nuxt.config.ts]
-  export default defineNuxtConfig({
-    modules: [
-      '@nuxt/ui',
-      '@nuxt/content',
-      'nuxt-og-image',
-      'nuxt-llms'
-    ],
+  ```ts [server.ts]
+  import { MavonServer, MavonClient, Entity } from 'mavonengine'
 
-    css: ['~/assets/css/main.css']
+  // Server-side game world
+  const server = new MavonServer()
+
+  server.onPlayerJoin((player) => {
+    const entity = new Entity({ position: [0, 1, 0] })
+    server.world.add(entity)
+    server.sync(player, entity)
   })
+
+  server.start(3000)
   ```
   :::
 ::
 
-::u-page-section{class="dark:bg-neutral-950"}
+::u-page-section
 #title
-Powered by Nuxt UI components
+Everything in one cohesive package
 
-#links
-  :::u-button
-  ---
-  color: neutral
-  size: lg
-  target: _blank
-  to: https://ui.nuxt.com/docs/getting-started/installation/nuxt
-  trailingIcon: i-lucide-arrow-right
-  variant: subtle
-  ---
-  Explore Nuxt UI
-  :::
+#description
+No more piecing together libraries. MavonEngine ships rendering, physics, networking, animation, particles, and debugging as a unified whole.
 
 #features
-  :::u-page-feature
-  ---
-  icon: i-lucide-palette
-  ---
-  #title
-  100+ UI Components
-
-  #description
-  Access the complete Nuxt UI component library. From badges to modals, everything styled and accessible out of the box.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-type
-  ---
-  #title
-  Beautiful Typography
-
-  #description
-  Pre-styled prose components with perfect visual harmony. No need for @tailwindcss/typography - get precise control over every element.
-  :::
-
   :::u-page-feature
   ---
   icon: i-lucide-layers
   ---
   #title
-  Rich Prose Components
+  Full-Stack Multiplayer Architecture
 
   #description
-  Accordions, cards, callouts, tabs, steps, code blocks, and more - all provided by Nuxt UI for interactive documentation.
+  Shared Entity System — write once, run on server and client. Automatic state synchronization with bandwidth optimization, distance-based culling for entity visibility, and hash-based change detection to minimize network traffic.
   :::
 
   :::u-page-feature
   ---
-  icon: i-lucide-search
+  icon: i-lucide-zap
   ---
   #title
-  Built-in Search
+  Integrated 3D Physics with Rapier
 
   #description
-  Full-text search with ContentSearch component. No need for Algolia - instant, relevant results with keyboard shortcuts (⌘K).
+  Kinematic character controller with slope climbing and sliding. Configurable parameters — 45° climb, 30° auto-slide. Full body & collider management and physics debug visualization in real-time.
   :::
 
   :::u-page-feature
   ---
-  icon: i-lucide-navigation
+  icon: i-lucide-monitor
   ---
   #title
-  Smart Navigation
+  Advanced 3D Rendering with Three.js
 
   #description
-  Auto-generated navigation with ContentNavigation and ContentToc components. Sticky table of contents and prev/next links.
+  Custom GLSL shader support with debug rendering modes — wireframe, armature, and physics overlays.
   :::
 
   :::u-page-feature
   ---
-  icon: i-lucide-moon
+  icon: i-lucide-wifi
   ---
   #title
-  Dark Mode Ready
+  Real-Time Multiplayer Networking
 
   #description
-  Automatic theme switching with smooth transitions. Respects system preferences and remembers user choice.
+  WebRTC-based communication for real-time data channels. Bandwidth tracking & monitoring, command buffering & processing across network latency, and server health monitoring with built-in HTTP endpoints.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-play
+  ---
+  #title
+  Skeletal Animation System
+
+  #description
+  Animation state management with logical organization. Smooth fade transitions with configurable duration, GLTF model support with Draco compression, and efficient skeleton cloning for instanced models.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-sparkles
+  ---
+  #title
+  Particle Effects Framework
+
+  #description
+  Built-in effects — rain and smoke ready to use. Custom shader support for unique particle visuals.
   :::
 ::
 
-::u-page-section{class="dark:bg-neutral-950"}
+::u-page-section
 #title
-Enhanced with Nuxt Content
+Built different
 
-#links
-  :::u-button
-  ---
-  color: neutral
-  size: lg
-  target: _blank
-  to: https://content.nuxt.com/docs/getting-started/installation
-  trailingIcon: i-lucide-arrow-right
-  variant: subtle
-  ---
-  Explore Nuxt Content
-  :::
+#description
+Most multiplayer browser games are held together with duct tape. MavonEngine is designed from the ground up as a unified system.
 
 #features
   :::u-page-feature
   ---
-  icon: i-simple-icons-markdown
+  icon: i-lucide-package
   ---
   #title
-  MDC Enhanced Markdown
+  Complete Solution
 
   #description
-  Write in Markdown while embedding Vue components. Seamlessly integrate interactive elements in your content.
+  Rendering, physics, networking, entity management, asset loading, animation, particles, and debugging tools in one cohesive package.
   :::
 
   :::u-page-feature
   ---
-  icon: i-lucide-file-text
+  icon: i-lucide-server
   ---
   #title
-  File-based Routing
+  Server + Client Unity
 
   #description
-  Organize content in folders and files. Your documentation structure automatically becomes your navigation.
+  Write game logic once and it works on both server and client. The shared entity system eliminates duplication and drift.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-globe
+  ---
+  #title
+  Networking Built In
+
+  #description
+  Distance-based culling, hash-based change detection, bandwidth monitoring, and automatic state synchronization — all built in, none bolted on.
   :::
 
   :::u-page-feature
@@ -201,63 +191,79 @@ Enhanced with Nuxt Content
   icon: i-lucide-code
   ---
   #title
-  Syntax Highlighting
+  Developer Experience
 
   #description
-  Beautiful code blocks with language detection, line numbers, and copy buttons. Support for 100+ languages.
+  Tweakpane integration, debug visualization, performance monitoring, and comprehensive TypeScript types. Catch bugs fast, ship faster.
   :::
 
   :::u-page-feature
   ---
-  icon: i-lucide-database
+  icon: i-lucide-puzzle
   ---
   #title
-  Content Database
+  Extensible Architecture
 
   #description
-  Query your content with a MongoDB-like API. Filter, sort, and search through your documentation programmatically.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-file-code
-  ---
-  #title
-  Frontmatter Support
-
-  #description
-  Add metadata to your content files. Define SEO tags, navigation properties, and custom fields.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-git-branch
-  ---
-  #title
-  Version Control
-
-  #description
-  Content lives in your repository. Branch, review, and deploy documentation alongside your code.
+  Abstract base classes let you customize servers, entities, and game logic without fighting the framework. Designed to grow with your project.
   :::
 ::
 
-::u-page-section{class="dark:bg-gradient-to-b from-neutral-950 to-neutral-900"}
+::u-page-section
+#title
+What can you build?
+
+#description
+MavonEngine is purpose-built for real-time multiplayer. Anything that needs players, physics, and a world in the browser.
+
+#features
+  :::u-page-feature
+  ---
+  icon: i-lucide-star
+  ---
+  #title
+  Action RPGs
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-gamepad-2
+  ---
+  #title
+  PvP Combat Games
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-globe-2
+  ---
+  #title
+  Open World Multiplayer
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-box
+  ---
+  #title
+  Physics-Based Games
+  :::
+::
+
+::u-page-section
   :::u-page-c-t-a
   ---
   links:
-    - label: Start building
-      to: '/getting-started'
+    - label: Join the community
+      to: /community
       trailingIcon: i-lucide-arrow-right
     - label: View on GitHub
-      to: 'https://github.com/nuxt-ui-templates/docs'
+      to: https://github.com
       target: _blank
       variant: subtle
       icon: i-simple-icons-github
-  title: Ready to build an amazing documentation?
-  description: Join thousands of developers building with Nuxt and Nuxt UI. Get this template and start shipping today.
-  class: dark:bg-neutral-950
+  title: Build Multiplayer 3D Games Faster
+  description: Server + Client + Physics + Networking + Rendering + Animation + Particles + Debugging. All in one package. All working together. All TypeScript.
   ---
-
-  :stars-bg
   :::
 ::
