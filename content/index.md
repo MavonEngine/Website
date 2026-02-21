@@ -4,7 +4,7 @@ seo:
   description: Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking.
 ---
 
-::u-page-hero{class="dark:bg-gradient-to-b from-neutral-900 to-neutral-950"}
+::u-page-hero{class="overflow-hidden"}
 ---
 orientation: horizontal
 ---
@@ -29,7 +29,7 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   color: neutral
   variant: outline
   size: xl
-  to: /community
+  href: /community
   ---
   Join the community
   :::
@@ -255,7 +255,7 @@ MavonEngine is purpose-built for real-time multiplayer. Anything that needs play
   ---
   links:
     - label: Join the community
-      to: /community
+      href: /community
       trailingIcon: i-lucide-arrow-right
     - label: View on GitHub
       to: https://github.com

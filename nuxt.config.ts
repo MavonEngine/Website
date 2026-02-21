@@ -30,6 +30,10 @@ export default defineNuxtConfig({
     asyncContext: true
   },
 
+  colorMode: {
+    preference: 'dark'
+  },
+
   compatibilityDate: '2024-07-11',
 
   nitro: {
@@ -56,12 +60,12 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://docs-template.nuxt.dev/',
-    title: 'Nuxt Docs Template',
-    description: 'A template for building documentation with Nuxt UI and Nuxt Content.',
+    domain: 'https://mavonengine.dev/',
+    title: 'MavonEngine',
+    description: 'Full-stack multiplayer 3D game engine for the browser. Built with TypeScript, Three.js, Rapier, and WebRTC.',
     full: {
-      title: 'Nuxt Docs Template - Full Documentation',
-      description: 'This is the full documentation for the Nuxt Docs Template.'
+      title: 'MavonEngine - Full Documentation',
+      description: 'Complete documentation for MavonEngine.'
     },
     sections: [
       {
@@ -82,6 +86,6 @@ export default defineNuxtConfig({
   },
 
   mcp: {
-    name: 'Docs template'
+    name: 'MavonEngine docs'
   }
 })
