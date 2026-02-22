@@ -33,6 +33,9 @@ export default defineNuxtConfig({
       routes: [
         '/'
       ],
+      ignore: [
+        '/community'
+      ],
       crawlLinks: true,
       autoSubfolderIndex: false
     }
