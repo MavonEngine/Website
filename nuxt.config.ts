@@ -1,14 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    '@nuxt/eslint',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@nuxt/content',
-    'nuxt-og-image',
-    'nuxt-llms',
-    '@nuxtjs/mcp-toolkit'
-  ],
+  modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/ui', '@nuxt/content', 'nuxt-og-image', 'nuxt-llms', '@nuxtjs/mcp-toolkit', 'nuxt-umami'],
 
   devtools: {
     enabled: true
@@ -87,5 +79,13 @@ export default defineNuxtConfig({
 
   mcp: {
     name: 'MavonEngine docs'
-  }
+  },
+
+  umami: {
+    id: 'd065dc99-7c95-43e4-9a1a-a38d087e0a54',
+    host: 'https://cloud.umami.is/',
+    autoTrack: true,
+    enabled: true,
+    domains: ['mavonengine.com']
+  },
 })
