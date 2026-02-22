@@ -5,21 +5,144 @@
 
 @theme static {
   --container-8xl: 90rem;
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: 'Inter', 'system-ui', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
+  /* Brand blue palette (Catppuccin Mocha-inspired, anchor: #89b4fa at 400) */
+  --color-blue-50: #f0f4ff;
+  --color-blue-100: #e0e9fe;
+  --color-blue-200: #c2d5fd;
+  --color-blue-300: #a5c0fb;
+  --color-blue-400: #89b4fa;
+  --color-blue-500: #6b9cf7;
+  --color-blue-600: #4d82f0;
+  --color-blue-700: #3368e0;
+  --color-blue-800: #2451c4;
+  --color-blue-900: #1a3a9e;
+  --color-blue-950: #0f2270;
 }
 
 :root {
   --ui-container: var(--container-8xl);
+  /* Override to 0 — we apply padding-top explicitly on UMain below
+     because the custom header doesn't use UHeader's JS to set this */
+  --ui-header-height: 0px;
+}
+
+/* Push all page content below the 56px fixed header */
+main {
+  padding-top: 56px;
+}
+
+/* Dark theme base — identical multi-layer background to Flarum */
+html {
+  scroll-behavior: smooth;
+}
+
+.dark,
+.dark body {
+  background-color: #11111b;
+  /* Layer order (front → back):
+     1. radial glow at top-centre
+     2. fade mask: transparent → #11111b between 50vh and 130vh
+     3. horizontal grid lines (repeating)
+     4. vertical grid lines (repeating) */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(137, 180, 250, 0.15) 0%, transparent 70%),
+    linear-gradient(to bottom, transparent 50vh, #11111b 130vh),
+    linear-gradient(rgba(137, 180, 250, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(137, 180, 250, 0.04) 1px, transparent 1px);
+  /* background-size: 100% 100% on the fade layer stretches it to the full page so
+     the grid is permanently hidden below the fade point, not just for 1 screen. */
+  background-size: 100% 100vh, 100% 100%, 60px 60px, 60px 60px;
+  background-repeat: no-repeat, no-repeat, repeat, repeat;
+}
+
+/* ─── Custom header — mirrors Flarum's injected nav exactly ─────────────── */
+.mavon-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  background: rgba(17, 17, 27, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mavon-header-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.mavon-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.mavon-logo-text {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 600;
+  color: white;
+  letter-spacing: -0.025em;
+  font-size: 15px;
+}
+
+.mavon-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.mavon-header-right {
+  margin-left: auto;
+}
+
+/* Nav links — matches .mavon-nav-link in Flarum's extend.php */
+.mavon-nav-link {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: Inter, system-ui, sans-serif;
+  transition: color 0.15s;
+}
+.mavon-nav-link:hover { color: #ffffff; }
+
+/* Hide nav on mobile (same as Flarum) */
+@media (max-width: 767px) {
+  .mavon-nav { display: none; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #11111b; }
+::-webkit-scrollbar-thumb { background: #313244; border-radius: 3px; }
+
+/* Card glow on hover */
+.card-glow:hover {
+  box-shadow: 0 0 0 1px rgba(137, 180, 250, 0.3), 0 8px 32px rgba(137, 180, 250, 0.08);
+}
+
+/* CTA pill button — matches Flarum's "← Main site" button exactly */
+.mavon-cta {
+  font-size: 13px;
+  font-weight: 500;
+  background: #89b4fa;
+  color: #11111b;
+  padding: 6px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.mavon-cta:hover {
+  background: #74c7ec;
 }

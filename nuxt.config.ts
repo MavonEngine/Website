@@ -1,20 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    '@nuxt/eslint',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@nuxt/content',
-    'nuxt-og-image',
-    'nuxt-llms',
-    '@nuxtjs/mcp-toolkit'
-  ],
+  modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/ui', '@nuxt/content', 'nuxt-og-image', 'nuxt-llms', '@nuxtjs/mcp-toolkit', 'nuxt-umami'],
 
   devtools: {
     enabled: true
   },
 
   css: ['~/assets/css/main.css'],
+
+  colorMode: {
+    preference: 'dark'
+  },
 
   content: {
     build: {
@@ -56,12 +52,12 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://docs-template.nuxt.dev/',
-    title: 'Nuxt Docs Template',
-    description: 'A template for building documentation with Nuxt UI and Nuxt Content.',
+    domain: 'https://mavonengine.dev/',
+    title: 'MavonEngine',
+    description: 'Full-stack multiplayer 3D game engine for the browser. Built with TypeScript, Three.js, Rapier, and WebRTC.',
     full: {
-      title: 'Nuxt Docs Template - Full Documentation',
-      description: 'This is the full documentation for the Nuxt Docs Template.'
+      title: 'MavonEngine - Full Documentation',
+      description: 'Complete documentation for MavonEngine.'
     },
     sections: [
       {
@@ -82,6 +78,14 @@ export default defineNuxtConfig({
   },
 
   mcp: {
-    name: 'Docs template'
+    name: 'MavonEngine docs'
+  },
+
+  umami: {
+    id: 'd065dc99-7c95-43e4-9a1a-a38d087e0a54',
+    host: 'https://cloud.umami.is/',
+    autoTrack: true,
+    enabled: true,
+    domains: ['mavonengine.com']
   }
 })

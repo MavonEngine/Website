@@ -1,72 +1,52 @@
-<script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
-
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
-
-const { header } = useAppConfig()
-</script>
-
 <template>
-  <UHeader
-    :ui="{ center: 'flex-1' }"
-    :to="header?.to || '/'"
-  >
-    <UContentSearchButton
-      v-if="header?.search"
-      :collapsed="false"
-      class="w-full"
-    />
-
-    <template
-      v-if="header?.logo?.dark || header?.logo?.light || header?.title"
-      #title
-    >
-      <UColorModeImage
-        v-if="header?.logo?.dark || header?.logo?.light"
-        :light="header?.logo?.light!"
-        :dark="header?.logo?.dark!"
-        :alt="header?.logo?.alt"
-        class="h-6 w-auto shrink-0"
-      />
-
-      <span v-else-if="header?.title">
-        {{ header.title }}
-      </span>
-    </template>
-
-    <template
-      v-else
-      #left
-    >
-      <NuxtLink :to="header?.to || '/'">
-        <AppLogo class="w-auto h-6 shrink-0" />
+  <header class="mavon-header">
+    <div class="mavon-header-inner">
+      <NuxtLink
+        to="/"
+        class="mavon-logo"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#89b4fa"
+          stroke-width="1.5"
+        >
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+        <span class="mavon-logo-text">MavonEngine</span>
       </NuxtLink>
 
-      <TemplateMenu />
-    </template>
+      <nav class="mavon-nav">
+        <NuxtLink
+          to="/#features"
+          class="mavon-nav-link"
+        >Features</NuxtLink>
+        <NuxtLink
+          to="/#why"
+          class="mavon-nav-link"
+        >Why mavon</NuxtLink>
+        <NuxtLink
+          to="/#usecases"
+          class="mavon-nav-link"
+        >Use Cases</NuxtLink>
+        <NuxtLink
+          to="/getting-started"
+          class="mavon-nav-link"
+        >Docs</NuxtLink>
+        <a
+          href="/community"
+          class="mavon-nav-link"
+        >Community</a>
+      </nav>
 
-    <template #right>
-      <UContentSearchButton
-        v-if="header?.search"
-        class="lg:hidden"
-      />
-
-      <UColorModeButton v-if="header?.colorMode" />
-
-      <template v-if="header?.links">
-        <UButton
-          v-for="(link, index) of header.links"
-          :key="index"
-          v-bind="{ color: 'neutral', variant: 'ghost', ...link }"
-        />
-      </template>
-    </template>
-
-    <template #body>
-      <UContentNavigation
-        highlight
-        :navigation="navigation"
-      />
-    </template>
-  </UHeader>
+      <div class="mavon-header-right">
+        <a
+          href="/getting-started"
+          class="mavon-cta"
+        >Get started</a>
+      </div>
+    </div>
+  </header>
 </template>
