@@ -10,6 +10,7 @@ const route = useRoute()
 const { toc } = useAppConfig()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
+
 const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -54,6 +55,14 @@ const links = computed(() => {
 
 <template>
   <UPage v-if="page">
+    <template #left>
+      <UPageAside>
+        <UContentNavigation
+          highlight
+          :navigation="navigation"
+        />
+      </UPageAside>
+    </template>
     <UPageHeader
       :title="page.title"
       :description="page.description"
