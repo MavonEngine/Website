@@ -8,6 +8,10 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  colorMode: {
+    preference: 'dark'
+  },
+
   content: {
     build: {
       markdown: {
@@ -20,10 +24,6 @@ export default defineNuxtConfig({
 
   experimental: {
     asyncContext: true
-  },
-
-  colorMode: {
-    preference: 'dark'
   },
 
   compatibilityDate: '2024-07-11',
@@ -87,5 +87,5 @@ export default defineNuxtConfig({
     autoTrack: true,
     enabled: true,
     domains: ['mavonengine.com']
-  },
+  }
 })

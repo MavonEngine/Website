@@ -24,17 +24,26 @@ const year = new Date().getFullYear()
             </div>
             <ul class="space-y-2">
               <li>
-                <NuxtLink to="/#features" class="text-muted hover:text-default transition-colors">
+                <NuxtLink
+                  to="/#features"
+                  class="text-muted hover:text-default transition-colors"
+                >
                   Features
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/#why" class="text-muted hover:text-default transition-colors">
+                <NuxtLink
+                  to="/#why"
+                  class="text-muted hover:text-default transition-colors"
+                >
                   Why MavonEngine
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/#usecases" class="text-muted hover:text-default transition-colors">
+                <NuxtLink
+                  to="/#usecases"
+                  class="text-muted hover:text-default transition-colors"
+                >
                   Use Cases
                 </NuxtLink>
               </li>
@@ -47,12 +56,19 @@ const year = new Date().getFullYear()
             </div>
             <ul class="space-y-2">
               <li>
-                <a href="/community" class="text-muted hover:text-default transition-colors">
+                <a
+                  href="/community"
+                  class="text-muted hover:text-default transition-colors"
+                >
                   Forum
                 </a>
               </li>
               <li>
-                <a href="https://github.com/mavonengine/mavonengine" target="_blank" class="text-muted hover:text-default transition-colors">
+                <a
+                  href="https://github.com/mavonengine/mavonengine"
+                  target="_blank"
+                  class="text-muted hover:text-default transition-colors"
+                >
                   GitHub
                 </a>
               </li>
