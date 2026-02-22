@@ -30,7 +30,7 @@ const year = new Date().getFullYear()
               </li>
               <li>
                 <NuxtLink to="/#why" class="text-muted hover:text-default transition-colors">
-                  Why mavon
+                  Why MavonEngine
                 </NuxtLink>
               </li>
               <li>
@@ -54,11 +54,6 @@ const year = new Date().getFullYear()
               <li>
                 <a href="https://github.com/mavonengine/mavonengine" target="_blank" class="text-muted hover:text-default transition-colors">
                   GitHub
-                </a>
-              </li>
-              <li>
-                <a href="#" class="text-muted hover:text-default transition-colors">
-                  Discord
                 </a>
               </li>
             </ul>

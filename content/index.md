@@ -3,7 +3,6 @@ seo:
   title: MavonEngine — Multiplayer 3D Game Engine
   description: Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking.
 ---
-
 ::u-page-hero{class="overflow-hidden"}
 ---
 orientation: horizontal
@@ -258,7 +257,7 @@ MavonEngine is purpose-built for real-time multiplayer. Anything that needs play
       href: /community
       trailingIcon: i-lucide-arrow-right
     - label: View on GitHub
-      to: https://github.com
+      to: https://github.com/mavonengine
       target: _blank
       variant: subtle
       icon: i-simple-icons-github
