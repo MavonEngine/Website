@@ -24,10 +24,6 @@
           class="mavon-nav-link"
         >Features</NuxtLink>
         <NuxtLink
-          to="/#why"
-          class="mavon-nav-link"
-        >Why mavon</NuxtLink>
-        <NuxtLink
           to="/#usecases"
           class="mavon-nav-link"
         >Use Cases</NuxtLink>

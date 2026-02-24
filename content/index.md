@@ -69,7 +69,7 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   :::
 ::
 
-::u-page-section
+::u-page-section{id="features"}
 #title
 Everything in one cohesive package
 
@@ -146,6 +146,19 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
 
 ::u-page-section
 #title
+Level Editor
+
+#description
+Very early WIP — a level editor that loads directly from the running game instance on the page.
+
+#default
+  :::div{class="rounded-xl overflow-hidden shadow-2xl"}
+  :video{src="/static/levelEditor.mp4" autoplay loop muted playsinline controls class="w-full"}
+  :::
+::
+
+::u-page-section
+#title
 Built different
 
 #description
@@ -208,7 +221,7 @@ Most multiplayer browser games are held together with duct tape. MavonEngine is 
   :::
 ::
 
-::u-page-section
+::u-page-section{id="usecases"}
 #title
 What can you build?
 

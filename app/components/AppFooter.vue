@@ -33,14 +33,6 @@ const year = new Date().getFullYear()
               </li>
               <li>
                 <NuxtLink
-                  to="/#why"
-                  class="text-muted hover:text-default transition-colors"
-                >
-                  Why MavonEngine
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink
                   to="/#usecases"
                   class="text-muted hover:text-default transition-colors"
                 >
