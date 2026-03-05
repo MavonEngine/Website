@@ -159,6 +159,33 @@ Very early WIP — a level editor that loads directly from the running game inst
 
 ::u-page-section
 #title
+Prefabs
+
+#description
+Drop in ready-to-use prefabs built by the community — from environment assets to gameplay elements. Pull any prefab directly into the editor, tweak it, and ship. Anyone can publish prefabs to the community registry.
+
+#default
+  :::div{class="text-center mb-6"}
+  [Browse the prefab docs.](/prefabs)
+  :::
+
+  :::div{class="grid grid-cols-1 lg:grid-cols-2 gap-6"}
+    ::::div
+    :video{src="/static/grassPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4"}
+
+    **Grass** — Lush, performant grass fields with wind simulation and LOD support. Drop it into your scene and configure density, sway, and color in seconds.
+    ::::
+
+    ::::div
+    :video{src="/static/waterPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4"}
+
+    **Water** — Basic water shader. 3 LOD + Basic customizations — ready to use out of the box.
+    ::::
+  :::
+::
+
+::u-page-section
+#title
 Built different
 
 #description
