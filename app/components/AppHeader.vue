@@ -1,8 +1,15 @@
+<script setup lang="ts">
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
+const switchLocalePath = useSwitchLocalePath()
+const docsPath = computed(() => locale.value === 'de' ? '/de/erste-schritte' : '/getting-started')
+</script>
+
 <template>
   <header class="mavon-header">
     <div class="mavon-header-inner">
       <NuxtLink
-        to="/"
+        :to="localePath('/')"
         class="mavon-logo"
       >
         <svg
@@ -20,28 +27,38 @@
 
       <nav class="mavon-nav">
         <NuxtLink
-          to="/#features"
+          :to="localePath('/') + '#features'"
           class="mavon-nav-link"
-        >Features</NuxtLink>
+        >{{ t('nav.features') }}</NuxtLink>
         <NuxtLink
-          to="/#usecases"
+          :to="localePath('/') + '#usecases'"
           class="mavon-nav-link"
-        >Use Cases</NuxtLink>
+        >{{ t('nav.usecases') }}</NuxtLink>
         <NuxtLink
-          to="/getting-started"
+          :to="docsPath"
           class="mavon-nav-link"
-        >Docs</NuxtLink>
+        >{{ t('nav.docs') }}</NuxtLink>
         <a
           href="/community"
           class="mavon-nav-link"
-        >Community</a>
+        >{{ t('nav.community') }}</a>
       </nav>
 
       <div class="mavon-header-right">
-        <a
-          href="/getting-started"
+        <div class="mavon-lang-switcher">
+          <NuxtLink
+            :to="switchLocalePath('en')"
+            :class="['mavon-lang-btn', { 'mavon-lang-active': locale === 'en' }]"
+          >EN</NuxtLink>
+          <NuxtLink
+            :to="switchLocalePath('de')"
+            :class="['mavon-lang-btn', { 'mavon-lang-active': locale === 'de' }]"
+          >DE</NuxtLink>
+        </div>
+        <NuxtLink
+          :to="docsPath"
           class="mavon-cta"
-        >Get started</a>
+        >{{ t('nav.getStarted') }}</NuxtLink>
       </div>
     </div>
   </header>

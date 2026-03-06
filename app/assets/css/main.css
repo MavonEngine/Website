@@ -105,7 +105,30 @@ html {
 
 .mavon-header-right {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
+
+/* Language switcher */
+.mavon-lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mavon-lang-btn {
+  font-size: 12px;
+  font-weight: 500;
+  font-family: Inter, system-ui, sans-serif;
+  color: #9ca3af;
+  text-decoration: none;
+  padding: 3px 7px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+.mavon-lang-btn:hover { color: #ffffff; background: rgba(255,255,255,0.05); }
+.mavon-lang-active { color: #89b4fa !important; }
 
 /* Nav links — matches .mavon-nav-link in Flarum's extend.php */
 .mavon-nav-link {

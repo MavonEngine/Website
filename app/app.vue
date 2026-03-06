@@ -1,23 +1,20 @@
 <script setup lang="ts">
 const { seo } = useAppConfig()
+const { locale } = useI18n()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
-  server: false
-})
+const { data: navEn } = await useAsyncData('navigation-en', () => queryCollectionNavigation('docs'))
+const { data: navDe } = await useAsyncData('navigation-de', () => queryCollectionNavigation('docs_de'))
+const navigation = computed(() => locale.value === 'de' ? (navDe.value?.[0]?.children ?? navDe.value) : navEn.value)
 
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' },
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap' }
+    { rel: 'icon', href: '/favicon.ico' }
   ],
   htmlAttrs: {
-    lang: 'en'
+    lang: locale
   }
 })
 
@@ -43,12 +40,5 @@ provide('navigation', navigation)
     </UMain>
 
     <AppFooter />
-
-    <ClientOnly>
-      <LazyUContentSearch
-        :files="files"
-        :navigation="navigation"
-      />
-    </ClientOnly>
   </UApp>
 </template>

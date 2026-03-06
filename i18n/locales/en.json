@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "features": "Features",
+    "usecases": "Use Cases",
+    "docs": "Docs",
+    "community": "Community",
+    "getStarted": "Get started"
+  },
+  "footer": {
+    "description": "Full-stack multiplayer 3D game engine for the browser. Built with TypeScript, Three.js, Rapier, and WebRTC.",
+    "engine": "Engine",
+    "features": "Features",
+    "usecases": "Use Cases",
+    "community": "Community",
+    "forum": "Forum",
+    "madeWith": "Made with care by the MavonEngine contributors."
+  },
+  "toc": {
+    "editPage": "Edit this page"
+  }
+}

@@ -1,6 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/ui', '@nuxt/content', 'nuxt-og-image', 'nuxt-llms', '@nuxtjs/mcp-toolkit', 'nuxt-umami'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/image',
+    '@nuxt/ui',
+    '@nuxt/content',
+    'nuxt-og-image',
+    'nuxt-llms',
+    '@nuxtjs/mcp-toolkit',
+    'nuxt-umami',
+    '@nuxtjs/i18n',
+    '@nuxtjs/seo'
+  ],
 
   devtools: {
     enabled: true
@@ -23,18 +34,27 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    asyncContext: true
+    asyncContext: true,
+    inlineSSRStyles: true
   },
 
   compatibilityDate: '2024-07-11',
 
   nitro: {
+    compressPublicAssets: true,
     prerender: {
       routes: [
         '/'
       ],
       ignore: [
-        '/community'
+        '/community',
+        // English slugs under /de/ that don't exist (i18n hreflang artifacts)
+        /^\/de\/(getting-started|core-concepts|networking|input|resources|utilities)(\/.*)?$/,
+        // German slugs at root without /de/ prefix (i18n hreflang artifacts)
+        /^\/(erste-schritte|kernkonzepte|netzwerk|eingabe|ressourcen|dienstprogramme)(\/.*)?$/,
+        // Prefab pages with wrong locale slug
+        /^\/de\/prefabs\/(grass|water|creating-a-prefab)(\/.*)?$/,
+        /^\/prefabs\/(gras|wasser|prefab-erstellen)(\/.*)?$/
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
@@ -50,8 +70,34 @@ export default defineNuxtConfig({
     }
   },
 
+  fonts: {
+    defaults: {
+      display: 'swap'
+    },
+    families: [
+      { name: 'Inter', weights: [400, 500, 600, 700], preload: true },
+      { name: 'JetBrains Mono', weights: [400, 500] }
+    ]
+  },
+
+  i18n: {
+    locales: [
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'de', language: 'de-DE', name: 'Deutsch', file: 'de.json' }
+    ],
+    defaultLocale: 'en',
+    strategy: 'prefix_except_default',
+    lazy: true,
+    langDir: 'locales/',
+    seo: false
+  },
+
   icon: {
     provider: 'iconify'
+  },
+
+  linkChecker: {
+    enabled: false
   },
 
   llms: {
@@ -82,6 +128,10 @@ export default defineNuxtConfig({
 
   mcp: {
     name: 'MavonEngine docs'
+  },
+
+  sitemap: {
+    sources: ['/api/__sitemap__/urls']
   },
 
   umami: {

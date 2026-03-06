@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
 const year = new Date().getFullYear()
 </script>
 
@@ -8,11 +10,11 @@ const year = new Date().getFullYear()
       <div class="py-12 flex flex-col md:flex-row gap-8 md:gap-0">
         <!-- Brand -->
         <div class="flex-1">
-          <NuxtLink to="/">
+          <NuxtLink :to="localePath('/')">
             <AppLogo class="h-5 w-auto mb-3" />
           </NuxtLink>
           <p class="text-sm text-muted max-w-xs leading-relaxed">
-            Full-stack multiplayer 3D game engine for the browser. Built with TypeScript, Three.js, Rapier, and WebRTC.
+            {{ t('footer.description') }}
           </p>
         </div>
 
@@ -20,23 +22,23 @@ const year = new Date().getFullYear()
         <div class="flex gap-12 text-sm">
           <div>
             <div class="text-xs font-medium uppercase tracking-wider text-muted mb-3">
-              Engine
+              {{ t('footer.engine') }}
             </div>
             <ul class="space-y-2">
               <li>
                 <NuxtLink
-                  to="/#features"
+                  :to="localePath('/') + '#features'"
                   class="text-muted hover:text-default transition-colors"
                 >
-                  Features
+                  {{ t('footer.features') }}
                 </NuxtLink>
               </li>
               <li>
                 <NuxtLink
-                  to="/#usecases"
+                  :to="localePath('/') + '#usecases'"
                   class="text-muted hover:text-default transition-colors"
                 >
-                  Use Cases
+                  {{ t('footer.usecases') }}
                 </NuxtLink>
               </li>
             </ul>
@@ -44,7 +46,7 @@ const year = new Date().getFullYear()
 
           <div>
             <div class="text-xs font-medium uppercase tracking-wider text-muted mb-3">
-              Community
+              {{ t('footer.community') }}
             </div>
             <ul class="space-y-2">
               <li>
@@ -52,7 +54,7 @@ const year = new Date().getFullYear()
                   href="/community"
                   class="text-muted hover:text-default transition-colors"
                 >
-                  Forum
+                  {{ t('footer.forum') }}
                 </a>
               </li>
               <li>
@@ -72,7 +74,14 @@ const year = new Date().getFullYear()
       <!-- Bottom bar -->
       <div class="py-5 border-t border-default flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted">
         <span>© {{ year }} MavonEngine.</span>
-        <span>Made with care by the MavonEngine contributors.</span>
+        <span>{{ t('footer.madeWith') }}</span>
+        <NuxtLink
+          v-if="locale === 'de'"
+          :to="localePath('/impressum')"
+          class="hover:text-default transition-colors"
+        >
+          Impressum
+        </NuxtLink>
       </div>
     </UContainer>
   </footer>

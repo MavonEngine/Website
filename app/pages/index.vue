@@ -1,5 +1,15 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('index', () => queryCollection('landing').path('/').first())
+const { locale } = useI18n()
+
+const { data: page } = await useAsyncData(
+  () => `index-${locale.value}`,
+  () => {
+    if (locale.value === 'de') {
+      return queryCollection('landing_de').first()
+    }
+    return queryCollection('landing').path('/').first()
+  }
+)
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }

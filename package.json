@@ -18,8 +18,10 @@
     "@nuxt/content": "^3.11.2",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.4.0",
+    "@nuxtjs/i18n": "^10.2.3",
     "@nuxtjs/mcp-toolkit": "^0.7.0",
     "@nuxtjs/mdc": "^0.20.1",
+    "@nuxtjs/seo": "^3.4.0",
     "@vueuse/core": "^14.2.1",
     "better-sqlite3": "^12.6.2",
     "minimark": "^0.2.0",
@@ -37,6 +39,5 @@
     "eslint": "^10.0.0",
     "typescript": "^5.9.3",
     "vue-tsc": "^3.2.4"
-  },
-  "packageManager": "pnpm@10.29.3"
+  }
 }

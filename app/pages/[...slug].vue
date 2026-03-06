@@ -7,28 +7,50 @@ definePageMeta({
 })
 
 const route = useRoute()
+const { t, locale } = useI18n()
 const { toc } = useAppConfig()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
+const { data: page } = await useAsyncData(
+  () => `page-${route.path}`,
+  () => {
+    const slug = route.params.slug as string[]
+    const sp = '/' + slug.join('/')
+    if (locale.value === 'de') {
+      return queryCollection('docs_de').path(`/de${sp}`).first()
+    }
+    return queryCollection('docs').path(sp).first()
+  }
+)
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryCollectionItemSurroundings('docs', route.path, {
-    fields: ['description']
-  })
-})
+const { data: surround } = await useAsyncData(
+  () => `surround-${route.path}`,
+  () => {
+    const slug = route.params.slug as string[]
+    const sp = '/' + slug.join('/')
+    if (locale.value === 'de') {
+      return queryCollectionItemSurroundings('docs_de', `/de${sp}`, { fields: ['description'] })
+    }
+    return queryCollectionItemSurroundings('docs', sp, { fields: ['description'] })
+  }
+)
 
 const title = page.value.seo?.title || page.value.title
 const description = page.value.seo?.description || page.value.description
+
+const { hreflangLinks } = useContentI18n()
+useHead(computed(() => ({ link: hreflangLinks.value })))
 
 useSeoMeta({
   title,
   ogTitle: title,
   description,
-  ogDescription: description
+  ogDescription: description,
+  twitterTitle: title,
+  twitterDescription: description
 })
 
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
@@ -42,7 +64,7 @@ const links = computed(() => {
   if (toc?.bottom?.edit) {
     links.push({
       icon: 'i-lucide-external-link',
-      label: 'Edit this page',
+      label: t('toc.editPage'),
       to: `${toc.bottom.edit}/${page?.value?.stem}.${page?.value?.extension}`,
       target: '_blank'
     })
