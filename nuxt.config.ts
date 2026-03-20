@@ -71,8 +71,8 @@ export default defineNuxtConfig({
 
   fonts: {
     families: [
-      { name: 'Inter', weights: [400, 500, 600, 700], preload: true },
-      { name: 'JetBrains Mono', weights: [400, 500] }
+      { name: 'Inter', weights: [400, 500, 600, 700], preload: true, display: 'swap' },
+      { name: 'JetBrains Mono', weights: [400, 500], display: 'swap' }
     ]
   },
 
