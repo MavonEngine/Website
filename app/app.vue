@@ -43,3 +43,7 @@ provide('navigation', navigation)
     <AppFooter />
   </UApp>
 </template>
+
+<style>
+@import '@/assets/css/main.css';
+</style>
