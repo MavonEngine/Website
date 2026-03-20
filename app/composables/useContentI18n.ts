@@ -27,7 +27,8 @@ const EN_TO_DE: Record<string, string> = {
   'prefabs': 'prefabs',
   'grass': 'gras',
   'water': 'wasser',
-  'creating-a-prefab': 'prefab-erstellen'
+  'creating-a-prefab': 'prefab-erstellen',
+  'showcase': 'showcase'
 }
 
 const DE_TO_EN: Record<string, string> = Object.fromEntries(

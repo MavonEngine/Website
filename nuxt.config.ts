@@ -34,8 +34,7 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    asyncContext: true,
-    inlineSSRStyles: true
+    asyncContext: true
   },
 
   compatibilityDate: '2024-07-11',
@@ -71,9 +70,6 @@ export default defineNuxtConfig({
   },
 
   fonts: {
-    defaults: {
-      display: 'swap'
-    },
     families: [
       { name: 'Inter', weights: [400, 500, 600, 700], preload: true },
       { name: 'JetBrains Mono', weights: [400, 500] }
@@ -87,9 +83,7 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
-    lazy: true,
-    langDir: 'locales/',
-    seo: false
+    langDir: 'locales/'
   },
 
   icon: {
@@ -101,7 +95,7 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://mavonengine.dev/',
+    domain: 'https://mavonengine.com/',
     title: 'MavonEngine',
     description: 'Full-stack multiplayer 3D game engine for the browser. Built with TypeScript, Three.js, Rapier, and WebRTC.',
     full: {
