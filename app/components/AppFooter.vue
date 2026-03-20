@@ -41,6 +41,9 @@ const year = new Date().getFullYear()
                   {{ t('footer.usecases') }}
                 </NuxtLink>
               </li>
+              <li class="pt-1">
+                <GitHubStarButton />
+              </li>
             </ul>
           </div>
 
@@ -59,7 +62,7 @@ const year = new Date().getFullYear()
               </li>
               <li>
                 <a
-                  href="https://github.com/mavonengine/mavonengine"
+                  href="https://github.com/MavonEngine/Core"
                   target="_blank"
                   class="text-muted hover:text-default transition-colors"
                 >

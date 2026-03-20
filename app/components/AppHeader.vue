@@ -55,6 +55,9 @@ const docsPath = computed(() => locale.value === 'de' ? '/de/erste-schritte' : '
             :class="['mavon-lang-btn', { 'mavon-lang-active': locale === 'de' }]"
           >DE</NuxtLink>
         </div>
+        <div class="flex items-center">
+          <GitHubStarButton />
+        </div>
         <NuxtLink
           :to="docsPath"
           class="mavon-cta"

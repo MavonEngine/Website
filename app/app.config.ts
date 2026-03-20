@@ -18,12 +18,7 @@ export default defineAppConfig({
     },
     search: true,
     colorMode: false,
-    links: [{
-      'icon': 'i-simple-icons-github',
-      'to': 'https://github.com/mavonengine/mavonengine',
-      'target': '_blank',
-      'aria-label': 'GitHub'
-    }]
+    links: []
   },
   footer: {
     credits: `© ${new Date().getFullYear()} MavonEngine`,
@@ -35,7 +30,7 @@ export default defineAppConfig({
       'aria-label': 'Discord'
     }, {
       'icon': 'i-simple-icons-github',
-      'to': 'https://github.com/mavonengine/mavonengine',
+      'to': 'https://github.com/MavonEngine/Core',
       'target': '_blank',
       'aria-label': 'GitHub'
     }]
@@ -44,11 +39,11 @@ export default defineAppConfig({
     title: 'Table of Contents',
     bottom: {
       title: 'Community',
-      edit: 'https://github.com/mavonengine/mavonengine/edit/main/content',
+      edit: 'https://github.com/MavonEngine/Website/edit/main/content',
       links: [{
         icon: 'i-lucide-star',
         label: 'Star on GitHub',
-        to: 'https://github.com/mavonengine/mavonengine',
+        to: 'https://github.com/MavonEngine/Core',
         target: '_blank'
       }, {
         icon: 'i-lucide-users',
