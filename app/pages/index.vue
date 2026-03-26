@@ -23,8 +23,8 @@ useSeoMeta({
   ogTitle: title,
   description,
   ogDescription: description,
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/docs-light.png',
-  twitterImage: 'https://ui.nuxt.com/assets/templates/nuxt/docs-light.png'
+  ogImage: 'https://mavonengine.com/community/assets/site-image-kipwrzwn.png',
+  twitterImage: 'https://mavonengine.com/community/assets/site-image-kipwrzwn.png'
 })
 </script>
 
