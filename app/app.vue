@@ -30,7 +30,7 @@ provide('navigation', navigation)
 </script>
 
 <template>
-  <NuxtPage v-if="route.name === 'demo'" />
+  <NuxtPage v-if="route.fullPath === '/demo'" />
   <UApp v-else>
     <NuxtLoadingIndicator />
 
