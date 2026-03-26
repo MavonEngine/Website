@@ -33,6 +33,17 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   Join the community
   :::
 
+  :::u-button
+  ---
+  color: neutral
+  variant: subtle
+  size: xl
+  to: /demo
+  trailing-icon: i-lucide-gamepad-2
+  ---
+  Try it live
+  :::
+
 #default
   :::prose-pre
   ---

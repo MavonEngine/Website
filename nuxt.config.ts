@@ -1,4 +1,34 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import glsl from 'vite-plugin-glsl'
+import { fileURLToPath } from 'node:url'
+
+const glslEsbuildPlugin = {
+  name: 'glsl',
+  setup(build: any) {
+    build.onLoad({ filter: /\.glsl$/ }, (args: any) => ({
+      contents: `export default ${JSON.stringify(readFileSync(args.path, 'utf8'))}`,
+      loader: 'js',
+    }))
+  },
+}
+
+const packageJsonEsbuildPlugin = {
+  name: 'package-json',
+  setup(build: any) {
+    build.onResolve({ filter: /[/\\]package\.json$/ }, (args: any) => ({ path: resolve(args.resolveDir, args.path), namespace: 'pkg-json' }))
+    build.onLoad({ filter: /.*/, namespace: 'pkg-json' }, (args: any) => {
+      const pkg = JSON.parse(readFileSync(args.path, 'utf8'))
+      const named = Object.entries(pkg)
+        .filter(([k]) => /^[a-z_$][\w$]*$/i.test(k))
+        .map(([k, v]) => `export const ${k} = ${JSON.stringify(v)};`)
+        .join('\n')
+      return { contents: `${named}\nexport default ${JSON.stringify(pkg)};`, loader: 'js' }
+    })
+  },
+}
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -31,6 +61,21 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    plugins: [glsl()],
+    optimizeDeps: {
+      esbuildOptions: {
+        plugins: [glslEsbuildPlugin, packageJsonEsbuildPlugin],
+      },
+    },
+    resolve: {
+      alias: {
+        '@template/server': fileURLToPath(new URL('../template-multiplayer/server', import.meta.url)),
+      },
+      dedupe: ['three', 'vue', '@dimforge/rapier3d-compat'],
+    },
+  },
+
   experimental: {
     asyncContext: true
   },
@@ -51,7 +96,8 @@ export default defineNuxtConfig({
         /^\/(erste-schritte|kernkonzepte|netzwerk|eingabe|ressourcen|dienstprogramme)(\/.*)?$/,
         // Prefab pages with wrong locale slug
         /^\/de\/prefabs\/(grass|water|creating-a-prefab)(\/.*)?$/,
-        /^\/prefabs\/(gras|wasser|prefab-erstellen)(\/.*)?$/
+        /^\/prefabs\/(gras|wasser|prefab-erstellen)(\/.*)?$/,
+        '/demo'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false

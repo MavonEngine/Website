@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const route = useRoute()
 const { seo } = useAppConfig()
 const { locale } = useI18n()
 
@@ -29,7 +30,8 @@ provide('navigation', navigation)
 </script>
 
 <template>
-  <UApp>
+  <NuxtPage v-if="route.name === 'demo'" />
+  <UApp v-else>
     <NuxtLoadingIndicator />
 
     <AppHeader />
