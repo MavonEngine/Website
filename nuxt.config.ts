@@ -47,6 +47,13 @@ export default defineNuxtConfig({
     enabled: true
   },
 
+  sourcemap: {
+    server: false,
+    client: false
+  },
+
+  css: ['~/assets/css/main.css'],
+
   colorMode: {
     preference: 'dark'
   },

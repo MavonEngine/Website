@@ -80,6 +80,12 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   :::
 ::
 
+::div{class="px-4 sm:px-6 lg:px-8 py-4 max-w-7xl mx-auto"}
+:::div{class="rounded-xl overflow-hidden shadow-2xl w-full"}
+:iframe{src="/demo" class="w-full border-0" style="height:600px;"}
+:::
+::
+
 ::u-page-section{id="features"}
 #title
 Everything in one cohesive package
