@@ -27,7 +27,7 @@ jobs:
       - name: Move multiplayer template
         run: |
           git clone --depth 1 --branch template/multiplayer https://github.com/MavonEngine/Core.git /tmp/core_repo
-          cp -R /tmp/core_repo/packages/multiplayer-template ../
+          cp -R /tmp/core_repo/packages/multiplayer-template ../template-multiplayer
 
       - name: Lint
         run: npm run lint
