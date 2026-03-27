@@ -98,17 +98,6 @@ export default defineNuxtConfig({
     }
   },
 
-  typescript: {
-    tsConfig: {
-      compilerOptions: {
-        noImplicitOverride: false,
-        paths: {
-          "@template/server/*": ["../../template-multiplayer/server/src/*"]
-        }
-      }
-    }
-  },
-
   vite: {
     plugins: [glsl()],
     optimizeDeps: {
@@ -121,6 +110,17 @@ export default defineNuxtConfig({
         '@template/server': fileURLToPath(new URL('../template-multiplayer/server/src', import.meta.url))
       },
       dedupe: ['three', 'vue', '@dimforge/rapier3d-compat']
+    }
+  },
+
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        noImplicitOverride: false,
+        paths: {
+          '@template/server/*': ['../../template-multiplayer/server/src/*']
+        }
+      }
     }
   },
 
