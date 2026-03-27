@@ -40,7 +40,8 @@ export default defineNuxtConfig({
     '@nuxtjs/mcp-toolkit',
     'nuxt-umami',
     '@nuxtjs/i18n',
-    '@nuxtjs/seo'
+    '@nuxtjs/seo',
+    '@nuxt/fonts',
   ],
 
   devtools: {
