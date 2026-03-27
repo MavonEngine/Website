@@ -22,7 +22,12 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm install      
+
+      - name: Move multiplayer template
+        run: |
+          git clone --depth 1 --branch template/multiplayer https://github.com/MavonEngine/Core.git /tmp/core_repo
+          cp -R /tmp/core_repo/packages/multiplayer-template ../
 
       - name: Lint
         run: npm run lint
