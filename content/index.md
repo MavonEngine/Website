@@ -33,11 +33,22 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   Join the community
   :::
 
+  :::u-button
+  ---
+  color: neutral
+  variant: subtle
+  size: xl
+  to: /demo
+  trailing-icon: i-lucide-gamepad-2
+  ---
+  Try it live
+  :::
+
 #default
   :::prose-pre
   ---
   code: |
-    import { MavonServer, MavonClient, Entity } from 'mavonengine'
+    import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
 
     // Server-side game world
     const server = new MavonServer()
@@ -53,7 +64,7 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   ---
 
   ```ts [server.ts]
-  import { MavonServer, MavonClient, Entity } from 'mavonengine'
+  import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
 
   // Server-side game world
   const server = new MavonServer()
@@ -67,6 +78,12 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   server.start(3000)
   ```
   :::
+::
+
+::div{class="px-4 sm:px-6 lg:px-8 py-4 max-w-7xl mx-auto"}
+:::div{class="rounded-xl overflow-hidden shadow-2xl w-full"}
+:iframe{src="/demo" class="w-full border-0" style="height:600px;"}
+:::
 ::
 
 ::u-page-section{id="features"}

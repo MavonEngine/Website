@@ -49,15 +49,13 @@ useSeoMeta({
   ogTitle: title,
   description,
   ogDescription: description,
+  ogImage: 'https://mavonengine.com/community/assets/site-image-kipwrzwn.png',
   twitterTitle: title,
-  twitterDescription: description
+  twitterDescription: description,
+  twitterImage: 'https://mavonengine.com/community/assets/site-image-kipwrzwn.png'
 })
 
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
-
-defineOgImageComponent('Docs', {
-  headline: headline.value
-})
 
 const links = computed(() => {
   const links = []

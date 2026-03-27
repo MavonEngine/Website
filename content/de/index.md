@@ -33,11 +33,22 @@ Baue Multiplayer-3D-Spiele für den Browser mit einer einheitlichen Server-Clien
   Community beitreten
   :::
 
+  :::u-button
+  ---
+  color: neutral
+  variant: subtle
+  size: xl
+  to: /demo
+  trailing-icon: i-lucide-gamepad-2
+  ---
+  Live ausprobieren
+  :::
+
 #default
   :::prose-pre
   ---
   code: |
-    import { MavonServer, MavonClient, Entity } from 'mavonengine'
+    import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
 
     // Server-seitige Spielwelt
     const server = new MavonServer()
@@ -53,7 +64,7 @@ Baue Multiplayer-3D-Spiele für den Browser mit einer einheitlichen Server-Clien
   ---
 
   ```ts [server.ts]
-  import { MavonServer, MavonClient, Entity } from 'mavonengine'
+  import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
 
   // Server-seitige Spielwelt
   const server = new MavonServer()
@@ -67,6 +78,12 @@ Baue Multiplayer-3D-Spiele für den Browser mit einer einheitlichen Server-Clien
   server.start(3000)
   ```
   :::
+::
+
+::div{class="px-4 sm:px-6 lg:px-8 py-4 max-w-7xl mx-auto"}
+:::div{class="rounded-xl overflow-hidden shadow-2xl w-full"}
+:iframe{src="/demo" class="w-full border-0" style="height:600px;"}
+:::
 ::
 
 ::u-page-section{id="features"}
