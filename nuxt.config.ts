@@ -98,6 +98,17 @@ export default defineNuxtConfig({
     }
   },
 
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        noImplicitOverride: false,
+        paths: {
+          "@template/server/*": ["../../template-multiplayer/server/src/*"]
+        }
+      }
+    }
+  },
+
   vite: {
     plugins: [glsl()],
     optimizeDeps: {
