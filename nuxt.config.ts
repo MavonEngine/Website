@@ -107,7 +107,7 @@ export default defineNuxtConfig({
     },
     resolve: {
       alias: {
-        '@template/server': fileURLToPath(new URL('../template-multiplayer/server', import.meta.url))
+        '@template/server': fileURLToPath(new URL('../template-multiplayer/server/src', import.meta.url))
       },
       dedupe: ['three', 'vue', '@dimforge/rapier3d-compat']
     }
