@@ -3,22 +3,23 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import glsl from 'vite-plugin-glsl'
 import { fileURLToPath } from 'node:url'
+import type { PluginBuild, OnLoadArgs, OnResolveArgs } from 'esbuild'
 
 const glslEsbuildPlugin = {
   name: 'glsl',
-  setup(build: any) {
-    build.onLoad({ filter: /\.glsl$/ }, (args: any) => ({
+  setup(build: PluginBuild) {
+    build.onLoad({ filter: /\.glsl$/ }, (args: OnLoadArgs) => ({
       contents: `export default ${JSON.stringify(readFileSync(args.path, 'utf8'))}`,
-      loader: 'js',
+      loader: 'js'
     }))
-  },
+  }
 }
 
 const packageJsonEsbuildPlugin = {
   name: 'package-json',
-  setup(build: any) {
-    build.onResolve({ filter: /[/\\]package\.json$/ }, (args: any) => ({ path: resolve(args.resolveDir, args.path), namespace: 'pkg-json' }))
-    build.onLoad({ filter: /.*/, namespace: 'pkg-json' }, (args: any) => {
+  setup(build: PluginBuild) {
+    build.onResolve({ filter: /[/\\]package\.json$/ }, (args: OnResolveArgs) => ({ path: resolve(args.resolveDir, args.path), namespace: 'pkg-json' }))
+    build.onLoad({ filter: /.*/, namespace: 'pkg-json' }, (args: OnLoadArgs) => {
       const pkg = JSON.parse(readFileSync(args.path, 'utf8'))
       const named = Object.entries(pkg)
         .filter(([k]) => /^[a-z_$][\w$]*$/i.test(k))
@@ -26,7 +27,7 @@ const packageJsonEsbuildPlugin = {
         .join('\n')
       return { contents: `${named}\nexport default ${JSON.stringify(pkg)};`, loader: 'js' }
     })
-  },
+  }
 }
 
 export default defineNuxtConfig({
@@ -41,16 +42,11 @@ export default defineNuxtConfig({
     'nuxt-umami',
     '@nuxtjs/i18n',
     '@nuxtjs/seo',
-    '@nuxt/fonts',
+    '@nuxt/fonts'
   ],
 
   devtools: {
     enabled: true
-  },
-
-  sourcemap: {
-    server: false,
-    client: false
   },
 
   css: ['~/assets/css/main.css'],
@@ -69,19 +65,9 @@ export default defineNuxtConfig({
     }
   },
 
-  vite: {
-    plugins: [glsl()],
-    optimizeDeps: {
-      esbuildOptions: {
-        plugins: [glslEsbuildPlugin, packageJsonEsbuildPlugin],
-      },
-    },
-    resolve: {
-      alias: {
-        '@template/server': fileURLToPath(new URL('../template-multiplayer/server', import.meta.url)),
-      },
-      dedupe: ['three', 'vue', '@dimforge/rapier3d-compat'],
-    },
+  sourcemap: {
+    server: false,
+    client: false
   },
 
   experimental: {
@@ -109,6 +95,21 @@ export default defineNuxtConfig({
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
+    }
+  },
+
+  vite: {
+    plugins: [glsl()],
+    optimizeDeps: {
+      esbuildOptions: {
+        plugins: [glslEsbuildPlugin, packageJsonEsbuildPlugin]
+      }
+    },
+    resolve: {
+      alias: {
+        '@template/server': fileURLToPath(new URL('../template-multiplayer/server', import.meta.url))
+      },
+      dedupe: ['three', 'vue', '@dimforge/rapier3d-compat']
     }
   },
 
