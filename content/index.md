@@ -48,7 +48,7 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   :::prose-pre
   ---
   code: |
-    import { MavonServer, MavonClient, Entity } from 'mavonengine'
+    import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
 
     // Server-side game world
     const server = new MavonServer()
@@ -64,7 +64,7 @@ Build multiplayer 3D games for the browser with a unified server-client architec
   ---
 
   ```ts [server.ts]
-  import { MavonServer, MavonClient, Entity } from 'mavonengine'
+  import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
 
   // Server-side game world
   const server = new MavonServer()
