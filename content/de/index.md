@@ -11,7 +11,7 @@ orientation: horizontal
 Multiplayer-3D [Spieleengine]{.text-primary}
 
 #description
-Baue Multiplayer-3D-Spiele für den Browser mit einer einheitlichen Server-Client-Architektur, integrierter Physik und Echtzeit-Netzwerkfunktionen.
+Baue Multiplayer-3D-Spiele für den Browser mit einer einheitlichen Server-Client-Architektur, integrierter Physik und Echtzeit-Netzwerkfunktionen. Der Server betreibt eine vereinfachte Hitbox-Szene neben der vollständigen 3D-Welt des Clients - für autoritativen Treffernachweis, Raycasting und räumliche Abfragen, ohne dem Client zu vertrauen.
 
 #links
   :::u-button

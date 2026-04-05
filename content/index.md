@@ -1,6 +1,6 @@
 ---
 seo:
-  title: MavonEngine — Multiplayer 3D Game Engine
+  title: MavonEngine - Multiplayer 3D Game Engine
   description: Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking.
 ---
 ::u-page-hero{class="overflow-hidden"}
@@ -11,7 +11,7 @@ orientation: horizontal
 Multiplayer 3D [Game Engine]{.text-primary}
 
 #description
-Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking.
+Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking. The server runs a simplified hitbox scene alongside the client's full 3D world - enabling authoritative hit detection, raycasting, and spatial queries without trusting the client.
 
 #links
   :::u-button
