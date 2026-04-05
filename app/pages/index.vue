@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const { locale } = useI18n()
 
+onMounted(() => {
+  setTimeout(() => {
+    document.getElementById('demo-frame')!.style.visibility = 'visible'
+  }, 500)
+})
+
 const { data: page } = await useAsyncData(
   () => `index-${locale.value}`,
   () => {
