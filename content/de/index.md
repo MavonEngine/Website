@@ -1,17 +1,17 @@
 ---
 seo:
-  title: MavonEngine — Multiplayer-3D-Spieleengine
-  description: Baue Multiplayer-3D-Spiele für den Browser mit einer einheitlichen Server-Client-Architektur, integrierter Physik und Echtzeit-Netzwerkfunktionen.
+  title: MavonEngine – Three.js-Spieleengine für Single- & Multiplayer-Browserspiele
+  description: MavonEngine ist eine Three.js-Spieleengine für Single- und Multiplayer-Browserspiele — mit serverautoritativer Physik, Echtzeit-Netzwerk und einer einheitlichen Server-Client-Architektur.
 ---
 ::u-page-hero{class="overflow-hidden"}
 ---
 orientation: horizontal
 ---
 #title
-Multiplayer-3D [Spieleengine]{.text-primary}
+Three.js [Spieleengine]{.text-primary} für Single- & Multiplayer
 
 #description
-Baue Multiplayer-3D-Spiele für den Browser mit einer einheitlichen Server-Client-Architektur, integrierter Physik und Echtzeit-Netzwerkfunktionen. Der Server betreibt eine vereinfachte Hitbox-Szene neben der vollständigen 3D-Welt des Clients - für autoritativen Treffernachweis, Raycasting und räumliche Abfragen, ohne dem Client zu vertrauen.
+MavonEngine ist eine Three.js-Spieleengine für Echtzeit-Browserspiele — die einzige mit serverautoritativer Physik von Anfang an. Baue Single- oder Multiplayer-3D-Spiele mit einer einheitlichen Server-Client-Architektur, integrierter Physik und Echtzeit-Netzwerkfunktionen. Der Server betreibt eine vereinfachte Hitbox-Szene neben der vollständigen Three.js-Welt des Clients — für autoritativen Treffernachweis, Raycasting und räumliche Abfragen, ohne dem Client zu vertrauen.
 
 #links
   :::u-button
@@ -124,7 +124,7 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
   Erweitertes 3D-Rendering mit Three.js
 
   #description
-  Unterstützung für benutzerdefinierte GLSL-Shader mit Debug-Rendering-Modi — Wireframe-, Armatur- und Physik-Overlays.
+  MavonEngine ist im Kern eine Three.js-Spieleengine — mit der vollen Leistung von Three.js, Unterstützung für benutzerdefinierte GLSL-Shader und Debug-Rendering-Modi wie Wireframe-, Armatur- und Physik-Overlays.
   :::
 
   :::u-page-feature
@@ -206,7 +206,7 @@ Sofort einsatzbereite Prefabs, die von der Community erstellt wurden — von Umg
 Anders gebaut
 
 #description
-Die meisten Multiplayer-Browserspiele werden mit Klebeband zusammengehalten. MavonEngine ist von Grund auf als einheitliches System konzipiert.
+Die meisten Multiplayer-Browserspiele werden mit Klebeband zusammengehalten. MavonEngine ist eine Three.js-Spieleengine, die von Grund auf als einheitliches System konzipiert wurde — damit alles von Anfang an zusammenarbeitet.
 
 #features
   :::u-page-feature
@@ -270,7 +270,7 @@ Die meisten Multiplayer-Browserspiele werden mit Klebeband zusammengehalten. Mav
 Was kannst du bauen?
 
 #description
-MavonEngine ist speziell für Echtzeit-Multiplayer entwickelt. Alles, was Spieler, Physik und eine Welt im Browser benötigt.
+MavonEngine ist eine Three.js-Spieleengine für Browserspiele — Single-Player oder Multiplayer. Alles, was Spieler, Physik und eine Welt im Browser benötigt.
 
 #features
   :::u-page-feature
@@ -303,6 +303,14 @@ MavonEngine ist speziell für Echtzeit-Multiplayer entwickelt. Alles, was Spiele
   ---
   #title
   Physikbasierte Spiele
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-user
+  ---
+  #title
+  Single-Player-3D-Spiele
   :::
 ::
 

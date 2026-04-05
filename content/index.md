@@ -1,17 +1,17 @@
 ---
 seo:
-  title: MavonEngine - Multiplayer 3D Game Engine
-  description: Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking.
+  title: MavonEngine – Three.js Game Engine for Single & Multiplayer Browser Games
+  description: MavonEngine is a Three.js game engine built for single and multiplayer browser games — with server-authoritative physics, real-time networking, and a unified server-client architecture built in.
 ---
 ::u-page-hero{class="overflow-hidden"}
 ---
 orientation: horizontal
 ---
 #title
-Multiplayer 3D [Game Engine]{.text-primary}
+Three.js [Game Engine]{.text-primary} for Single & Multiplayer
 
 #description
-Build multiplayer 3D games for the browser with a unified server-client architecture, integrated physics and real-time networking. The server runs a simplified hitbox scene alongside the client's full 3D world - enabling authoritative hit detection, raycasting, and spatial queries without trusting the client.
+MavonEngine is a Three.js game engine built for real-time browser games — the only one with server-authoritative physics built in. Build single-player or multiplayer 3D games with a unified server-client architecture, integrated physics, and real-time networking. The server runs a simplified hitbox scene alongside the client's full Three.js world — enabling authoritative hit detection, raycasting, and spatial queries without trusting the client.
 
 #links
   :::u-button
@@ -124,7 +124,7 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
   Advanced 3D Rendering with Three.js
 
   #description
-  Custom GLSL shader support with debug rendering modes — wireframe, armature, and physics overlays.
+  MavonEngine is a Three.js game engine at its core — giving you the full power of Three.js with custom GLSL shader support and debug rendering modes including wireframe, armature, and physics overlays.
   :::
 
   :::u-page-feature
@@ -206,7 +206,7 @@ Drop in ready-to-use prefabs built by the community — from environment assets 
 Built different
 
 #description
-Most multiplayer browser games are held together with duct tape. MavonEngine is designed from the ground up as a unified system.
+Most multiplayer browser games are held together with duct tape. MavonEngine is a Three.js game engine designed from the ground up as a unified system — so everything works together out of the box.
 
 #features
   :::u-page-feature
@@ -270,7 +270,7 @@ Most multiplayer browser games are held together with duct tape. MavonEngine is 
 What can you build?
 
 #description
-MavonEngine is purpose-built for real-time multiplayer. Anything that needs players, physics, and a world in the browser.
+MavonEngine is a Three.js game engine purpose-built for browser games — single-player or multiplayer. Anything that needs players, physics, and a world in the browser.
 
 #features
   :::u-page-feature
@@ -303,6 +303,14 @@ MavonEngine is purpose-built for real-time multiplayer. Anything that needs play
   ---
   #title
   Physics-Based Games
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-user
+  ---
+  #title
+  Single-Player 3D Games
   :::
 ::
 

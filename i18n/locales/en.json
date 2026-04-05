@@ -7,7 +7,7 @@
     "getStarted": "Get started"
   },
   "footer": {
-    "description": "Full-stack multiplayer 3D game engine for the browser. Built with TypeScript, Three.js, Rapier, and WebRTC.",
+    "description": "Three.js game engine for single-player and multiplayer browser games. Built with TypeScript, Three.js, Rapier, and WebRTC.",
     "engine": "Engine",
     "features": "Features",
     "usecases": "Use Cases",

@@ -7,7 +7,7 @@
     "getStarted": "Loslegen"
   },
   "footer": {
-    "description": "Full-Stack-Multiplayer-3D-Spieleengine für den Browser. Gebaut mit TypeScript, Three.js, Rapier und WebRTC.",
+    "description": "Three.js-Spieleengine für Single-Player- und Multiplayer-Browserspiele. Gebaut mit TypeScript, Three.js, Rapier und WebRTC.",
     "engine": "Engine",
     "features": "Funktionen",
     "usecases": "Anwendungsfälle",
