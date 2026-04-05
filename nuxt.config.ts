@@ -1,9 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import type { OnLoadArgs, PluginBuild } from 'esbuild'
 import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
-import glsl from 'vite-plugin-glsl'
 import { fileURLToPath } from 'node:url'
-import type { PluginBuild, OnLoadArgs, OnResolveArgs } from 'esbuild'
+import glsl from 'vite-plugin-glsl'
 
 const glslEsbuildPlugin = {
   name: 'glsl',
@@ -12,21 +11,6 @@ const glslEsbuildPlugin = {
       contents: `export default ${JSON.stringify(readFileSync(args.path, 'utf8'))}`,
       loader: 'js'
     }))
-  }
-}
-
-const packageJsonEsbuildPlugin = {
-  name: 'package-json',
-  setup(build: PluginBuild) {
-    build.onResolve({ filter: /[/\\]package\.json$/ }, (args: OnResolveArgs) => ({ path: resolve(args.resolveDir, args.path), namespace: 'pkg-json' }))
-    build.onLoad({ filter: /.*/, namespace: 'pkg-json' }, (args: OnLoadArgs) => {
-      const pkg = JSON.parse(readFileSync(args.path, 'utf8'))
-      const named = Object.entries(pkg)
-        .filter(([k]) => /^[a-z_$][\w$]*$/i.test(k))
-        .map(([k, v]) => `export const ${k} = ${JSON.stringify(v)};`)
-        .join('\n')
-      return { contents: `${named}\nexport default ${JSON.stringify(pkg)};`, loader: 'js' }
-    })
   }
 }
 
@@ -102,7 +86,7 @@ export default defineNuxtConfig({
     plugins: [glsl()],
     optimizeDeps: {
       esbuildOptions: {
-        plugins: [glslEsbuildPlugin, packageJsonEsbuildPlugin]
+        plugins: [glslEsbuildPlugin]
       }
     },
     resolve: {
