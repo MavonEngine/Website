@@ -11,7 +11,7 @@ orientation: horizontal
 Three.js [Spieleengine]{.text-primary} für Single- & Multiplayer
 
 #description
-MavonEngine ist eine Three.js-Spieleengine für Echtzeit-Browserspiele — die einzige mit serverautoritativer Physik von Anfang an. Baue Single- oder Multiplayer-3D-Spiele mit einer einheitlichen Server-Client-Architektur, integrierter Physik und Echtzeit-Netzwerkfunktionen. Der Server betreibt eine vereinfachte Hitbox-Szene neben der vollständigen Three.js-Welt des Clients — für autoritativen Treffernachweis, Raycasting und räumliche Abfragen, ohne dem Client zu vertrauen.
+MavonEngine ist eine Three.js-Spieleengine für Echtzeit-Browserspiele — die einzige mit serverautoritativer Physik von Anfang an. Baue Single- oder Multiplayer-3D-Spiele mit einer einheitlichen Server-Client-Architektur, integrierter Physik und Echtzeit-Netzwerkfunktionen.
 
 #links
   :::u-button
@@ -170,7 +170,7 @@ Sehr frühes WIP — ein Level-Editor, der direkt aus der laufenden Spielinstanz
 
 #default
   :::div{class="rounded-xl overflow-hidden shadow-2xl"}
-  :video{src="/static/levelEditor.mp4" autoplay loop muted playsinline controls class="w-full"}
+  :video{src="/static/levelEditor.mp4" autoplay loop muted playsinline controls class="w-full" title="MavonEngine Three.js-Spieleengine — Level-Editor"}
   :::
 ::
 
@@ -188,13 +188,13 @@ Sofort einsatzbereite Prefabs, die von der Community erstellt wurden — von Umg
 
   :::div{class="grid grid-cols-1 lg:grid-cols-2 gap-6"}
     ::::div
-    :video{src="/static/grassPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4"}
+    :video{src="/static/grassPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4" title="MavonEngine Three.js-Spieleengine — Gras-Prefab mit Windsimulation"}
 
     **Gras** — Üppige, performante Grasfelder mit Windsimulation und LOD-Unterstützung. Füge es in deine Szene ein und konfiguriere Dichte, Schwingung und Farbe in Sekunden.
     ::::
 
     ::::div
-    :video{src="/static/waterPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4"}
+    :video{src="/static/waterPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4" title="MavonEngine Three.js-Spieleengine — Wasser-Shader-Prefab"}
 
     **Wasser** — Einfacher Wasser-Shader. 3 LODs + Grundanpassungen — sofort einsatzbereit.
     ::::
@@ -228,7 +228,7 @@ Die meisten Multiplayer-Browserspiele werden mit Klebeband zusammengehalten. Mav
   Server + Client-Einheit
 
   #description
-  Schreibe Spiellogik einmal und sie funktioniert auf Server und Client. Das gemeinsame Entity-System eliminiert Duplikation und Drift.
+  Schreibe Spiellogik einmal und sie funktioniert auf Server und Client. Das gemeinsame Entity-System eliminiert Duplikation und Drift. Der Server betreibt eine vereinfachte Hitbox-Szene neben der vollständigen Three.js-Welt des Clients — für autoritativen Treffernachweis, Raycasting und räumliche Abfragen, ohne dem Client zu vertrauen.
   :::
 
   :::u-page-feature
@@ -314,6 +314,42 @@ MavonEngine ist eine Three.js-Spieleengine für Browserspiele — Single-Player 
   :::
 ::
 
+
+::u-page-section
+#title
+Häufig gestellte Fragen
+
+#default
+  ::accordion
+    :::accordion-item{label="Was ist eine Three.js-Spieleengine?"}
+    Eine Three.js-Spieleengine baut auf dem Rendering von Three.js auf und fügt die Systeme hinzu, die jedes Spiel braucht — Physik, Netzwerk, Entity-Verwaltung, Animationen und Tooling. Statt separate Bibliotheken selbst zusammenzuführen, liefert eine Spieleengine all das integriert und funktionierend. MavonEngine ist eine Three.js-Spieleengine für Browserspiele — mit serverautoritativer Physik und Multiplayer-Netzwerk von Anfang an.
+    :::
+
+    :::accordion-item{label="Was ist der Unterschied zwischen einer Three.js-Spieleengine und purem Three.js?"}
+    Three.js ist eine Rendering-Bibliothek — sie zeichnet 3D-Szenen im Browser. Eine Three.js-Spieleengine wie MavonEngine ergänzt alles Weitere: ein Entity-System, State Machines, Physiksimulation, Echtzeit-Multiplayer-Netzwerk, Asset-Loading, Animationen, Partikel und einen Level-Editor. Du schreibst weniger Boilerplate und konzentrierst dich auf die Spiellogik.
+    :::
+
+    :::accordion-item{label="Kann man mit Three.js Multiplayer-Spiele bauen?"}
+    Ja, aber Three.js allein hat kein Netzwerk und keine Physik — du musst beides selbst integrieren. MavonEngine löst das, indem es Rapier3D-Physik auf dem Server neben der Three.js-Szene des Clients betreibt, mit WebRTC-basierter Zustandssynchronisierung. Es übernimmt die schwierigen Teile von Multiplayer, damit du dich auf das Gameplay konzentrieren kannst.
+    :::
+
+    :::accordion-item{label="Was ist die beste Three.js-Spieleengine für Multiplayer?"}
+    MavonEngine ist die einzige Three.js-Spieleengine, die speziell für Multiplayer-Browserspiele entwickelt wurde. Sie betreibt eine serverautoritäre Physiksimulation parallel zur Three.js-Welt des Clients — für präzise Treffererkennung, Anti-Cheat und Echtzeit-Zustandssynchronisierung, ohne es selbst aufbauen zu müssen.
+    :::
+
+    :::accordion-item{label="Unterstützt eine Three.js-Spieleengine Physik?"}
+    MavonEngine enthält Rapier3D-Physik auf Server und Client. Der Server führt die autoritäre Simulation aus — Kollision, Treffererkennung, räumliche Abfragen — während der Client Physik für visuelles Feedback nutzt. Diese Aufteilung verhindert Cheating und sorgt für konsistentes Gameplay bei allen Spielern.
+    :::
+
+    :::accordion-item{label="Gibt es eine kostenlose Three.js-Spieleengine?"}
+    Ja. MavonEngine ist kostenlos und Open Source. Es enthält Rendering, Physik, Multiplayer-Netzwerk, Entity-Verwaltung, Animationen, Partikel und einen Level-Editor — alles kostenlos.
+    :::
+
+    :::accordion-item{label="Wie starte ich mit dem Bau eines 3D-Browserspiels mit Three.js?"}
+    Der schnellste Weg ist, ein Projekt mit `npx @mavonengine/create-bootstrap` zu erstellen. Das richtet ein funktionierendes Three.js-Spieleengine-Projekt mit Physik und Multiplayer-Unterstützung in unter einer Minute ein. Folge dem [Erste-Schritte-Leitfaden](/de/getting-started), um von null zu einem laufenden Spiel zu kommen.
+    :::
+  ::
+::
 
 ::u-page-section
   :::u-page-c-t-a

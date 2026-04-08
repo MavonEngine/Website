@@ -11,7 +11,7 @@ orientation: horizontal
 Three.js [Game Engine]{.text-primary} for Single & Multiplayer
 
 #description
-MavonEngine is a Three.js game engine built for real-time browser games — the only one with server-authoritative physics built in. Build single-player or multiplayer 3D games with a unified server-client architecture, integrated physics, and real-time networking. The server runs a simplified hitbox scene alongside the client's full Three.js world — enabling authoritative hit detection, raycasting, and spatial queries without trusting the client.
+MavonEngine is a Three.js game engine built for real-time browser games — the only one with server-authoritative physics built in. Build single-player or multiplayer 3D games with a unified server-client architecture, integrated physics, and real-time networking.
 
 #links
   :::u-button
@@ -170,7 +170,7 @@ Very early WIP — a level editor that loads directly from the running game inst
 
 #default
   :::div{class="rounded-xl overflow-hidden shadow-2xl"}
-  :video{src="/static/levelEditor.mp4" autoplay loop muted playsinline controls class="w-full"}
+  :video{src="/static/levelEditor.mp4" autoplay loop muted playsinline controls class="w-full" title="MavonEngine Three.js Game Engine — Level Editor"}
   :::
 ::
 
@@ -188,13 +188,13 @@ Drop in ready-to-use prefabs built by the community — from environment assets 
 
   :::div{class="grid grid-cols-1 lg:grid-cols-2 gap-6"}
     ::::div
-    :video{src="/static/grassPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4"}
+    :video{src="/static/grassPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4" title="MavonEngine Three.js Game Engine — Grass Prefab with Wind Simulation"}
 
     **Grass** — Lush, performant grass fields with wind simulation and LOD support. Drop it into your scene and configure density, sway, and color in seconds.
     ::::
 
     ::::div
-    :video{src="/static/waterPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4"}
+    :video{src="/static/waterPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4" title="MavonEngine Three.js Game Engine — Water Shader Prefab"}
 
     **Water** — Basic water shader. 3 LOD + Basic customizations — ready to use out of the box.
     ::::
@@ -228,7 +228,7 @@ Most multiplayer browser games are held together with duct tape. MavonEngine is 
   Server + Client Unity
 
   #description
-  Write game logic once and it works on both server and client. The shared entity system eliminates duplication and drift.
+  Write game logic once and it works on both server and client. The shared entity system eliminates duplication and drift. The server runs a simplified hitbox scene alongside the client's full Three.js world — enabling authoritative hit detection, raycasting, and spatial queries without trusting the client.
   :::
 
   :::u-page-feature
@@ -314,6 +314,42 @@ MavonEngine is a Three.js game engine purpose-built for browser games — single
   :::
 ::
 
+
+::u-page-section
+#title
+Frequently Asked Questions
+
+#default
+  ::accordion
+    :::accordion-item{label="What is a Three.js game engine?"}
+    A Three.js game engine builds on top of Three.js's rendering to add the systems every game needs — physics, networking, entity management, animations, and tooling. Instead of wiring together separate libraries yourself, a game engine gives you all of that integrated and working together. MavonEngine is a Three.js game engine built specifically for browser games, with server-authoritative physics and multiplayer networking built in from the start.
+    :::
+
+    :::accordion-item{label="How is a Three.js game engine different from vanilla Three.js?"}
+    Three.js is a rendering library — it draws 3D scenes in the browser. A Three.js game engine like MavonEngine adds everything else: an entity system, state machines, physics simulation, real-time multiplayer networking, asset loading, animations, particles, and a level editor. You write less boilerplate and focus on game logic instead.
+    :::
+
+    :::accordion-item{label="Can you build multiplayer games with Three.js?"}
+    Yes, but Three.js alone has no networking or physics — you have to integrate them yourself. MavonEngine solves this by running Rapier3D physics on the server alongside the client's Three.js scene, with WebRTC-based state synchronization built in. It handles the hard parts of multiplayer so you can focus on gameplay.
+    :::
+
+    :::accordion-item{label="What is the best Three.js game engine for multiplayer?"}
+    MavonEngine is the only Three.js game engine purpose-built for multiplayer browser games. It runs a server-authoritative physics simulation in parallel with the client's Three.js world, giving you accurate hit detection, anti-cheat, and real-time state sync without building it from scratch.
+    :::
+
+    :::accordion-item{label="Does a Three.js game engine handle physics?"}
+    MavonEngine includes Rapier3D physics on both the server and client. The server runs the authoritative simulation — collision, hit detection, spatial queries — while the client uses physics for visual feedback. This split prevents cheating and keeps gameplay consistent across all players.
+    :::
+
+    :::accordion-item{label="Is there a free Three.js game engine?"}
+    Yes. MavonEngine is free and open source. It includes rendering, physics, multiplayer networking, entity management, animations, particles, and a level editor — all at no cost.
+    :::
+
+    :::accordion-item{label="How do I start building a 3D browser game with Three.js?"}
+    The fastest way is to scaffold a project with `npx @mavonengine/create-bootstrap`. This sets up a working Three.js game engine project with physics and multiplayer support in under a minute. Follow the [Getting Started guide](/getting-started) to go from zero to a running game.
+    :::
+  ::
+::
 
 ::u-page-section
   :::u-page-c-t-a
