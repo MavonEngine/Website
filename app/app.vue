@@ -26,6 +26,19 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
+useSchemaOrg([
+  defineOrganization({
+    name: 'MavonEngine',
+    url: 'https://mavonengine.com',
+    logo: 'https://mavonengine.com/favicon.ico',
+    sameAs: ['https://github.com/mavonengine']
+  }),
+  defineWebSite({
+    name: 'MavonEngine',
+    description: 'Full-stack Three.js game engine for single-player and multiplayer browser games.'
+  })
+])
+
 provide('navigation', navigation)
 </script>
 

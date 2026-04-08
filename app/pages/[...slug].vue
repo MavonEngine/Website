@@ -57,6 +57,23 @@ useSeoMeta({
 
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
 
+const breadcrumbItems = computed(() => {
+  const items: { name: string, item?: string }[] = [{ name: 'Home', item: 'https://mavonengine.com/' }]
+  if (headline.value) {
+    const sectionSlug = (route.params.slug as string[])[0]
+    items.push({ name: headline.value, item: `https://mavonengine.com/${sectionSlug}` })
+  }
+  if (page.value?.title && page.value.title !== headline.value) {
+    items.push({ name: page.value.title, item: `https://mavonengine.com${route.path}` })
+  }
+  return items
+})
+
+useSchemaOrg([
+  defineWebPage(),
+  defineBreadcrumb({ itemListElement: breadcrumbItems })
+])
+
 const links = computed(() => {
   const links = []
   if (toc?.bottom?.edit) {
