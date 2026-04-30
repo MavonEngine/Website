@@ -4,7 +4,7 @@ import type Game from '@mavonengine/core/Game'
 definePageMeta({ layout: false })
 
 onMounted(async () => {
-  await import('../../../template-multiplayer/client/src/main')
+  await import('../../../../paper-train/src/main')
 })
 
 onUnmounted(() => {
