@@ -75,7 +75,8 @@ export default defineNuxtConfig({
         // Prefab pages with wrong locale slug
         /^\/de\/prefabs\/(grass|water|creating-a-prefab)(\/.*)?$/,
         /^\/prefabs\/(gras|wasser|prefab-erstellen)(\/.*)?$/,
-        '/demo'
+        '/demo',
+        '/demo/paper-train'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
