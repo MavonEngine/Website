@@ -76,7 +76,8 @@ export default defineNuxtConfig({
         /^\/de\/prefabs\/(grass|water|creating-a-prefab)(\/.*)?$/,
         /^\/prefabs\/(gras|wasser|prefab-erstellen)(\/.*)?$/,
         '/demo',
-        '/demo/paper-train'
+        '/demo/paper-train',
+        '/demo/BASEJumpGame'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
