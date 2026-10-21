@@ -17,7 +17,7 @@
     "@iconify-json/lucide": "^1.2.90",
     "@iconify-json/simple-icons": "^1.2.70",
     "@iconify-json/vscode-icons": "^1.2.42",
-    "@mavonengine/core": "0.0.6",
+    "@mavonengine/core": "0.0.20",
     "@nuxt/content": "3.12.0",
     "@nuxt/fonts": "^0.14.0",
     "@nuxt/image": "2.0.0",
