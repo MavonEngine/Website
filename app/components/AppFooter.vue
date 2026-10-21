@@ -49,6 +49,30 @@ const year = new Date().getFullYear()
 
           <div>
             <div class="text-xs font-medium uppercase tracking-wider text-muted mb-3">
+              {{ t('footer.demos') }}
+            </div>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="/demo/paper-train"
+                  class="text-muted hover:text-default transition-colors"
+                >
+                  Paper Train ({{ t('footer.singlePlayer') }})
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/demo/BASEJumpGame"
+                  class="text-muted hover:text-default transition-colors"
+                >
+                  BASE Jump ({{ t('footer.multiplayer') }})
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="text-xs font-medium uppercase tracking-wider text-muted mb-3">
               {{ t('footer.community') }}
             </div>
             <ul class="space-y-2">

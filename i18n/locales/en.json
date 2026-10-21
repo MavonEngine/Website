@@ -13,6 +13,9 @@
     "usecases": "Use Cases",
     "community": "Community",
     "forum": "Forum",
+    "demos": "Demos",
+    "singlePlayer": "Single Player",
+    "multiplayer": "Multiplayer",
     "madeWith": "Made with care by the MavonEngine contributors."
   },
   "toc": {

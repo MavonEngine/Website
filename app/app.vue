@@ -43,7 +43,7 @@ provide('navigation', navigation)
 </script>
 
 <template>
-  <NuxtPage v-if="['/demo', '/demo/paper-train', '/demo/BASEJumpGame'].includes(route.path)" />
+  <NuxtPage v-if="route.meta.layout === false" />
   <UApp v-else>
     <NuxtLoadingIndicator />
 
