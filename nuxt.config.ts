@@ -95,7 +95,9 @@ export default defineNuxtConfig({
       alias: {
         '@template/server': fileURLToPath(new URL('../template-multiplayer/server/src', import.meta.url))
       },
-      dedupe: ['three', 'vue', '@dimforge/rapier3d-compat']
+      // Rapier isn't deduped: each demo resolves its own, base-jump needs 0.21 (and its multibody/motor APIs) while
+      // the others stay on 0.18.2, whose character controller doesn't stall the way 0.20+'s does
+      dedupe: ['three', 'vue']
     }
   },
 
