@@ -48,34 +48,50 @@ MavonEngine ist eine Three.js-Spieleengine für Echtzeit-Browserspiele — die e
   :::prose-pre
   ---
   code: |
-    import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
+    import Server from '@mavonengine/core/Networking/Server/Server'
+    import Player from './Base/Player'
 
-    // Server-seitige Spielwelt
-    const server = new MavonServer()
+    export default class GameServer extends Server<Player> {
+      // Ein Client hat sich verbunden: Spieler zurückgeben, der Server fügt ihn hinzu und synchronisiert ihn
+      protected onConnection(channel) {
+        return new Player(channel.id)
+      }
 
-    server.onPlayerJoin((player) => {
-      const entity = new Entity({ position: [0, 1, 0] })
-      server.world.add(entity)
-      server.sync(player, entity)
-    })
+      // Eingaben kommen geordnet an und laufen im autoritativen Tick
+      protected onCommand(command) {
+        const player = this.game.world.entities.items.get(command.playerId)
+        player?.applyInput(command)
+      }
 
-    server.start(3000)
+      // Nur Entities im Umkreis von 200 Einheiten jedes Spielers synchronisieren
+      getStateSyncDistance() {
+        return 200
+      }
+    }
   filename: server.ts
   ---
 
   ```ts [server.ts]
-  import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
+  import Server from '@mavonengine/core/Networking/Server/Server'
+  import Player from './Base/Player'
 
-  // Server-seitige Spielwelt
-  const server = new MavonServer()
+  export default class GameServer extends Server<Player> {
+    // Ein Client hat sich verbunden: Spieler zurückgeben, der Server fügt ihn hinzu und synchronisiert ihn
+    protected onConnection(channel) {
+      return new Player(channel.id)
+    }
 
-  server.onPlayerJoin((player) => {
-    const entity = new Entity({ position: [0, 1, 0] })
-    server.world.add(entity)
-    server.sync(player, entity)
-  })
+    // Eingaben kommen geordnet an und laufen im autoritativen Tick
+    protected onCommand(command) {
+      const player = this.game.world.entities.items.get(command.playerId)
+      player?.applyInput(command)
+    }
 
-  server.start(3000)
+    // Nur Entities im Umkreis von 200 Einheiten jedes Spielers synchronisieren
+    getStateSyncDistance() {
+      return 200
+    }
+  }
   ```
   :::
 ::
@@ -159,6 +175,72 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
   #description
   Eingebaute Effekte — Regen und Rauch sofort einsatzbereit. Unterstützung für benutzerdefinierte Shader für einzigartige Partikelvisualisierungen.
   :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-map
+  ---
+  #title
+  Szenen für Client & Server
+
+  #description
+  Eine JSON-Szenendatei für beide Seiten — der Client baut, was gerendert wird, der Server Collider und Spiellogik. Im Editor speichern und der Server lädt die Karte für alle verbundenen Spieler neu.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-puzzle
+  ---
+  #title
+  Engine-Plugins
+
+  #description
+  `mavonengine install` fügt Plugins mit Client-, Server- und Asset-Teilen hinzu. Konfiguriert in `mavonengine.json`; `mavonengine build` liefert nur die Assets aus, die dein Spiel wirklich nutzt.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-gamepad-2
+  ---
+  #title
+  Gamepad-Unterstützung
+
+  #description
+  Xbox-, PlayStation- und generische Controller direkt nutzbar — radiale Deadzones, passende Tastenbeschriftungen, analoge Trigger und Vibration.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-activity
+  ---
+  #title
+  Live-Server-Monitoring
+
+  #description
+  Tick-Zeit gegen das Tick-Budget, CPU, Bandbreite, Spieler, Logs und HTTP-Anfragen — im Terminal mit `mavonengine dashboard` oder im Browser hinter einem Login.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-bot
+  ---
+  #title
+  KI-Assistenten-Unterstützung (MCP)
+
+  #description
+  `mavonengine mcp` lässt jeden KI-Coding-Assistenten dein laufendes Spiel untersuchen: Server-Metriken, Szenen und Entities, Renderer-Statistiken, Konsole, Screenshots und Frame-Traces aus dem Browser-Tab — und diese Doku lesen.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-signal
+  ---
+  #title
+  Latenzsimulation
+
+  #description
+  Teste deinen Netzwerkcode gegen künstliche Latenz, Jitter und Paketverlust, bevor es deine Spieler tun.
+  :::
 ::
 
 ::u-page-section
@@ -166,11 +248,28 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
 Level-Editor
 
 #description
-Sehr frühes WIP — ein Level-Editor, der direkt aus der laufenden Spielinstanz auf der Seite lädt.
+Frühes WIP — ein Level-Editor, der im laufenden Spiel startet und mit dem Server verbunden bleibt. Bearbeite die Szene, drücke `Strg+S`, und der Server lädt die Karte für alle Spieler neu. Eigene Tools lassen sich als Panels andocken.
 
 #default
   :::div{class="rounded-xl overflow-hidden shadow-2xl"}
   :video{src="/static/levelEditor.mp4" autoplay loop muted playsinline controls class="w-full" title="MavonEngine Three.js-Spieleengine — Level-Editor"}
+  :::
+::
+
+::u-page-section
+#title
+Live-Server-Monitoring
+
+#description
+Beobachte deinen Spielserver im laufenden Betrieb: Tick-Zeit gegen das Tick-Budget, CPU, Bandbreite, Welt- und Physik-Statistiken, verbundene Spieler, Logs und HTTP-Anfragen. Im Terminal mit `mavonengine dashboard` oder im Browser mit dem Plugin `@mavonengine/http-monitoring`.
+
+#default
+  :::div{class="text-center mb-6"}
+  [Zur Monitoring-Dokumentation.](/de/werkzeuge/monitoring)
+  :::
+
+  :::div{class="rounded-xl overflow-hidden shadow-2xl"}
+  ![MavonEngine-Server-Monitoring-Dashboard: CPU-, Netzwerk- und Tick-Diagramme, Welt-Statistiken, Spieler und Logs](/images/http-monitoring.png)
   :::
 ::
 
@@ -250,7 +349,7 @@ Die meisten Multiplayer-Browserspiele werden mit Klebeband zusammengehalten. Mav
   Entwicklererfahrung
 
   #description
-  Tweakpane-Integration, Debug-Visualisierung, Performance-Überwachung und umfassende TypeScript-Typen. Fehler schnell finden, schneller ausliefern.
+  Ein Befehl zum Erstellen und Starten eines Projekts, ein Live-Server-Dashboard, Tweakpane-Debug-Panels, Physik-Overlays, MCP-Unterstützung für KI-Assistenten und umfassende TypeScript-Typen. Fehler schnell finden, schneller ausliefern.
   :::
 
   :::u-page-feature
@@ -261,7 +360,7 @@ Die meisten Multiplayer-Browserspiele werden mit Klebeband zusammengehalten. Mav
   Erweiterbare Architektur
 
   #description
-  Abstrakte Basisklassen ermöglichen die Anpassung von Servern, Entities und Spiellogik, ohne gegen das Framework ankämpfen zu müssen. Entwickelt, um mit deinem Projekt zu wachsen.
+  Abstrakte Basisklassen ermöglichen die Anpassung von Servern, Entities und Spiellogik, ohne gegen das Framework ankämpfen zu müssen. Engine-Plugins fügen Client-, Server- und Editor-Funktionen als npm-Pakete hinzu. Entwickelt, um mit deinem Projekt zu wachsen.
   :::
 ::
 
@@ -364,7 +463,7 @@ Häufig gestellte Fragen
       variant: subtle
       icon: i-simple-icons-github
   title: Multiplayer-3D-Spiele schneller bauen
-  description: Server + Client + Physik + Netzwerk + Rendering + Animation + Partikel + Debugging. Alles in einem Paket. Alles zusammenarbeitend. Alles TypeScript.
+  description: Server + Client + Physik + Netzwerk + Rendering + Szenen + Animation + Partikel + Plugins + Tooling. Alles in einem Paket. Alles zusammenarbeitend. Alles TypeScript.
   ---
   :::
 ::

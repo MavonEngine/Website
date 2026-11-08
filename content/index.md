@@ -48,34 +48,50 @@ MavonEngine is a Three.js game engine built for real-time browser games — the 
   :::prose-pre
   ---
   code: |
-    import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
+    import Server from '@mavonengine/core/Networking/Server/Server'
+    import Player from './Base/Player'
 
-    // Server-side game world
-    const server = new MavonServer()
+    export default class GameServer extends Server<Player> {
+      // A client connected: return its player, the server adds and syncs it
+      protected onConnection(channel) {
+        return new Player(channel.id)
+      }
 
-    server.onPlayerJoin((player) => {
-      const entity = new Entity({ position: [0, 1, 0] })
-      server.world.add(entity)
-      server.sync(player, entity)
-    })
+      // Inputs arrive in order and run on the authoritative tick
+      protected onCommand(command) {
+        const player = this.game.world.entities.items.get(command.playerId)
+        player?.applyInput(command)
+      }
 
-    server.start(3000)
+      // Only sync entities within 200 units of each player
+      getStateSyncDistance() {
+        return 200
+      }
+    }
   filename: server.ts
   ---
 
   ```ts [server.ts]
-  import { MavonServer, MavonClient, Entity } from '@mavonengine/core'
+  import Server from '@mavonengine/core/Networking/Server/Server'
+  import Player from './Base/Player'
 
-  // Server-side game world
-  const server = new MavonServer()
+  export default class GameServer extends Server<Player> {
+    // A client connected: return its player, the server adds and syncs it
+    protected onConnection(channel) {
+      return new Player(channel.id)
+    }
 
-  server.onPlayerJoin((player) => {
-    const entity = new Entity({ position: [0, 1, 0] })
-    server.world.add(entity)
-    server.sync(player, entity)
-  })
+    // Inputs arrive in order and run on the authoritative tick
+    protected onCommand(command) {
+      const player = this.game.world.entities.items.get(command.playerId)
+      player?.applyInput(command)
+    }
 
-  server.start(3000)
+    // Only sync entities within 200 units of each player
+    getStateSyncDistance() {
+      return 200
+    }
+  }
   ```
   :::
 ::
@@ -159,6 +175,72 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
   #description
   Built-in effects — rain and smoke ready to use. Custom shader support for unique particle visuals.
   :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-map
+  ---
+  #title
+  Scenes Shared by Client & Server
+
+  #description
+  One JSON scene file for both sides — the client builds what is rendered, the server builds colliders and game logic. Save in the editor and the server reloads the map for every connected player.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-puzzle
+  ---
+  #title
+  Engine Plugins
+
+  #description
+  `mavonengine install` adds plugins with client, server and asset parts. Configure them in `mavonengine.json`; `mavonengine build` ships only the assets your game actually uses.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-gamepad-2
+  ---
+  #title
+  Gamepad Support
+
+  #description
+  Xbox, PlayStation and generic controllers out of the box — radial deadzones, layout-aware button labels, analog triggers and rumble.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-activity
+  ---
+  #title
+  Live Server Monitoring
+
+  #description
+  Tick time against the tick budget, CPU, bandwidth, players, logs and HTTP requests — in the terminal with `mavonengine dashboard`, or in the browser behind a login.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-bot
+  ---
+  #title
+  AI Assistant Support (MCP)
+
+  #description
+  `mavonengine mcp` lets any AI coding assistant inspect your running game: server metrics, scenes and entities, renderer stats, console, screenshots and frame traces from the browser tab — and read these docs.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-signal
+  ---
+  #title
+  Latency Simulation
+
+  #description
+  Test your netcode against artificial latency, jitter and packet loss before your players do.
+  :::
 ::
 
 ::u-page-section
@@ -166,11 +248,28 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
 Level Editor
 
 #description
-Very early WIP — a level editor that loads directly from the running game instance on the page.
+Early WIP — a level editor that boots inside the running game and stays connected to the server. Edit the scene, press `Ctrl+S`, and the server reloads the map for every player. Dock your own tools as custom panels.
 
 #default
   :::div{class="rounded-xl overflow-hidden shadow-2xl"}
   :video{src="/static/levelEditor.mp4" autoplay loop muted playsinline controls class="w-full" title="MavonEngine Three.js Game Engine — Level Editor"}
+  :::
+::
+
+::u-page-section
+#title
+Live Server Monitoring
+
+#description
+Watch your game server while it runs: tick time against the tick budget, CPU, bandwidth, world and physics stats, connected players, logs and HTTP requests. In the terminal with `mavonengine dashboard`, or in the browser with the `@mavonengine/http-monitoring` plugin.
+
+#default
+  :::div{class="text-center mb-6"}
+  [Read the monitoring docs.](/tooling/monitoring)
+  :::
+
+  :::div{class="rounded-xl overflow-hidden shadow-2xl"}
+  ![MavonEngine server monitoring dashboard: CPU, network and tick charts, world stats, players and logs](/images/http-monitoring.png)
   :::
 ::
 
@@ -250,7 +349,7 @@ Most multiplayer browser games are held together with duct tape. MavonEngine is 
   Developer Experience
 
   #description
-  Tweakpane integration, debug visualization, performance monitoring, and comprehensive TypeScript types. Catch bugs fast, ship faster.
+  One command to create and run a project, a live server dashboard, Tweakpane debug panels, physics overlays, MCP support for AI assistants, and comprehensive TypeScript types. Catch bugs fast, ship faster.
   :::
 
   :::u-page-feature
@@ -261,7 +360,7 @@ Most multiplayer browser games are held together with duct tape. MavonEngine is 
   Extensible Architecture
 
   #description
-  Abstract base classes let you customize servers, entities, and game logic without fighting the framework. Designed to grow with your project.
+  Abstract base classes let you customize servers, entities, and game logic without fighting the framework. Engine plugins add client, server and editor features as npm packages. Designed to grow with your project.
   :::
 ::
 
@@ -364,7 +463,7 @@ Frequently Asked Questions
       variant: subtle
       icon: i-simple-icons-github
   title: Build Multiplayer 3D Games Faster
-  description: Server + Client + Physics + Networking + Rendering + Animation + Particles + Debugging. All in one package. All working together. All TypeScript.
+  description: Server + Client + Physics + Networking + Rendering + Scenes + Animation + Particles + Plugins + Tooling. All in one package. All working together. All TypeScript.
   ---
   :::
 ::
