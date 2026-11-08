@@ -346,7 +346,7 @@ Häufig gestellte Fragen
     :::
 
     :::accordion-item{label="Wie starte ich mit dem Bau eines 3D-Browserspiels mit Three.js?"}
-    Der schnellste Weg ist, ein Projekt mit `npx @mavonengine/create-bootstrap` zu erstellen. Das richtet ein funktionierendes Three.js-Spieleengine-Projekt mit Physik und Multiplayer-Unterstützung in unter einer Minute ein. Folge dem [Erste-Schritte-Leitfaden](/de/getting-started), um von null zu einem laufenden Spiel zu kommen.
+    Der schnellste Weg ist, ein Projekt mit `npx @mavonengine/cli create my-game` zu erstellen. Das richtet ein funktionierendes Three.js-Spieleengine-Projekt mit Physik und Multiplayer-Unterstützung in unter einer Minute ein. Folge dem [Erste-Schritte-Leitfaden](/de/getting-started), um von null zu einem laufenden Spiel zu kommen.
     :::
   ::
 ::

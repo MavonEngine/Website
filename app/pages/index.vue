@@ -70,7 +70,7 @@ const faqSchemas: Record<string, object> = {
       {
         '@type': 'Question',
         'name': 'How do I start building a 3D browser game with Three.js?',
-        'acceptedAnswer': { '@type': 'Answer', 'text': 'The fastest way is to scaffold a project with npx @mavonengine/create-bootstrap. This sets up a working Three.js game engine project with physics and multiplayer support in under a minute. Follow the Getting Started guide at mavonengine.com/getting-started to go from zero to a running game.' }
+        'acceptedAnswer': { '@type': 'Answer', 'text': 'The fastest way is to scaffold a project with npx @mavonengine/cli create my-game. This sets up a working Three.js game engine project with physics and multiplayer support in under a minute. Follow the Getting Started guide at mavonengine.com/getting-started to go from zero to a running game.' }
       }
     ]
   },
@@ -110,7 +110,7 @@ const faqSchemas: Record<string, object> = {
       {
         '@type': 'Question',
         'name': 'Wie starte ich mit dem Bau eines 3D-Browserspiels mit Three.js?',
-        'acceptedAnswer': { '@type': 'Answer', 'text': 'Der schnellste Weg ist, ein Projekt mit npx @mavonengine/create-bootstrap zu erstellen. Das richtet ein funktionierendes Three.js-Spieleengine-Projekt mit Physik und Multiplayer-Unterstützung in unter einer Minute ein. Folge dem Erste-Schritte-Leitfaden unter mavonengine.com/de/getting-started, um von null zu einem laufenden Spiel zu kommen.' }
+        'acceptedAnswer': { '@type': 'Answer', 'text': 'Der schnellste Weg ist, ein Projekt mit npx @mavonengine/cli create my-game zu erstellen. Das richtet ein funktionierendes Three.js-Spieleengine-Projekt mit Physik und Multiplayer-Unterstützung in unter einer Minute ein. Folge dem Erste-Schritte-Leitfaden unter mavonengine.com/de/getting-started, um von null zu einem laufenden Spiel zu kommen.' }
       }
     ]
   }

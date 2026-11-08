@@ -69,9 +69,9 @@ export default defineNuxtConfig({
       ignore: [
         '/community',
         // English slugs under /de/ that don't exist (i18n hreflang artifacts)
-        /^\/de\/(getting-started|core-concepts|networking|input|resources|utilities)(\/.*)?$/,
+        /^\/de\/(getting-started|core-concepts|tooling|networking|input|resources|utilities)(\/.*)?$/,
         // German slugs at root without /de/ prefix (i18n hreflang artifacts)
-        /^\/(erste-schritte|kernkonzepte|netzwerk|eingabe|ressourcen|dienstprogramme)(\/.*)?$/,
+        /^\/(erste-schritte|kernkonzepte|werkzeuge|netzwerk|eingabe|ressourcen|dienstprogramme)(\/.*)?$/,
         // Prefab pages with wrong locale slug
         /^\/de\/prefabs\/(grass|water|creating-a-prefab)(\/.*)?$/,
         /^\/prefabs\/(gras|wasser|prefab-erstellen)(\/.*)?$/,

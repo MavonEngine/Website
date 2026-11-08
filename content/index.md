@@ -346,7 +346,7 @@ Frequently Asked Questions
     :::
 
     :::accordion-item{label="How do I start building a 3D browser game with Three.js?"}
-    The fastest way is to scaffold a project with `npx @mavonengine/create-bootstrap`. This sets up a working Three.js game engine project with physics and multiplayer support in under a minute. Follow the [Getting Started guide](/getting-started) to go from zero to a running game.
+    The fastest way is to scaffold a project with `npx @mavonengine/cli create my-game`. This sets up a working Three.js game engine project with physics and multiplayer support in under a minute. Follow the [Getting Started guide](/getting-started) to go from zero to a running game.
     :::
   ::
 ::
