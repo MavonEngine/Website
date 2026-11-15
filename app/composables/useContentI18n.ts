@@ -23,6 +23,8 @@ const EN_TO_DE: Record<string, string> = {
   'monitoring': 'monitoring',
   'ai-assistants': 'ki-assistenten',
   'chat': 'chat',
+  'database': 'datenbank',
+  'auth': 'auth',
   'networking': 'netzwerk',
   'server': 'server',
   'client': 'client',
