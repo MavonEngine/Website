@@ -318,19 +318,65 @@ Accounts, eine Datenbank, Hintergrund-Jobs, Mail und Benachrichtigungen — die 
   [Spieler-Accounts](/de/werkzeuge/auth) · [Datenbank](/de/werkzeuge/datenbank) · [Job-Warteschlange](/de/werkzeuge/warteschlange) · [Mail](/de/werkzeuge/mail) · [Benachrichtigungen](/de/werkzeuge/benachrichtigungen)
   :::
 
+  :::prose-pre
+  ---
+  code: |
+    import Server from '@mavonengine/core/Networking/Server/Server'
+    import Player from './Base/Player'
+    import { GrantReward } from './Jobs/GrantReward'
+    import { LevelUp } from './Notifications/LevelUp'
+
+    export default class GameServer extends Server<Player> {
+      // Jede Verbindung hat einen Account, bei jedem erneuten Verbinden denselben
+      protected onConnection(channel) {
+        const player = new Player(channel.id)
+        this.logger.info(`${player.identity?.name} joined`)
+        return player
+      }
+
+      // Im Spiel, per Mail und im Posteingang des Spielers
+      async levelUp(player: Player, level: number) {
+        await player.notify(new LevelUp(level))
+        // Langsame Arbeit kommt auf die Warteschlange und wird bei Fehlern erneut versucht
+        await this.queue.dispatch(new GrantReward({ player: player.identity!.id, coins: 100 }))
+      }
+
+      // Plugins teilen eine Datenbank, jedes mit eigenen Tabellen und Migrationen
+      topScores() {
+        return this.db?.selectFrom('game_scores').selectAll().limit(10).execute()
+      }
+    }
+  filename: server.ts
+  ---
+
   ```ts [server.ts]
-  // Jede Verbindung hat einen Account, bei jedem erneuten Verbinden denselben
-  const account = player.identity
+  import Server from '@mavonengine/core/Networking/Server/Server'
+  import Player from './Base/Player'
+  import { GrantReward } from './Jobs/GrantReward'
+  import { LevelUp } from './Notifications/LevelUp'
 
-  // Im Spiel, per Mail und im Posteingang des Spielers
-  await player.notify(new LevelUp(5))
+  export default class GameServer extends Server<Player> {
+    // Jede Verbindung hat einen Account, bei jedem erneuten Verbinden denselben
+    protected onConnection(channel) {
+      const player = new Player(channel.id)
+      this.logger.info(`${player.identity?.name} joined`)
+      return player
+    }
 
-  // Langsame Arbeit kommt auf die Warteschlange und wird bei Fehlern erneut versucht
-  await server.queue.dispatch(new GrantReward({ player: account.id, coins: 100 }))
+    // Im Spiel, per Mail und im Posteingang des Spielers
+    async levelUp(player: Player, level: number) {
+      await player.notify(new LevelUp(level))
+      // Langsame Arbeit kommt auf die Warteschlange und wird bei Fehlern erneut versucht
+      await this.queue.dispatch(new GrantReward({ player: player.identity!.id, coins: 100 }))
+    }
 
-  // Plugins teilen eine Datenbank, jedes mit eigenen Tabellen und Migrationen
-  const top = await server.db?.selectFrom('game_scores').selectAll().limit(10).execute()
+    // Plugins teilen eine Datenbank, jedes mit eigenen Tabellen und Migrationen
+    topScores() {
+      return this.db?.selectFrom('game_scores').selectAll().limit(10).execute()
+    }
+  }
   ```
+  :::
 ::
 
 ::u-page-section

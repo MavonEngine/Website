@@ -318,19 +318,65 @@ Accounts, a database, background jobs, mail and notifications — the server sid
   [Player accounts](/tooling/auth) · [Database](/tooling/database) · [Job queue](/tooling/queue) · [Mail](/tooling/mail) · [Notifications](/tooling/notifications)
   :::
 
+  :::prose-pre
+  ---
+  code: |
+    import Server from '@mavonengine/core/Networking/Server/Server'
+    import Player from './Base/Player'
+    import { GrantReward } from './Jobs/GrantReward'
+    import { LevelUp } from './Notifications/LevelUp'
+
+    export default class GameServer extends Server<Player> {
+      // Every connection has an account, the same on every reconnect
+      protected onConnection(channel) {
+        const player = new Player(channel.id)
+        this.logger.info(`${player.identity?.name} joined`)
+        return player
+      }
+
+      // In the game, by mail and kept in the player's inbox
+      async levelUp(player: Player, level: number) {
+        await player.notify(new LevelUp(level))
+        // Slow work goes on the queue, tried again when it fails
+        await this.queue.dispatch(new GrantReward({ player: player.identity!.id, coins: 100 }))
+      }
+
+      // Plugins share one database, each with its own tables and migrations
+      topScores() {
+        return this.db?.selectFrom('game_scores').selectAll().limit(10).execute()
+      }
+    }
+  filename: server.ts
+  ---
+
   ```ts [server.ts]
-  // Every connection has an account, the same on every reconnect
-  const account = player.identity
+  import Server from '@mavonengine/core/Networking/Server/Server'
+  import Player from './Base/Player'
+  import { GrantReward } from './Jobs/GrantReward'
+  import { LevelUp } from './Notifications/LevelUp'
 
-  // In the game, by mail and kept in the player's inbox
-  await player.notify(new LevelUp(5))
+  export default class GameServer extends Server<Player> {
+    // Every connection has an account, the same on every reconnect
+    protected onConnection(channel) {
+      const player = new Player(channel.id)
+      this.logger.info(`${player.identity?.name} joined`)
+      return player
+    }
 
-  // Slow work goes on the queue, tried again when it fails
-  await server.queue.dispatch(new GrantReward({ player: account.id, coins: 100 }))
+    // In the game, by mail and kept in the player's inbox
+    async levelUp(player: Player, level: number) {
+      await player.notify(new LevelUp(level))
+      // Slow work goes on the queue, tried again when it fails
+      await this.queue.dispatch(new GrantReward({ player: player.identity!.id, coins: 100 }))
+    }
 
-  // Plugins share one database, each with its own tables and migrations
-  const top = await server.db?.selectFrom('game_scores').selectAll().limit(10).execute()
+    // Plugins share one database, each with its own tables and migrations
+    topScores() {
+      return this.db?.selectFrom('game_scores').selectAll().limit(10).execute()
+    }
+  }
   ```
+  :::
 ::
 
 ::u-page-section
