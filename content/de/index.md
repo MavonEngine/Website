@@ -195,7 +195,7 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
   Engine-Plugins
 
   #description
-  `mavonengine install` fügt Plugins mit Client-, Server- und Asset-Teilen hinzu. Konfiguriert in `mavonengine.json`; `mavonengine build` liefert nur die Assets aus, die dein Spiel wirklich nutzt.
+  Offizielle Plugins für Chat, Accounts, eine Datenbank, Mail, Benachrichtigungen und Monitoring, installiert mit `mavonengine install` oder direkt aus dem Dashboard und dem Editor. Plugins können einander verwenden, und `mavonengine build` liefert nur die Assets aus, die dein Spiel wirklich nutzt.
   :::
 
   :::u-page-feature
@@ -217,7 +217,7 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
   Live-Server-Monitoring
 
   #description
-  Tick-Zeit gegen das Tick-Budget, CPU, Bandbreite, Spieler, Logs und HTTP-Anfragen — im Terminal mit `mavonengine dashboard` oder im Browser hinter einem Login.
+  Tick-Zeit gegen das Tick-Budget, CPU, Bandbreite, die Job-Warteschlange, Spieler und ihre Accounts, Logs, HTTP-Anfragen und die Datenbank — im Terminal mit `mavonengine dashboard` oder im Browser hinter einem Login.
   :::
 
   :::u-page-feature
@@ -241,6 +241,39 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
   #description
   Teste deinen Netzwerkcode gegen künstliche Latenz, Jitter und Paketverlust, bevor es deine Spieler tun.
   :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-key-round
+  ---
+  #title
+  Spieler-Accounts
+
+  #description
+  Anmeldungen, Sitzungen und Gäste, die ihren Fortschritt bei der Registrierung behalten. Jede Verbindung bekommt eine stabile Account-ID, und der Server weist Clients ab, bevor sie einen Spieler bekommen. E-Mail-Bestätigung und Passwort-Resets per Mail.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-database
+  ---
+  #title
+  Datenbank & Job-Warteschlange
+
+  #description
+  Eine SQLite-Datenbank auf dem in Node eingebauten `node:sqlite`, mit Migrationen pro Plugin. Hintergrund-Jobs mit Wiederholungen, Backoff und Verzögerungen, die einen Neustart überstehen.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-bell
+  ---
+  #title
+  Mail & Benachrichtigungen
+
+  #description
+  `player.notify(new LevelUp())` erreicht den Spieler im Spiel, per Mail oder zum späteren Lesen. Eingereihte Mails in einem anpassbaren Layout, über SMTP oder jeden nodemailer-Transport.
+  :::
 ::
 
 ::u-page-section
@@ -261,7 +294,7 @@ Frühes WIP — ein Level-Editor, der im laufenden Spiel startet und mit dem Ser
 Live-Server-Monitoring
 
 #description
-Beobachte deinen Spielserver im laufenden Betrieb: Tick-Zeit gegen das Tick-Budget, CPU, Bandbreite, Welt- und Physik-Statistiken, verbundene Spieler, Logs und HTTP-Anfragen. Im Terminal mit `mavonengine dashboard` oder im Browser mit dem Plugin `@mavonengine/http-monitoring`.
+Beobachte deinen Spielserver im laufenden Betrieb: Tick-Zeit gegen das Tick-Budget, CPU, Bandbreite, Welt- und Physik-Statistiken, die Job-Warteschlange, verbundene Spieler und ihre Accounts, Logs, HTTP-Anfragen und die Datenbank. Im Terminal mit `mavonengine dashboard` oder im Browser mit dem Plugin `@mavonengine/http-monitoring`.
 
 #default
   :::div{class="text-center mb-6"}
@@ -271,6 +304,33 @@ Beobachte deinen Spielserver im laufenden Betrieb: Tick-Zeit gegen das Tick-Budg
   :::div{class="rounded-xl overflow-hidden shadow-2xl"}
   ![MavonEngine-Server-Monitoring-Dashboard: CPU-, Netzwerk- und Tick-Diagramme, Welt-Statistiken, Spieler und Logs](/images/http-monitoring.png)
   :::
+::
+
+::u-page-section
+#title
+Alles, was ein Live-Spiel braucht
+
+#description
+Accounts, eine Datenbank, Hintergrund-Jobs, Mail und Benachrichtigungen — die Serverseite eines Spiels, zu dem Spieler zurückkommen. Installiere die Plugins, die du brauchst, und die Engine verbindet sie: Benachrichtigungen finden den Account des Spielers, Mails gehen über die Warteschlange hinaus, und alle Plugins teilen dieselbe Datenbank.
+
+#default
+  :::div{class="text-center mb-6"}
+  [Spieler-Accounts](/de/werkzeuge/auth) · [Datenbank](/de/werkzeuge/datenbank) · [Job-Warteschlange](/de/werkzeuge/warteschlange) · [Mail](/de/werkzeuge/mail) · [Benachrichtigungen](/de/werkzeuge/benachrichtigungen)
+  :::
+
+  ```ts [server.ts]
+  // Jede Verbindung hat einen Account, bei jedem erneuten Verbinden denselben
+  const account = player.identity
+
+  // Im Spiel, per Mail und im Posteingang des Spielers
+  await player.notify(new LevelUp(5))
+
+  // Langsame Arbeit kommt auf die Warteschlange und wird bei Fehlern erneut versucht
+  await server.queue.dispatch(new GrantReward({ player: account.id, coins: 100 }))
+
+  // Plugins teilen eine Datenbank, jedes mit eigenen Tabellen und Migrationen
+  const top = await server.db?.selectFrom('game_scores').selectAll().limit(10).execute()
+  ```
 ::
 
 ::u-page-section
@@ -349,7 +409,7 @@ Die meisten Multiplayer-Browserspiele werden mit Klebeband zusammengehalten. Mav
   Entwicklererfahrung
 
   #description
-  Ein Befehl zum Erstellen und Starten eines Projekts, ein Live-Server-Dashboard, Tweakpane-Debug-Panels, Physik-Overlays, MCP-Unterstützung für KI-Assistenten und umfassende TypeScript-Typen. Fehler schnell finden, schneller ausliefern.
+  Ein Befehl zum Erstellen und Starten eines Projekts, Plugins aus dem Dashboard oder dem Editor installiert, ein Live-Server-Dashboard, Tweakpane-Debug-Panels, Physik-Overlays, MCP-Unterstützung für KI-Assistenten und umfassende TypeScript-Typen. Fehler schnell finden, schneller ausliefern.
   :::
 
   :::u-page-feature
@@ -360,7 +420,7 @@ Die meisten Multiplayer-Browserspiele werden mit Klebeband zusammengehalten. Mav
   Erweiterbare Architektur
 
   #description
-  Abstrakte Basisklassen ermöglichen die Anpassung von Servern, Entities und Spiellogik, ohne gegen das Framework ankämpfen zu müssen. Engine-Plugins fügen Client-, Server- und Editor-Funktionen als npm-Pakete hinzu. Entwickelt, um mit deinem Projekt zu wachsen.
+  Abstrakte Basisklassen ermöglichen die Anpassung von Servern, Entities und Spiellogik, ohne gegen das Framework ankämpfen zu müssen. Engine-Plugins fügen Client-, Server- und Editor-Funktionen als npm-Pakete hinzu und bieten einander ihre APIs an. Entwickelt, um mit deinem Projekt zu wachsen.
   :::
 ::
 
@@ -444,8 +504,16 @@ Häufig gestellte Fragen
     Ja. MavonEngine ist kostenlos und Open Source. Es enthält Rendering, Physik, Multiplayer-Netzwerk, Entity-Verwaltung, Animationen, Partikel und einen Level-Editor — alles kostenlos.
     :::
 
+    :::accordion-item{label="Unterstützt MavonEngine Spieler-Accounts und Anmeldungen?"}
+    Ja. Das Plugin `@mavonengine/auth` fügt Spieler-Accounts mit Benutzername und Passwort, Sitzungen, Gastzugang und ein Rate-Limit für Anmeldungen hinzu, und mit `@mavonengine/mail` bestätigt es E-Mails und setzt vergessene Passwörter zurück. Der Spielserver prüft jede Verbindung, bevor der Client einen Spieler bekommt, und gibt jedem Spieler eine stabile Account-ID für Spielstände, Punktestände und Stummschaltungen. Siehe die [Dokumentation zu Spieler-Accounts](/de/werkzeuge/auth).
+    :::
+
+    :::accordion-item{label="Kann ein Three.js-Spiel Spielern E-Mails und Benachrichtigungen senden?"}
+    Mit MavonEngine ja. `player.notify(new LevelUp())` erreicht den Spieler im Spiel, per Mail und in einem Posteingang, den er später liest. Mails kommen auf die Job-Warteschlange des Servers und werden erneut versucht, wenn der Mailserver nicht erreichbar ist, sodass das Spiel nie darauf wartet. Siehe [Benachrichtigungen](/de/werkzeuge/benachrichtigungen) und [Mail](/de/werkzeuge/mail).
+    :::
+
     :::accordion-item{label="Wie starte ich mit dem Bau eines 3D-Browserspiels mit Three.js?"}
-    Der schnellste Weg ist, ein Projekt mit `npx @mavonengine/cli create my-game` zu erstellen. Das richtet ein funktionierendes Three.js-Spieleengine-Projekt mit Physik und Multiplayer-Unterstützung in unter einer Minute ein. Folge dem [Erste-Schritte-Leitfaden](/de/getting-started), um von null zu einem laufenden Spiel zu kommen.
+    Der schnellste Weg ist, ein Projekt mit `npx @mavonengine/cli create my-game` zu erstellen. Das richtet ein funktionierendes Three.js-Spieleengine-Projekt mit Physik und Multiplayer-Unterstützung in unter einer Minute ein. Folge dem [Erste-Schritte-Leitfaden](/de/erste-schritte), um von null zu einem laufenden Spiel zu kommen.
     :::
   ::
 ::
@@ -463,7 +531,7 @@ Häufig gestellte Fragen
       variant: subtle
       icon: i-simple-icons-github
   title: Multiplayer-3D-Spiele schneller bauen
-  description: Server + Client + Physik + Netzwerk + Rendering + Szenen + Animation + Partikel + Plugins + Tooling. Alles in einem Paket. Alles zusammenarbeitend. Alles TypeScript.
+  description: Server + Client + Physik + Netzwerk + Rendering + Szenen + Animation + Partikel + Accounts + Datenbank + Warteschlange + Mail + Plugins + Tooling. Alles in einem Paket. Alles zusammenarbeitend. Alles TypeScript.
   ---
   :::
 ::

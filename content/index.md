@@ -195,7 +195,7 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
   Engine Plugins
 
   #description
-  `mavonengine install` adds plugins with client, server and asset parts. Configure them in `mavonengine.json`; `mavonengine build` ships only the assets your game actually uses.
+  Official plugins for chat, accounts, a database, mail, notifications and monitoring, installed with `mavonengine install` or right from the dashboard and the editor. Plugins can use each other, and `mavonengine build` ships only the assets your game actually uses.
   :::
 
   :::u-page-feature
@@ -217,7 +217,7 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
   Live Server Monitoring
 
   #description
-  Tick time against the tick budget, CPU, bandwidth, players, logs and HTTP requests — in the terminal with `mavonengine dashboard`, or in the browser behind a login.
+  Tick time against the tick budget, CPU, bandwidth, the job queue, players and their accounts, logs, HTTP requests and the database — in the terminal with `mavonengine dashboard`, or in the browser behind a login.
   :::
 
   :::u-page-feature
@@ -241,6 +241,39 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
   #description
   Test your netcode against artificial latency, jitter and packet loss before your players do.
   :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-key-round
+  ---
+  #title
+  Player Accounts
+
+  #description
+  Logins, sessions and guests who keep their progress when they register. Every connection gets a stable account id, and the server turns clients away before they get a player. Email confirmation and password resets by mail.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-database
+  ---
+  #title
+  Database & Job Queue
+
+  #description
+  A SQLite database on Node's built-in `node:sqlite`, with migrations per plugin. Background jobs with retries, backoff and delays that survive a restart.
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-bell
+  ---
+  #title
+  Mail & Notifications
+
+  #description
+  `player.notify(new LevelUp())` reaches the player in the game, by mail, or kept to read later. Queued mail in a layout you can change, over SMTP or any nodemailer transport.
+  :::
 ::
 
 ::u-page-section
@@ -261,7 +294,7 @@ Early WIP — a level editor that boots inside the running game and stays connec
 Live Server Monitoring
 
 #description
-Watch your game server while it runs: tick time against the tick budget, CPU, bandwidth, world and physics stats, connected players, logs and HTTP requests. In the terminal with `mavonengine dashboard`, or in the browser with the `@mavonengine/http-monitoring` plugin.
+Watch your game server while it runs: tick time against the tick budget, CPU, bandwidth, world and physics stats, the job queue, connected players and their accounts, logs, HTTP requests and the database. In the terminal with `mavonengine dashboard`, or in the browser with the `@mavonengine/http-monitoring` plugin.
 
 #default
   :::div{class="text-center mb-6"}
@@ -271,6 +304,33 @@ Watch your game server while it runs: tick time against the tick budget, CPU, ba
   :::div{class="rounded-xl overflow-hidden shadow-2xl"}
   ![MavonEngine server monitoring dashboard: CPU, network and tick charts, world stats, players and logs](/images/http-monitoring.png)
   :::
+::
+
+::u-page-section
+#title
+Everything a Live Game Needs
+
+#description
+Accounts, a database, background jobs, mail and notifications — the server side of a game that players keep coming back to. Install the plugins you need, and the engine wires them together: notifications find the player's account, mail goes out through the queue, and every plugin shares the same database.
+
+#default
+  :::div{class="text-center mb-6"}
+  [Player accounts](/tooling/auth) · [Database](/tooling/database) · [Job queue](/tooling/queue) · [Mail](/tooling/mail) · [Notifications](/tooling/notifications)
+  :::
+
+  ```ts [server.ts]
+  // Every connection has an account, the same on every reconnect
+  const account = player.identity
+
+  // In the game, by mail and kept in the player's inbox
+  await player.notify(new LevelUp(5))
+
+  // Slow work goes on the queue, tried again when it fails
+  await server.queue.dispatch(new GrantReward({ player: account.id, coins: 100 }))
+
+  // Plugins share one database, each with its own tables and migrations
+  const top = await server.db?.selectFrom('game_scores').selectAll().limit(10).execute()
+  ```
 ::
 
 ::u-page-section
@@ -349,7 +409,7 @@ Most multiplayer browser games are held together with duct tape. MavonEngine is 
   Developer Experience
 
   #description
-  One command to create and run a project, a live server dashboard, Tweakpane debug panels, physics overlays, MCP support for AI assistants, and comprehensive TypeScript types. Catch bugs fast, ship faster.
+  One command to create and run a project, plugins installed from the dashboard or the editor, a live server dashboard, Tweakpane debug panels, physics overlays, MCP support for AI assistants, and comprehensive TypeScript types. Catch bugs fast, ship faster.
   :::
 
   :::u-page-feature
@@ -360,7 +420,7 @@ Most multiplayer browser games are held together with duct tape. MavonEngine is 
   Extensible Architecture
 
   #description
-  Abstract base classes let you customize servers, entities, and game logic without fighting the framework. Engine plugins add client, server and editor features as npm packages. Designed to grow with your project.
+  Abstract base classes let you customize servers, entities, and game logic without fighting the framework. Engine plugins add client, server and editor features as npm packages, and offer their APIs to each other. Designed to grow with your project.
   :::
 ::
 
@@ -444,6 +504,14 @@ Frequently Asked Questions
     Yes. MavonEngine is free and open source. It includes rendering, physics, multiplayer networking, entity management, animations, particles, and a level editor — all at no cost.
     :::
 
+    :::accordion-item{label="Does MavonEngine handle player accounts and logins?"}
+    Yes. The `@mavonengine/auth` plugin adds player accounts with usernames and passwords, sessions, guest play and login rate limiting, and with `@mavonengine/mail` it confirms emails and resets forgotten passwords. The game server checks every connection before the client gets a player, and gives each player a stable account id to key saves, scores and mutes on. Read the [player accounts docs](/tooling/auth).
+    :::
+
+    :::accordion-item{label="Can a Three.js game send emails and notifications to players?"}
+    With MavonEngine, yes. `player.notify(new LevelUp())` reaches the player in the game, by mail and in an inbox they read later. Mail goes on the server's job queue and is tried again when the mail server is down, so the game never waits for it. See [Notifications](/tooling/notifications) and [Mail](/tooling/mail).
+    :::
+
     :::accordion-item{label="How do I start building a 3D browser game with Three.js?"}
     The fastest way is to scaffold a project with `npx @mavonengine/cli create my-game`. This sets up a working Three.js game engine project with physics and multiplayer support in under a minute. Follow the [Getting Started guide](/getting-started) to go from zero to a running game.
     :::
@@ -463,7 +531,7 @@ Frequently Asked Questions
       variant: subtle
       icon: i-simple-icons-github
   title: Build Multiplayer 3D Games Faster
-  description: Server + Client + Physics + Networking + Rendering + Scenes + Animation + Particles + Plugins + Tooling. All in one package. All working together. All TypeScript.
+  description: Server + Client + Physics + Networking + Rendering + Scenes + Animation + Particles + Accounts + Database + Queue + Mail + Plugins + Tooling. All in one package. All working together. All TypeScript.
   ---
   :::
 ::
