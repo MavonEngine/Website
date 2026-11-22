@@ -4,6 +4,10 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import glsl from 'vite-plugin-glsl'
 
+// The BASE jump demo runs on its own host (the basejump container, behind Caddy): airsports.<the site's domain>
+const siteUrl = new URL(/^https?:\/\//.test(process.env.NUXT_PUBLIC_SITE_URL ?? '') ? process.env.NUXT_PUBLIC_SITE_URL! : `https://${process.env.NUXT_PUBLIC_SITE_URL || 'localhost'}`)
+const airsportsUrl = `${siteUrl.protocol}//airsports.${siteUrl.host}`
+
 const glslEsbuildPlugin = {
   name: 'glsl',
   setup(build: PluginBuild) {
@@ -49,6 +53,17 @@ export default defineNuxtConfig({
     }
   },
 
+  runtimeConfig: {
+    public: {
+      airsportsUrl
+    }
+  },
+
+  routeRules: {
+    // the demo used to be a page here
+    '/demo/BASEJumpGame': { redirect: { to: airsportsUrl, statusCode: 301 } }
+  },
+
   sourcemap: {
     server: false,
     client: false
@@ -76,8 +91,7 @@ export default defineNuxtConfig({
         /^\/de\/prefabs\/(grass|water|creating-a-prefab)(\/.*)?$/,
         /^\/prefabs\/(gras|wasser|prefab-erstellen)(\/.*)?$/,
         '/demo',
-        '/demo/paper-train',
-        '/demo/BASEJumpGame'
+        '/demo/paper-train'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
@@ -95,8 +109,8 @@ export default defineNuxtConfig({
       alias: {
         '@template/server': fileURLToPath(new URL('../template-multiplayer/server/src', import.meta.url))
       },
-      // Rapier isn't deduped: each demo resolves its own, base-jump needs 0.21 (and its multibody/motor APIs) while
-      // the others stay on 0.18.2, whose character controller doesn't stall the way 0.20+'s does
+      // Rapier isn't deduped: each demo resolves its own, and they stay on 0.18.2, whose character controller doesn't
+      // stall the way 0.20+'s does
       dedupe: ['three', 'vue']
     }
   },

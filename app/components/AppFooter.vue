@@ -2,6 +2,7 @@
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const year = new Date().getFullYear()
+const { airsportsUrl } = useRuntimeConfig().public
 </script>
 
 <template>
@@ -62,7 +63,7 @@ const year = new Date().getFullYear()
               </li>
               <li>
                 <a
-                  href="/demo/BASEJumpGame"
+                  :href="airsportsUrl"
                   class="text-muted hover:text-default transition-colors"
                 >
                   BASE Jump ({{ t('footer.multiplayer') }})
