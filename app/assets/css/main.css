@@ -358,6 +358,7 @@ html {
   .home .cursor { animation: home-blink 1s step-end infinite; }
 
   .home .pslide { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(20px, 4vw, 48px); }
+  .home .pslide.wide { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.6fr); }
   .home .nav-btn {
     position: absolute;
     top: 50%;
@@ -451,7 +452,8 @@ html {
     .home .g2 { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 760px) {
-    .home .pslide { grid-template-columns: minmax(0, 1fr); }
+    .home .pslide,
+    .home .pslide.wide { grid-template-columns: minmax(0, 1fr); }
     .home .pshot { display: none !important; }
     .home .nav-btn { width: 44px; height: 44px; }
   }

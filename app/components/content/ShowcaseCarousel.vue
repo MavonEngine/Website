@@ -1,23 +1,27 @@
 <script setup lang="ts">
 // One panel the size of the monitoring screenshot that slides between screenshots (`src` set) and
-// plugin panels (no `src`: title, description, install command and a screenshot placeholder).
+// plugin panels (no `src`: title, description, install command and `shot`, a screenshot or an .mp4; `slot` is the
+// placeholder's label while there is none).
 // Auto-advances every `interval` ms, pauses on hover and focus, and doesn't autoplay under reduced motion.
-type Slide = { title: string, src?: string, alt?: string, tag?: string, desc?: string, cmd?: string, slot?: string }
+// A screenshot slide with `href` links there; `href: airsports` means the BASE Jump host (airsports.<domain>).
+type Slide = { title: string, src?: string, alt?: string, tag?: string, desc?: string, cmd?: string, slot?: string, shot?: string, href?: string }
 
 const props = withDefaults(defineProps<{ slides?: Slide[], interval?: number }>(), {
   interval: 5000,
   slides: () => [
     { src: '/images/http-monitoring.png', alt: 'MavonEngine server monitoring dashboard: CPU, network and tick charts, world stats, players and logs', title: 'Live server monitoring', tag: '@mavonengine/http-monitoring' },
-    { title: 'Chat', cmd: 'npx @mavonengine/cli install @mavonengine/chat', slot: 'CHAT SCREENSHOT', desc: 'In-game text chat with rate limiting, mutes, proximity chat, history and an admin API. Press Enter in the game to type.' },
-    { src: '/baseScreenshot.jpg', alt: 'BASE Jump, a multiplayer MavonEngine demo', title: 'BASE Jump — multiplayer demo', tag: 'DEMO' },
-    { title: 'Player Accounts', cmd: 'npx @mavonengine/cli install @mavonengine/auth', slot: 'LOGIN SCREENSHOT', desc: 'Usernames and passwords, sessions, guest play and login rate limiting. Every player gets a stable account id.' },
-    { title: 'Database', cmd: 'npx @mavonengine/cli install @mavonengine/sqlite', slot: 'DATABASE SCREENSHOT', desc: 'SQLite on Node’s built-in node:sqlite, shared by every plugin, each with its own tables and migrations.' },
-    { title: 'Mail', cmd: 'npx @mavonengine/cli install @mavonengine/mail', slot: 'MAIL SCREENSHOT', desc: 'Queued mail in a layout you can change, over SMTP or any nodemailer transport — retried when the mail server is down.' },
-    { title: 'Notifications', cmd: 'npx @mavonengine/cli install @mavonengine/notifications', slot: 'NOTIFICATION SCREENSHOT', desc: 'player.notify(new LevelUp()) reaches the player in the game, by mail, or in an inbox they read later.' }
+    { title: 'Chat', cmd: 'npx @mavonengine/cli install @mavonengine/chat', slot: 'CHAT SCREENSHOT', shot: '/static/plugin-chat.png', desc: 'In-game text chat with rate limiting, mutes, proximity chat, history and an admin API. Press Enter in the game to type.' },
+    { src: '/baseScreenshot.jpg', alt: 'BASE Jump, a multiplayer MavonEngine demo', title: 'BASE Jump — multiplayer demo', tag: 'DEMO', href: 'airsports' },
+    { title: 'Player Accounts', cmd: 'npx @mavonengine/cli install @mavonengine/auth', slot: 'LOGIN SCREENSHOT', shot: '/static/plugin-auth-login.mp4', desc: 'Usernames and passwords, sessions, guest play and login rate limiting. Every player gets a stable account id.' },
+    { title: 'Database', cmd: 'npx @mavonengine/cli install @mavonengine/sqlite', slot: 'DATABASE SCREENSHOT', shot: '/static/plugin-database.png', desc: 'SQLite on Node’s built-in node:sqlite, shared by every plugin, each with its own tables and migrations.' },
+    { title: 'Mail', cmd: 'npx @mavonengine/cli install @mavonengine/mail', slot: 'MAIL SCREENSHOT', shot: '/static/plugin-mail.png', desc: 'Queued mail in a layout you can change, over SMTP or any nodemailer transport, retried when the mail server is down. A dev inbox to preview every mail is built in.' },
+    { title: 'Notifications', cmd: 'npx @mavonengine/cli install @mavonengine/notifications', slot: 'NOTIFICATION SCREENSHOT', shot: '/static/plugin-notifications.png', desc: 'player.notify(new LevelUp()) reaches the player in the game, by mail, or in an inbox they read later.' }
   ]
 })
 
 const { t } = useI18n()
+const { airsportsUrl } = useRuntimeConfig().public
+const slideHref = (s: Slide) => s.href === 'airsports' ? airsportsUrl as string : s.href
 const n = computed(() => props.slides.length)
 const idx = ref(0)
 let paused = false
@@ -77,7 +81,13 @@ onBeforeUnmount(() => clearInterval(timer))
             :aria-hidden="i !== idx"
             class="relative flex-[0_0_100%] h-full overflow-hidden"
           >
-            <template v-if="s.src">
+            <component
+              :is="s.href ? 'a' : 'div'"
+              v-if="s.src"
+              :href="slideHref(s)"
+              :tabindex="s.href && i !== idx ? -1 : undefined"
+              class="block size-full"
+            >
               <img
                 :src="s.src"
                 :alt="s.alt"
@@ -95,10 +105,11 @@ onBeforeUnmount(() => clearInterval(timer))
                   class="mono text-[11px] text-[#89b4fa] tracking-[0.08em] border border-[rgba(137,180,250,0.4)] bg-[rgba(17,17,27,0.6)] py-1 px-[9px] rounded-[5px]"
                 >{{ s.tag }}</span>
               </div>
-            </template>
+            </component>
             <div
               v-else
               class="pslide h-full box-border p-[clamp(24px,5vw,64px)] bg-[radial-gradient(ellipse_70%_80%_at_85%_50%,rgba(137,180,250,0.12),transparent_70%),repeating-linear-gradient(135deg,rgba(137,180,250,0.035)_0_12px,transparent_12px_24px),#181825]"
+              :class="{ wide: s.shot }"
             >
               <div class="flex flex-col justify-center gap-4 min-w-0">
                 <div class="mono flex items-center gap-2.5 text-xs tracking-[0.12em] text-[#89b4fa]">
@@ -112,10 +123,36 @@ onBeforeUnmount(() => clearInterval(timer))
                 </p>
                 <code
                   v-if="s.cmd"
-                  class="self-start max-w-full box-border overflow-hidden text-ellipsis whitespace-nowrap mono text-[13px] text-[#89dceb] bg-[rgba(17,17,27,0.7)] border border-[rgba(137,220,235,0.2)] py-[9px] px-3 rounded-lg"
+                  class="self-start max-w-full box-border break-words mono text-[13px] leading-[1.6] text-[#89dceb] bg-[rgba(17,17,27,0.7)] border border-[rgba(137,220,235,0.2)] py-[9px] px-3 rounded-lg"
                 ><span class="text-[#a6e3a1]">$ </span>{{ s.cmd }}</code>
               </div>
-              <div class="pshot rounded-xl border border-dashed border-[rgba(137,180,250,0.3)] bg-[rgba(17,17,27,0.55)] flex items-center justify-center mono text-xs text-[#9399b2] tracking-[0.08em] text-center p-4">
+              <div
+                v-if="s.shot"
+                class="pshot flex items-center min-w-0"
+              >
+                <video
+                  v-if="s.shot.endsWith('.mp4')"
+                  :src="s.shot"
+                  :aria-label="s.title"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  preload="metadata"
+                  class="block w-full h-auto rounded-xl border border-[rgba(137,180,250,0.25)] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
+                />
+                <img
+                  v-else
+                  :src="s.shot"
+                  :alt="s.title"
+                  loading="lazy"
+                  class="block w-full h-auto rounded-xl border border-[rgba(137,180,250,0.25)] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
+                >
+              </div>
+              <div
+                v-else
+                class="pshot rounded-xl border border-dashed border-[rgba(137,180,250,0.3)] bg-[rgba(17,17,27,0.55)] flex items-center justify-center mono text-xs text-[#9399b2] tracking-[0.08em] text-center p-4"
+              >
                 [ {{ s.slot }} ]
               </div>
             </div>

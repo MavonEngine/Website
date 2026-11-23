@@ -192,26 +192,32 @@ slides:
   - title: Chat
     cmd: npx @mavonengine/cli install @mavonengine/chat
     slot: CHAT-SCREENSHOT
+    shot: /static/plugin-chat.png
     desc: Text-Chat im Spiel mit Rate-Limit, Stummschaltungen, Umgebungs-Chat, Verlauf und einer Admin-API. Im Spiel Enter drücken zum Tippen.
   - src: /baseScreenshot.jpg
     alt: BASE Jump, eine Multiplayer-Demo mit MavonEngine
     title: BASE Jump — Multiplayer-Demo
     tag: DEMO
+    href: airsports
   - title: Spieler-Accounts
     cmd: npx @mavonengine/cli install @mavonengine/auth
     slot: LOGIN-SCREENSHOT
+    shot: /static/plugin-auth-login.mp4
     desc: Benutzernamen und Passwörter, Sitzungen, Gastzugang und ein Rate-Limit für Anmeldungen. Jeder Spieler bekommt eine stabile Account-ID.
   - title: Datenbank
     cmd: npx @mavonengine/cli install @mavonengine/sqlite
     slot: DATENBANK-SCREENSHOT
+    shot: /static/plugin-database.png
     desc: SQLite auf dem in Node eingebauten node:sqlite, geteilt von allen Plugins, jedes mit eigenen Tabellen und Migrationen.
   - title: Mail
     cmd: npx @mavonengine/cli install @mavonengine/mail
     slot: MAIL-SCREENSHOT
-    desc: Eingereihte Mails in einem anpassbaren Layout, über SMTP oder jeden nodemailer-Transport — erneut versucht, wenn der Mailserver nicht erreichbar ist.
+    shot: /static/plugin-mail.png
+    desc: Eingereihte Mails in einem anpassbaren Layout, über SMTP oder jeden nodemailer-Transport, erneut versucht, wenn der Mailserver nicht erreichbar ist. Ein Dev-Posteingang zur Vorschau jeder Mail ist eingebaut.
   - title: Benachrichtigungen
     cmd: npx @mavonengine/cli install @mavonengine/notifications
     slot: BENACHRICHTIGUNGS-SCREENSHOT
+    shot: /static/plugin-notifications.png
     desc: player.notify(new LevelUp()) erreicht den Spieler im Spiel, per Mail oder in einem Posteingang, den er später liest.
 ---
 ::
