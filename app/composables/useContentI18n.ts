@@ -28,6 +28,7 @@ const EN_TO_DE: Record<string, string> = {
   'queue': 'warteschlange',
   'mail': 'mail',
   'notifications': 'benachrichtigungen',
+  'admin-panel': 'admin-panel',
   'networking': 'netzwerk',
   'server': 'server',
   'client': 'client',
