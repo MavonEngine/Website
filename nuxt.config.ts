@@ -61,7 +61,9 @@ export default defineNuxtConfig({
 
   routeRules: {
     // the demo used to be a page here
-    '/demo/BASEJumpGame': { redirect: { to: airsportsUrl, statusCode: 301 } }
+    '/demo/BASEJumpGame': { redirect: { to: airsportsUrl, statusCode: 301 } },
+    // The forum lives outside the app at /community; Nuxt UI localizes links to it on German pages
+    '/de/community': { redirect: { to: '/community', statusCode: 301 } }
   },
 
   sourcemap: {
@@ -135,6 +137,12 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+
+  // nuxt-ai-ready (pulled in by @nuxtjs/seo 6) would add database-backed MCP site tools on top of
+  // our own docs MCP server (`mcp` below). They need drizzle-orm, and the docs server doesn't use them.
+  aiReady: {
+    database: false
   },
 
   eslint: {

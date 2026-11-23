@@ -115,7 +115,9 @@ export default defineAppConfig({
       }, {
         icon: 'i-lucide-users',
         label: 'Join the community',
-        href: '/community'
+        href: '/community',
+        // The forum is served outside the Nuxt app; without this, Nuxt UI localizes it to /de/community
+        external: true
       }]
     }
   }
