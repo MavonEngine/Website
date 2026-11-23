@@ -1,7 +1,14 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
-const switchLocalePath = useSwitchLocalePath()
+const route = useRoute()
+// Docs slugs are translated (getting-started ↔ erste-schritte), which switchLocalePath doesn't know
+// about, so take the other language's path from the same map the hreflang links use
+const { alternatePath } = useContentI18n()
+function langPath(code: 'en' | 'de') {
+  const path = code === locale.value ? route.path : alternatePath.value
+  return path.length > 1 ? path.replace(/\/$/, '') : path
+}
 const docsPath = computed(() => locale.value === 'de' ? '/de/erste-schritte' : '/getting-started')
 </script>
 
@@ -55,7 +62,7 @@ const docsPath = computed(() => locale.value === 'de' ? '/de/erste-schritte' : '
       <div class="mavon-header-right">
         <div class="mavon-lang-switcher hide-sm">
           <NuxtLink
-            :to="switchLocalePath('en')"
+            :to="langPath('en')"
             :class="['mavon-lang-btn', { 'mavon-lang-active': locale === 'en' }]"
             hreflang="en"
           >EN</NuxtLink>
@@ -64,7 +71,7 @@ const docsPath = computed(() => locale.value === 'de' ? '/de/erste-schritte' : '
             aria-hidden="true"
           >/</span>
           <NuxtLink
-            :to="switchLocalePath('de')"
+            :to="langPath('de')"
             :class="['mavon-lang-btn', { 'mavon-lang-active': locale === 'de' }]"
             hreflang="de"
           >DE</NuxtLink>
