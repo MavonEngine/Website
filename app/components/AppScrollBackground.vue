@@ -1,29 +1,16 @@
 <script setup lang="ts">
+import { scrollPalette as pal, rgbaString as rgba, type RGB } from '~/utils/scrollPalette'
+
 // Fixed full-viewport background for the homepage: a warp starfield that follows scroll velocity,
 // wireframe terrain that flows with scrollY, a rotating icosahedron with an orbit ring, a scan beam
-// and HUD rails on wide screens. The accent colour moves along PAL as the page scrolls.
+// and HUD readouts on wide screens. The accent colour follows scrollPalette as the page scrolls;
+// the scroll % rail on the left is ScrollRail.
 const props = withDefaults(defineProps<{ intensity?: number }>(), { intensity: 1 })
 
-type RGB = [number, number, number]
 type Vec3 = [number, number, number]
 
 const canvas = ref<HTMLCanvasElement | null>(null)
 let stop: (() => void) | null = null
-
-const PAL: RGB[] = [[137, 180, 250], [116, 199, 236], [180, 190, 254], [203, 166, 247], [148, 226, 213], [137, 180, 250]]
-
-function pal(p: number): RGB {
-  const f = Math.max(0, Math.min(0.9999, p)) * (PAL.length - 1)
-  const i = Math.floor(f)
-  const k = f - i
-  const a = PAL[i]!
-  const b = PAL[i + 1]!
-  return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k]
-}
-
-function rgba(col: RGB, a: number) {
-  return `rgba(${col[0] | 0},${col[1] | 0},${col[2] | 0},${Math.max(0, Math.min(1, a)).toFixed(3)})`
-}
 
 function rot(v: Vec3, ax: number, ay: number): Vec3 {
   const [x, y, z] = v
@@ -146,7 +133,7 @@ onMounted(() => {
       const pzz = s.z + (pz - s.z) * tail
       const PX = cx + (s.x / pzz) * W * 0.32, PY = cy + (s.y / pzz) * H * 0.32
       const near = 1 - s.z
-      ctx.strokeStyle = rgba(i % 5 === 0 ? col2 : [205, 214, 244], near * 0.85 * Math.min(1, I))
+      ctx.strokeStyle = rgba(i % 5 === 0 ? col2 : [205, 214, 244] as RGB, near * 0.85 * Math.min(1, I))
       ctx.lineWidth = near * 1.9 + 0.3
       ctx.beginPath()
       ctx.moveTo(PX, PY)
@@ -232,7 +219,7 @@ onMounted(() => {
         ctx.stroke()
       }
       for (const q of P) {
-        ctx.fillStyle = rgba([205, 214, 244], alpha * (0.5 + 0.5 * (1 - (q[2] + 1) / 2)))
+        ctx.fillStyle = rgba([205, 214, 244] as RGB, alpha * (0.5 + 0.5 * (1 - (q[2] + 1) / 2)))
         ctx.beginPath()
         ctx.arc(q[0], q[1], 1.8 * w, 0, Math.PI * 2)
         ctx.fill()
@@ -279,39 +266,9 @@ onMounted(() => {
     ctx.fillStyle = rgba(col, 0.18 * I)
     ctx.fillRect(0, by, W, 1)
 
-    // --- HUD rails
+    // --- HUD readouts (the scroll % rail is ScrollRail)
     if (W > 1000) {
-      const top = H * 0.22, bot = H * 0.78, len = bot - top
-      ctx.strokeStyle = 'rgba(205,214,244,0.12)'
-      ctx.lineWidth = 1
-      ctx.beginPath()
-      ctx.moveTo(22.5, top)
-      ctx.lineTo(22.5, bot)
-      ctx.stroke()
-      for (let m = 0; m <= 20; m++) {
-        const my = top + len * m / 20
-        const mw = m % 5 === 0 ? 8 : 4
-        ctx.beginPath()
-        ctx.moveTo(22.5, my)
-        ctx.lineTo(22.5 + mw, my)
-        ctx.stroke()
-      }
-      ctx.strokeStyle = rgba(col, 0.9)
-      ctx.lineWidth = 2
-      ctx.beginPath()
-      ctx.moveTo(22.5, top)
-      ctx.lineTo(22.5, top + len * p)
-      ctx.stroke()
-      ctx.fillStyle = rgba(col, 1)
-      ctx.beginPath()
-      ctx.arc(22.5, top + len * p, 3.5, 0, Math.PI * 2)
-      ctx.fill()
       ctx.font = '500 10px "JetBrains Mono", monospace'
-      ctx.fillStyle = 'rgba(166,173,200,0.75)'
-      ctx.fillText('SCR', 16, top - 14)
-      ctx.fillStyle = rgba(col, 0.95)
-      ctx.fillText(String(Math.round(p * 100)).padStart(3, '0') + '%', 14, bot + 22)
-
       ctx.textAlign = 'right'
       ctx.fillStyle = 'rgba(166,173,200,0.6)'
       ctx.fillText('Z ' + (sc.y / 10).toFixed(1).padStart(7, '0'), W - 18, H - 52)

@@ -4,6 +4,7 @@
 
 <template>
   <UContainer>
+    <ScrollRail />
     <slot />
   </UContainer>
 </template>

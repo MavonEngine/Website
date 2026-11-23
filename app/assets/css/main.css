@@ -38,6 +38,8 @@ main {
 /* Dark theme base — identical multi-layer background to Flarum */
 html {
   scroll-behavior: smooth;
+  /* Firefox's scrollbars; ::-webkit-scrollbar below covers Chromium/Safari */
+  scrollbar-color: #313244 #11111b;
 }
 
 .dark,

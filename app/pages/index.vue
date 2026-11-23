@@ -85,6 +85,7 @@ useSchemaOrg([
     <ClientOnly>
       <AppScrollBackground />
     </ClientOnly>
+    <ScrollRail />
     <div class="home">
       <ContentRenderer
         v-if="page"
