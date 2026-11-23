@@ -30,7 +30,7 @@
     "@vueuse/core": "14.2.1",
     "better-sqlite3": "12.8.0",
     "minimark": "^0.2.0",
-    "nuxt": "4.4.2",
+    "nuxt": "4.6.4",
     "nuxt-llms": "0.2.0",
     "nuxt-og-image": "6.2.6",
     "nuxt-umami": "3.2.1",
