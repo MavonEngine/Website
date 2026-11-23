@@ -3,581 +3,308 @@ seo:
   title: MavonEngine – Three.js Game Engine for Single & Multiplayer Browser Games
   description: MavonEngine is a Three.js game engine built for single and multiplayer browser games — with server-authoritative physics, real-time networking, and a unified server-client architecture built in.
 ---
-::u-page-hero{class="overflow-hidden"}
+::home-hero
 ---
-orientation: horizontal
+badge: OPEN SOURCE · ALL TYPESCRIPT
+command: npx @mavonengine/cli create my-game
+tags: [TypeScript, Three.js, Rapier Physics, WebRTC, GLTF / Draco]
 ---
 #title
-Three.js [Game Engine]{.text-primary} for Single & Multiplayer
+Three.js [Game Engine]{.accent} for Single & Multiplayer
 
 #description
 MavonEngine is a Three.js game engine built for real-time browser games — the only one with server-authoritative physics built in. Build single-player or multiplayer 3D games with a unified server-client architecture, integrated physics, and real-time networking.
 
 #links
-  :::u-button
-  ---
-  to: /getting-started
-  size: xl
-  trailing-icon: i-lucide-arrow-right
-  ---
-  Get started
-  :::
-
-  :::u-button
-  ---
-  color: neutral
-  variant: outline
-  size: xl
-  href: /community
-  ---
-  Join the community
-  :::
-
-  :::u-button
-  ---
-  color: neutral
-  variant: subtle
-  size: xl
-  to: /demo
-  trailing-icon: i-lucide-gamepad-2
-  ---
-  Try it live
-  :::
+:home-button[Get started]{to="/getting-started" icon="i-lucide-arrow-right"}
+:home-button[Join the community]{to="/community" variant="outline"}
+:home-button[Try it live]{to="/demo" variant="outline" icon="i-lucide-gamepad-2"}
 
 #default
-  :::prose-pre
+  :::home-code-card
   ---
-  code: |
-    import Server from '@mavonengine/core/Networking/Server/Server'
-    import Player from './Base/Player'
-
-    export default class GameServer extends Server<Player> {
-      // A client connected: return its player, the server adds and syncs it
-      protected onConnection(channel) {
-        return new Player(channel.id)
-      }
-
-      // Inputs arrive in order and run on the authoritative tick
-      protected onCommand(command) {
-        const player = this.game.world.entities.items.get(command.playerId)
-        player?.applyInput(command)
-      }
-
-      // Only sync entities within 200 units of each player
-      getStateSyncDistance() {
-        return 200
-      }
-    }
-  filename: server.ts
+  sample: server
+  badge: AUTHORITATIVE
+  glow: true
+  stats:
+    - label: PHYSICS
+      value: Rapier3D
+    - label: TRANSPORT
+      value: WebRTC · UDP
+    - label: SYNC RADIUS
+      value: 200 units
+      accent: true
   ---
-
-  ```ts [server.ts]
-  import Server from '@mavonengine/core/Networking/Server/Server'
-  import Player from './Base/Player'
-
-  export default class GameServer extends Server<Player> {
-    // A client connected: return its player, the server adds and syncs it
-    protected onConnection(channel) {
-      return new Player(channel.id)
-    }
-
-    // Inputs arrive in order and run on the authoritative tick
-    protected onCommand(command) {
-      const player = this.game.world.entities.items.get(command.playerId)
-      player?.applyInput(command)
-    }
-
-    // Only sync entities within 200 units of each player
-    getStateSyncDistance() {
-      return 200
-    }
-  }
-  ```
   :::
 ::
 
-::div{class="px-4 sm:px-6 lg:px-8 py-4 max-w-7xl mx-auto"}
-:::div{class="rounded-xl overflow-hidden shadow-2xl w-full"}
-:iframe{src="/demo" id="demo-frame" class="w-full border-0" loading="lazy" sandbox="allow-scripts allow-same-origin" style="height:600px; visibility:hidden"}
-:::
+::home-demo
 ::
 
-::u-page-section{id="features"}
+::home-section{id="features" index="01" label="ENGINE" large}
 #title
 Everything in one cohesive package
 
 #description
 No more piecing together libraries. MavonEngine ships rendering, physics, networking, animation, particles, and debugging as a unified whole.
 
-#features
-  :::u-page-feature
-  ---
-  icon: i-lucide-layers
-  ---
-  #title
-  Full-Stack Multiplayer Architecture
+#default
+  :::div{class="g3"}
+    ::::home-feature{icon="i-lucide-layers" title="Full-Stack Multiplayer Architecture"}
+    Shared Entity System — write once, run on server and client. Automatic state synchronization with bandwidth optimization, distance-based culling for entity visibility, and hash-based change detection to minimize network traffic.
+    ::::
 
-  #description
-  Shared Entity System — write once, run on server and client. Automatic state synchronization with bandwidth optimization, distance-based culling for entity visibility, and hash-based change detection to minimize network traffic.
-  :::
+    ::::home-feature{icon="i-lucide-zap" title="Integrated 3D Physics with Rapier"}
+    Kinematic character controller with slope climbing and sliding. Configurable parameters — 45° climb, 30° auto-slide. Full body & collider management and physics debug visualization in real-time.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-zap
-  ---
-  #title
-  Integrated 3D Physics with Rapier
+    ::::home-feature{icon="i-lucide-monitor" title="Advanced 3D Rendering with Three.js"}
+    The full power of Three.js with custom GLSL shader support and debug rendering modes including wireframe, armature, and physics overlays.
+    ::::
 
-  #description
-  Kinematic character controller with slope climbing and sliding. Configurable parameters — 45° climb, 30° auto-slide. Full body & collider management and physics debug visualization in real-time.
-  :::
+    ::::home-feature{icon="i-lucide-wifi" title="Real-Time Multiplayer Networking"}
+    WebRTC-based communication for real-time data channels. Bandwidth tracking & monitoring, command buffering & processing across network latency, and server health monitoring with built-in HTTP endpoints.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-monitor
-  ---
-  #title
-  Advanced 3D Rendering with Three.js
+    ::::home-feature{icon="i-lucide-play" title="Skeletal Animation System"}
+    Animation state management with logical organization. Smooth fade transitions with configurable duration, GLTF model support with Draco compression, and efficient skeleton cloning for instanced models.
+    ::::
 
-  #description
-  MavonEngine is a Three.js game engine at its core — giving you the full power of Three.js with custom GLSL shader support and debug rendering modes including wireframe, armature, and physics overlays.
-  :::
+    ::::home-feature{icon="i-lucide-sparkles" title="Particle Effects Framework"}
+    Built-in effects — rain and smoke ready to use. Custom shader support for unique particle visuals.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-wifi
-  ---
-  #title
-  Real-Time Multiplayer Networking
+    ::::home-feature{icon="i-lucide-map" title="Scenes Shared by Client & Server"}
+    One JSON scene file for both sides — the client builds what is rendered, the server builds colliders and game logic. Save in the editor and the server reloads the map for every connected player.
+    ::::
 
-  #description
-  WebRTC-based communication for real-time data channels. Bandwidth tracking & monitoring, command buffering & processing across network latency, and server health monitoring with built-in HTTP endpoints.
-  :::
+    ::::home-feature{icon="i-lucide-puzzle" title="Engine Plugins"}
+    Official plugins for chat, accounts, a database, mail, notifications and monitoring, installed with `mavonengine install` or from the dashboard and the editor. `mavonengine build` ships only the assets your game uses.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-play
-  ---
-  #title
-  Skeletal Animation System
+    ::::home-feature{icon="i-lucide-gamepad-2" title="Gamepad Support"}
+    Xbox, PlayStation and generic controllers out of the box — radial deadzones, layout-aware button labels, analog triggers and rumble.
+    ::::
 
-  #description
-  Animation state management with logical organization. Smooth fade transitions with configurable duration, GLTF model support with Draco compression, and efficient skeleton cloning for instanced models.
-  :::
+    ::::home-feature{icon="i-lucide-activity" title="Live Server Monitoring"}
+    Tick time against the tick budget, CPU, bandwidth, the job queue, players and their accounts, logs, HTTP requests and the database — in the terminal or in the browser behind a login.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-sparkles
-  ---
-  #title
-  Particle Effects Framework
+    ::::home-feature{icon="i-lucide-bot" title="AI Assistant Support (MCP)"}
+    `mavonengine mcp` lets any AI coding assistant inspect your running game: server metrics, scenes and entities, renderer stats, console, screenshots and frame traces — and read these docs.
+    ::::
 
-  #description
-  Built-in effects — rain and smoke ready to use. Custom shader support for unique particle visuals.
-  :::
+    ::::home-feature{icon="i-lucide-signal" title="Latency Simulation"}
+    Test your netcode against artificial latency, jitter and packet loss before your players do.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-map
-  ---
-  #title
-  Scenes Shared by Client & Server
+    ::::home-feature{icon="i-lucide-key-round" title="Player Accounts"}
+    Logins, sessions and guests who keep their progress when they register. Every connection gets a stable account id. Email confirmation and password resets by mail.
+    ::::
 
-  #description
-  One JSON scene file for both sides — the client builds what is rendered, the server builds colliders and game logic. Save in the editor and the server reloads the map for every connected player.
-  :::
+    ::::home-feature{icon="i-lucide-database" title="Database & Job Queue"}
+    A SQLite database on Node's built-in `node:sqlite`, with migrations per plugin. Background jobs with retries, backoff and delays that survive a restart.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-puzzle
-  ---
-  #title
-  Engine Plugins
-
-  #description
-  Official plugins for chat, accounts, a database, mail, notifications and monitoring, installed with `mavonengine install` or right from the dashboard and the editor. Plugins can use each other, and `mavonengine build` ships only the assets your game actually uses.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-gamepad-2
-  ---
-  #title
-  Gamepad Support
-
-  #description
-  Xbox, PlayStation and generic controllers out of the box — radial deadzones, layout-aware button labels, analog triggers and rumble.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-activity
-  ---
-  #title
-  Live Server Monitoring
-
-  #description
-  Tick time against the tick budget, CPU, bandwidth, the job queue, players and their accounts, logs, HTTP requests and the database — in the terminal with `mavonengine dashboard`, or in the browser behind a login.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-bot
-  ---
-  #title
-  AI Assistant Support (MCP)
-
-  #description
-  `mavonengine mcp` lets any AI coding assistant inspect your running game: server metrics, scenes and entities, renderer stats, console, screenshots and frame traces from the browser tab — and read these docs.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-signal
-  ---
-  #title
-  Latency Simulation
-
-  #description
-  Test your netcode against artificial latency, jitter and packet loss before your players do.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-key-round
-  ---
-  #title
-  Player Accounts
-
-  #description
-  Logins, sessions and guests who keep their progress when they register. Every connection gets a stable account id, and the server turns clients away before they get a player. Email confirmation and password resets by mail.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-database
-  ---
-  #title
-  Database & Job Queue
-
-  #description
-  A SQLite database on Node's built-in `node:sqlite`, with migrations per plugin. Background jobs with retries, backoff and delays that survive a restart.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-bell
-  ---
-  #title
-  Mail & Notifications
-
-  #description
-  `player.notify(new LevelUp())` reaches the player in the game, by mail, or kept to read later. Queued mail in a layout you can change, over SMTP or any nodemailer transport.
+    ::::home-feature{icon="i-lucide-bell" title="Mail & Notifications"}
+    `player.notify(new LevelUp())` reaches the player in the game, by mail, or kept to read later. Queued mail in a layout you can change, over SMTP or any nodemailer transport.
+    ::::
   :::
 ::
 
-::u-page-section
+::home-split{index="02" label="LEVEL EDITOR" note="EARLY WIP"}
 #title
-Level Editor
+Edit the world while it runs.
 
 #description
-Early WIP — a level editor that boots inside the running game and stays connected to the server. Edit the scene, press `Ctrl+S`, and the server reloads the map for every player. Dock your own tools as custom panels.
+A level editor that boots inside the running game and stays connected to the server. Edit the scene, press save, and the server reloads the map for every player. Dock your own tools as custom panels.
+
+#extra
+:::home-shortcut{modifier="Ctrl" key-name="S" hint="map reloads for all players"}
+:::
 
 #default
-  :::div{class="rounded-xl overflow-hidden shadow-2xl"}
-  :video{src="/static/levelEditor.mp4" autoplay loop muted playsinline controls class="w-full" title="MavonEngine Three.js Game Engine — Level Editor"}
-  :::
+:::home-video{src="/static/levelEditor.mp4" title="MavonEngine Three.js Game Engine — Level Editor"}
+:::
 ::
 
-::u-page-section
+::home-section{id="showcase" index="03" label="PLUGINS & SCREENSHOTS" :max-width="620"}
 #title
-Live Server Monitoring
+Plug it in. Watch it run.
 
 #description
-Watch your game server while it runs: tick time against the tick budget, CPU, bandwidth, world and physics stats, the job queue, connected players and their accounts, logs, HTTP requests and the database. In the terminal with `mavonengine dashboard`, or in the browser with the `@mavonengine/http-monitoring` plugin.
+Official plugins for chat, accounts, a database, mail, notifications and monitoring — one command each, and the engine wires them together. Plugins can use each other and share the same database.
 
-#default
-  :::div{class="text-center mb-6"}
-  [Read the monitoring docs.](/tooling/monitoring)
-  :::
-
-  :::div{class="rounded-xl overflow-hidden shadow-2xl"}
-  ![MavonEngine server monitoring dashboard: CPU, network and tick charts, world stats, players and logs](/images/http-monitoring.png)
-  :::
+#aside
+:::install-command
+:::
 ::
 
-::u-page-section
+::showcase-carousel
+::
+
+::div{class="wrap mt-7 flex flex-wrap gap-3 justify-center"}
+:home-button[All plugins]{to="/tooling/plugins" variant="outline" icon="i-lucide-arrow-right"}
+:home-button[Monitoring docs]{to="/tooling/monitoring" variant="outline"}
+::
+
+::home-split{index="04" label="LIVE OPS" top}
 #title
 Everything a Live Game Needs
 
 #description
-Accounts, a database, background jobs, mail and notifications — the server side of a game that players keep coming back to. Install the plugins you need, and the engine wires them together: notifications find the player's account, mail goes out through the queue, and every plugin shares the same database.
+Accounts, a database, background jobs, mail and notifications — the server side of a game that players keep coming back to. Install the plugins you need, and the engine wires them together.
+
+#extra
+  :::home-link-pills
+  ---
+  label: Live game tooling
+  links:
+    - label: Player accounts
+      to: /tooling/auth
+    - label: Database
+      to: /tooling/database
+    - label: Job queue
+      to: /tooling/queue
+    - label: Mail
+      to: /tooling/mail
+    - label: Notifications
+      to: /tooling/notifications
+  ---
+  :::
 
 #default
-  :::div{class="text-center mb-6"}
-  [Player accounts](/tooling/auth) · [Database](/tooling/database) · [Job queue](/tooling/queue) · [Mail](/tooling/mail) · [Notifications](/tooling/notifications)
-  :::
-
-  :::prose-pre
-  ---
-  code: |
-    import Server from '@mavonengine/core/Networking/Server/Server'
-    import Player from './Base/Player'
-    import { GrantReward } from './Jobs/GrantReward'
-    import { LevelUp } from './Notifications/LevelUp'
-
-    export default class GameServer extends Server<Player> {
-      // Every connection has an account, the same on every reconnect
-      protected onConnection(channel) {
-        const player = new Player(channel.id)
-        this.logger.info(`${player.identity?.name} joined`)
-        return player
-      }
-
-      // In the game, by mail and kept in the player's inbox
-      async levelUp(player: Player, level: number) {
-        await player.notify(new LevelUp(level))
-        // Slow work goes on the queue, tried again when it fails
-        await this.queue.dispatch(new GrantReward({ player: player.identity!.id, coins: 100 }))
-      }
-
-      // Plugins share one database, each with its own tables and migrations
-      topScores() {
-        return this.db?.selectFrom('game_scores').selectAll().limit(10).execute()
-      }
-    }
-  filename: server.ts
-  ---
-
-  ```ts [server.ts]
-  import Server from '@mavonengine/core/Networking/Server/Server'
-  import Player from './Base/Player'
-  import { GrantReward } from './Jobs/GrantReward'
-  import { LevelUp } from './Notifications/LevelUp'
-
-  export default class GameServer extends Server<Player> {
-    // Every connection has an account, the same on every reconnect
-    protected onConnection(channel) {
-      const player = new Player(channel.id)
-      this.logger.info(`${player.identity?.name} joined`)
-      return player
-    }
-
-    // In the game, by mail and kept in the player's inbox
-    async levelUp(player: Player, level: number) {
-      await player.notify(new LevelUp(level))
-      // Slow work goes on the queue, tried again when it fails
-      await this.queue.dispatch(new GrantReward({ player: player.identity!.id, coins: 100 }))
-    }
-
-    // Plugins share one database, each with its own tables and migrations
-    topScores() {
-      return this.db?.selectFrom('game_scores').selectAll().limit(10).execute()
-    }
-  }
-  ```
-  :::
+:::home-code-card{sample="liveops"}
+:::
 ::
 
-::u-page-section
+::home-section{index="05" label="PREFABS" :max-width="680"}
 #title
-Prefabs
+Drop in. Tweak. Ship.
 
 #description
-Drop in ready-to-use prefabs built by the community — from environment assets to gameplay elements. Pull any prefab directly into the editor, tweak it, and ship. Anyone can publish prefabs to the community registry.
+Ready-to-use prefabs built by the community — from environment assets to gameplay elements. Pull any prefab directly into the editor, and anyone can publish to the community registry.
+
+#aside
+:home-button[Browse the prefab docs]{to="/prefabs" variant="outline" icon="i-lucide-arrow-right"}
 
 #default
-  :::div{class="text-center mb-6"}
-  [Browse the prefab docs.](/prefabs)
-  :::
-
-  :::div{class="grid grid-cols-1 lg:grid-cols-2 gap-6"}
-    ::::div
-    :video{src="/static/grassPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4" title="MavonEngine Three.js Game Engine — Grass Prefab with Wind Simulation"}
-
-    **Grass** — Lush, performant grass fields with wind simulation and LOD support. Drop it into your scene and configure density, sway, and color in seconds.
+  :::div{class="g2"}
+    ::::home-prefab{title="Grass" tag="WIND · LOD" tone="green" video="/static/grassPrefab.mp4" video-title="MavonEngine Three.js Game Engine — Grass Prefab with Wind Simulation"}
+    Lush, performant grass fields with wind simulation and LOD support. Configure density, sway, and color in seconds.
     ::::
 
-    ::::div
-    :video{src="/static/waterPrefab.mp4" autoplay loop muted playsinline controls class="w-full rounded-xl mb-4" title="MavonEngine Three.js Game Engine — Water Shader Prefab"}
-
-    **Water** — Basic water shader. 3 LOD + Basic customizations — ready to use out of the box.
+    ::::home-prefab{title="Water" tag="3 LOD · SHADER" tone="sapphire" video="/static/waterPrefab.mp4" video-title="MavonEngine Three.js Game Engine — Water Shader Prefab"}
+    Basic water shader with 3 LOD levels and basic customizations — ready to use out of the box.
     ::::
   :::
 ::
 
-::u-page-section
+::home-section{index="06" label="ARCHITECTURE" :max-width="760" large}
 #title
 Built different
 
 #description
-Most multiplayer browser games are held together with duct tape. MavonEngine is a Three.js game engine designed from the ground up as a unified system — so everything works together out of the box.
+Most multiplayer browser games are held together with duct tape. MavonEngine is designed from the ground up as a unified system — so everything works together out of the box.
 
-#features
-  :::u-page-feature
-  ---
-  icon: i-lucide-package
-  ---
-  #title
-  Complete Solution
+#default
+  :::div{class="g3"}
+    ::::home-feature{number="01" title="Complete Solution"}
+    Rendering, physics, networking, entity management, asset loading, animation, particles, and debugging tools in one cohesive package.
+    ::::
 
-  #description
-  Rendering, physics, networking, entity management, asset loading, animation, particles, and debugging tools in one cohesive package.
-  :::
+    ::::home-feature{number="02" title="Server + Client Unity" wide}
+    Write game logic once and it works on both server and client. The shared entity system eliminates duplication and drift. The server runs a simplified hitbox scene alongside the client's full Three.js world — enabling authoritative hit detection, raycasting, and spatial queries without trusting the client.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-server
-  ---
-  #title
-  Server + Client Unity
+    ::::home-feature{number="03" title="Networking Built In"}
+    Distance-based culling, hash-based change detection, bandwidth monitoring, and automatic state synchronization — all built in, none bolted on.
+    ::::
 
-  #description
-  Write game logic once and it works on both server and client. The shared entity system eliminates duplication and drift. The server runs a simplified hitbox scene alongside the client's full Three.js world — enabling authoritative hit detection, raycasting, and spatial queries without trusting the client.
-  :::
+    ::::home-feature{number="04" title="Developer Experience"}
+    One command to create and run a project, a live server dashboard, Tweakpane debug panels, physics overlays, MCP support for AI assistants, and comprehensive TypeScript types.
+    ::::
 
-  :::u-page-feature
-  ---
-  icon: i-lucide-globe
-  ---
-  #title
-  Networking Built In
-
-  #description
-  Distance-based culling, hash-based change detection, bandwidth monitoring, and automatic state synchronization — all built in, none bolted on.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-code
-  ---
-  #title
-  Developer Experience
-
-  #description
-  One command to create and run a project, plugins installed from the dashboard or the editor, a live server dashboard, Tweakpane debug panels, physics overlays, MCP support for AI assistants, and comprehensive TypeScript types. Catch bugs fast, ship faster.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-puzzle
-  ---
-  #title
-  Extensible Architecture
-
-  #description
-  Abstract base classes let you customize servers, entities, and game logic without fighting the framework. Engine plugins add client, server and editor features as npm packages, and offer their APIs to each other. Designed to grow with your project.
+    ::::home-feature{number="05" title="Extensible Architecture"}
+    Abstract base classes let you customize servers, entities, and game logic without fighting the framework. Engine plugins add client, server and editor features as npm packages.
+    ::::
   :::
 ::
 
-::u-page-section{id="usecases"}
+::home-section{id="usecases" index="07" label="USE CASES" center large}
 #title
 What can you build?
 
 #description
-MavonEngine is a Three.js game engine purpose-built for browser games — single-player or multiplayer. Anything that needs players, physics, and a world in the browser.
+Anything that needs players, physics, and a world in the browser.
 
-#features
-  :::u-page-feature
-  ---
-  icon: i-lucide-star
-  ---
-  #title
-  Action RPGs
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-gamepad-2
-  ---
-  #title
-  PvP Combat Games
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-globe-2
-  ---
-  #title
-  Open World Multiplayer
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-box
-  ---
-  #title
-  Physics-Based Games
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-user
-  ---
-  #title
-  Single-Player 3D Games
+#default
+  :::div{class="g5"}
+  ::::home-use-case{icon="i-lucide-star" title="Action RPGs"}
+  ::::
+  ::::home-use-case{icon="i-lucide-gamepad-2" title="PvP Combat Games"}
+  ::::
+  ::::home-use-case{icon="i-lucide-globe" title="Open World Multiplayer"}
+  ::::
+  ::::home-use-case{icon="i-lucide-box" title="Physics-Based Games"}
+  ::::
+  ::::home-use-case{icon="i-lucide-user-round" title="Single-Player 3D Games"}
+  ::::
   :::
 ::
 
-
-::u-page-section
+::home-section{index="08" label="FAQ" narrow}
 #title
 Frequently Asked Questions
 
 #default
-  ::accordion
-    :::accordion-item{label="What is a Three.js game engine?"}
-    A Three.js game engine builds on top of Three.js's rendering to add the systems every game needs — physics, networking, entity management, animations, and tooling. Instead of wiring together separate libraries yourself, a game engine gives you all of that integrated and working together. MavonEngine is a Three.js game engine built specifically for browser games, with server-authoritative physics and multiplayer networking built in from the start.
-    :::
+  :::home-faq
+    ::::home-faq-item{label="What is a Three.js game engine?"}
+    A Three.js game engine builds on top of Three.js's rendering to add the systems every game needs — physics, networking, entity management, animations, and tooling. MavonEngine is a Three.js game engine built specifically for browser games, with server-authoritative physics and multiplayer networking built in from the start.
+    ::::
 
-    :::accordion-item{label="How is a Three.js game engine different from vanilla Three.js?"}
-    Three.js is a rendering library — it draws 3D scenes in the browser. A Three.js game engine like MavonEngine adds everything else: an entity system, state machines, physics simulation, real-time multiplayer networking, asset loading, animations, particles, and a level editor. You write less boilerplate and focus on game logic instead.
-    :::
+    ::::home-faq-item{label="How is a Three.js game engine different from vanilla Three.js?"}
+    Three.js is a rendering library — it draws 3D scenes in the browser. MavonEngine adds everything else: an entity system, state machines, physics simulation, real-time multiplayer networking, asset loading, animations, particles, and a level editor.
+    ::::
 
-    :::accordion-item{label="Can you build multiplayer games with Three.js?"}
-    Yes, but Three.js alone has no networking or physics — you have to integrate them yourself. MavonEngine solves this by running Rapier3D physics on the server alongside the client's Three.js scene, with WebRTC-based state synchronization built in. It handles the hard parts of multiplayer so you can focus on gameplay.
-    :::
+    ::::home-faq-item{label="Can you build multiplayer games with Three.js?"}
+    Yes, but Three.js alone has no networking or physics. MavonEngine runs Rapier3D physics on the server alongside the client's Three.js scene, with WebRTC-based state synchronization built in.
+    ::::
 
-    :::accordion-item{label="What is the best Three.js game engine for multiplayer?"}
-    MavonEngine is the only Three.js game engine purpose-built for multiplayer browser games. It runs a server-authoritative physics simulation in parallel with the client's Three.js world, giving you accurate hit detection, anti-cheat, and real-time state sync without building it from scratch.
-    :::
+    ::::home-faq-item{label="What is the best Three.js game engine for multiplayer?"}
+    MavonEngine is purpose-built for multiplayer browser games. It runs a server-authoritative physics simulation in parallel with the client's Three.js world, giving you accurate hit detection, anti-cheat, and real-time state sync without building it from scratch.
+    ::::
 
-    :::accordion-item{label="Does a Three.js game engine handle physics?"}
-    MavonEngine includes Rapier3D physics on both the server and client. The server runs the authoritative simulation — collision, hit detection, spatial queries — while the client uses physics for visual feedback. This split prevents cheating and keeps gameplay consistent across all players.
-    :::
+    ::::home-faq-item{label="Does a Three.js game engine handle physics?"}
+    MavonEngine includes Rapier3D physics on both the server and client. The server runs the authoritative simulation — collision, hit detection, spatial queries — while the client uses physics for visual feedback.
+    ::::
 
-    :::accordion-item{label="Is there a free Three.js game engine?"}
-    Yes. MavonEngine is free and open source. It includes rendering, physics, multiplayer networking, entity management, animations, particles, and a level editor — all at no cost.
-    :::
+    ::::home-faq-item{label="Is there a free Three.js game engine?"}
+    Yes. MavonEngine is free and open source — rendering, physics, multiplayer networking, entity management, animations, particles, and a level editor, all at no cost.
+    ::::
 
-    :::accordion-item{label="Does MavonEngine handle player accounts and logins?"}
-    Yes. The `@mavonengine/auth` plugin adds player accounts with usernames and passwords, sessions, guest play and login rate limiting, and with `@mavonengine/mail` it confirms emails and resets forgotten passwords. The game server checks every connection before the client gets a player, and gives each player a stable account id to key saves, scores and mutes on. Read the [player accounts docs](/tooling/auth).
-    :::
+    ::::home-faq-item{label="Does MavonEngine handle player accounts and logins?"}
+    Yes. The `@mavonengine/auth` plugin adds accounts, sessions, guest play and login rate limiting; with `@mavonengine/mail` it confirms emails and resets passwords. [Player accounts docs](/tooling/auth).
+    ::::
 
-    :::accordion-item{label="Can a Three.js game send emails and notifications to players?"}
-    With MavonEngine, yes. `player.notify(new LevelUp())` reaches the player in the game, by mail and in an inbox they read later. Mail goes on the server's job queue and is tried again when the mail server is down, so the game never waits for it. See [Notifications](/tooling/notifications) and [Mail](/tooling/mail).
-    :::
+    ::::home-faq-item{label="Can a Three.js game send emails and notifications to players?"}
+    With MavonEngine, yes. `player.notify(new LevelUp())` reaches the player in the game, by mail and in an inbox. Mail goes on the server's job queue and is retried when the mail server is down.
+    ::::
 
-    :::accordion-item{label="How do I start building a 3D browser game with Three.js?"}
-    The fastest way is to scaffold a project with `npx @mavonengine/cli create my-game`. This sets up a working Three.js game engine project with physics and multiplayer support in under a minute. Follow the [Getting Started guide](/getting-started) to go from zero to a running game.
-    :::
-  ::
+    ::::home-faq-item{label="How do I start building a 3D browser game with Three.js?"}
+    Scaffold a project with `npx @mavonengine/cli create my-game` — a working project with physics and multiplayer in under a minute. Then follow the [Getting Started guide](/getting-started).
+    ::::
+  :::
 ::
 
-::u-page-section
-  :::u-page-c-t-a
-  ---
-  links:
-    - label: Join the community
-      href: /community
-      trailingIcon: i-lucide-arrow-right
-    - label: View on GitHub
-      to: https://github.com/mavonengine
-      target: _blank
-      variant: subtle
-      icon: i-simple-icons-github
-  title: Build Multiplayer 3D Games Faster
-  description: Server + Client + Physics + Networking + Rendering + Scenes + Animation + Particles + Accounts + Database + Queue + Mail + Plugins + Tooling. All in one package. All working together. All TypeScript.
-  ---
-  :::
+::home-cta{eyebrow="// READY PLAYER ONE"}
+#title
+Build Multiplayer 3D Games [Faster]{.accent}
+
+#description
+Server + Client + Physics + Networking + Rendering + Scenes + Animation + Particles + Accounts + Database + Queue + Mail + Plugins + Tooling. **All in one package. All working together. All TypeScript.**
+
+#links
+:home-button[Join the community]{to="/community" icon="i-lucide-arrow-right"}
+:home-button[View on GitHub]{to="https://github.com/mavonengine" variant="outline" target="_blank"}
 ::

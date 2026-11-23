@@ -4,10 +4,13 @@
     "usecases": "Use Cases",
     "docs": "Docs",
     "community": "Community",
-    "getStarted": "Get started"
+    "getStarted": "Get started",
+    "star": "Star",
+    "home": "MavonEngine home",
+    "primary": "Primary"
   },
   "footer": {
-    "description": "Three.js game engine for single-player and multiplayer browser games. Built with TypeScript, Three.js, Rapier, and WebRTC.",
+    "description": "The Three.js game engine for single & multiplayer browser games.",
     "engine": "Engine",
     "features": "Features",
     "usecases": "Use Cases",
@@ -15,10 +18,21 @@
     "forum": "Forum",
     "demos": "Demos",
     "singlePlayer": "Single Player",
-    "multiplayer": "Multiplayer",
-    "madeWith": "Made with care by the MavonEngine contributors."
+    "multiplayer": "Multiplayer"
   },
   "toc": {
     "editPage": "Edit this page"
+  },
+  "home": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyLabel": "Copy command to clipboard",
+    "chooseCommand": "Choose a command",
+    "plugin": "PLUGIN",
+    "carousel": "Plugins and screenshots",
+    "prev": "Previous slide",
+    "next": "Next slide",
+    "showSlide": "Show slide {n}: {title}",
+    "slideOf": "{n} of {total}: {title}"
   }
 }

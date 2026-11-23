@@ -11,21 +11,29 @@ const docsPath = computed(() => locale.value === 'de' ? '/de/erste-schritte' : '
       <NuxtLink
         :to="localePath('/')"
         class="mavon-logo"
+        :aria-label="t('nav.home')"
       >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#89b4fa"
-          stroke-width="1.5"
-        >
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-        </svg>
+        <span class="mavon-logo-badge">
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#89b4fa"
+            stroke-width="1.6"
+            stroke-linejoin="round"
+          >
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+        </span>
         <span class="mavon-logo-text">MavonEngine</span>
       </NuxtLink>
 
-      <nav class="mavon-nav">
+      <nav
+        class="mavon-nav"
+        :aria-label="t('nav.primary')"
+      >
         <NuxtLink
           :to="localePath('/') + '#features'"
           class="mavon-nav-link"
@@ -45,22 +53,38 @@ const docsPath = computed(() => locale.value === 'de' ? '/de/erste-schritte' : '
       </nav>
 
       <div class="mavon-header-right">
-        <div class="mavon-lang-switcher">
+        <div class="mavon-lang-switcher hide-sm">
           <NuxtLink
             :to="switchLocalePath('en')"
             :class="['mavon-lang-btn', { 'mavon-lang-active': locale === 'en' }]"
+            hreflang="en"
           >EN</NuxtLink>
+          <span
+            class="mavon-lang-sep"
+            aria-hidden="true"
+          >/</span>
           <NuxtLink
             :to="switchLocalePath('de')"
             :class="['mavon-lang-btn', { 'mavon-lang-active': locale === 'de' }]"
+            hreflang="de"
           >DE</NuxtLink>
         </div>
-        <div class="flex items-center">
-          <GitHubStarButton />
-        </div>
+        <a
+          class="mavon-star hide-sm"
+          href="https://github.com/MavonEngine/Core"
+          target="_blank"
+          rel="noopener"
+          aria-label="Star MavonEngine/Core on GitHub"
+        >
+          <UIcon
+            name="i-simple-icons-github"
+            class="size-4"
+          />
+          {{ t('nav.star') }}
+        </a>
         <NuxtLink
           :to="docsPath"
-          class="mavon-cta"
+          class="btn btn-p btn-sm"
         >{{ t('nav.getStarted') }}</NuxtLink>
       </div>
     </div>

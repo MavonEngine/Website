@@ -1,116 +1,94 @@
 <script setup lang="ts">
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const localePath = useLocalePath()
 const year = new Date().getFullYear()
 const { airsportsUrl } = useRuntimeConfig().public
 </script>
 
 <template>
-  <footer class="border-t border-default mt-auto">
-    <UContainer>
-      <div class="py-12 flex flex-col md:flex-row gap-8 md:gap-0">
-        <!-- Brand -->
-        <div class="flex-1">
-          <NuxtLink :to="localePath('/')">
-            <AppLogo class="h-5 w-auto mb-3" />
-          </NuxtLink>
-          <p class="text-sm text-muted max-w-xs leading-relaxed">
-            {{ t('footer.description') }}
-          </p>
-        </div>
-
-        <!-- Link columns -->
-        <div class="flex gap-12 text-sm">
-          <div>
-            <div class="text-xs font-medium uppercase tracking-wider text-muted mb-3">
-              {{ t('footer.engine') }}
-            </div>
-            <ul class="space-y-2">
-              <li>
-                <NuxtLink
-                  :to="localePath('/') + '#features'"
-                  class="text-muted hover:text-default transition-colors"
-                >
-                  {{ t('footer.features') }}
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink
-                  :to="localePath('/') + '#usecases'"
-                  class="text-muted hover:text-default transition-colors"
-                >
-                  {{ t('footer.usecases') }}
-                </NuxtLink>
-              </li>
-              <li class="pt-1">
-                <GitHubStarButton />
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <div class="text-xs font-medium uppercase tracking-wider text-muted mb-3">
-              {{ t('footer.demos') }}
-            </div>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="/demo/paper-train"
-                  class="text-muted hover:text-default transition-colors"
-                >
-                  Paper Train ({{ t('footer.singlePlayer') }})
-                </a>
-              </li>
-              <li>
-                <a
-                  :href="airsportsUrl"
-                  class="text-muted hover:text-default transition-colors"
-                >
-                  BASE Jump ({{ t('footer.multiplayer') }})
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <div class="text-xs font-medium uppercase tracking-wider text-muted mb-3">
-              {{ t('footer.community') }}
-            </div>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="/community"
-                  class="text-muted hover:text-default transition-colors"
-                >
-                  {{ t('footer.forum') }}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/MavonEngine/Core"
-                  target="_blank"
-                  class="text-muted hover:text-default transition-colors"
-                >
-                  GitHub
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom bar -->
-      <div class="py-5 border-t border-default flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted">
-        <span>© {{ year }} MavonEngine.</span>
-        <span>{{ t('footer.madeWith') }}</span>
+  <footer class="mavon-footer">
+    <div class="mavon-footer-wrap flex flex-wrap justify-between gap-12 pt-14 pb-10">
+      <div class="flex flex-col gap-3 max-w-[300px]">
         <NuxtLink
-          v-if="locale === 'de'"
-          :to="localePath('/impressum')"
-          class="hover:text-default transition-colors"
+          :to="localePath('/')"
+          class="flex items-center gap-2.5"
         >
-          Impressum
+          <svg
+            aria-hidden="true"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#89b4fa"
+            stroke-width="1.6"
+            stroke-linejoin="round"
+          >
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+          <span class="font-display font-bold text-[17px] text-[#cdd6f4]">MavonEngine</span>
         </NuxtLink>
+        <p class="m-0 text-sm leading-relaxed text-[#9399b2]">
+          {{ t('footer.description') }}
+        </p>
       </div>
-    </UContainer>
+
+      <div class="flex flex-wrap gap-16 text-sm">
+        <nav
+          :aria-label="t('footer.engine')"
+          class="flex flex-col gap-3"
+        >
+          <div class="mavon-footer-label">
+            {{ t('footer.engine').toUpperCase() }}
+          </div>
+          <NuxtLink :to="localePath('/') + '#features'">
+            {{ t('footer.features') }}
+          </NuxtLink>
+          <NuxtLink :to="localePath('/') + '#usecases'">
+            {{ t('footer.usecases') }}
+          </NuxtLink>
+          <a
+            href="https://github.com/MavonEngine/Core"
+            target="_blank"
+            rel="noopener"
+          >GitHub</a>
+        </nav>
+
+        <nav
+          :aria-label="t('footer.demos')"
+          class="flex flex-col gap-3"
+        >
+          <div class="mavon-footer-label">
+            {{ t('footer.demos').toUpperCase() }}
+          </div>
+          <a href="/demo/paper-train">Paper Train ({{ t('footer.singlePlayer') }})</a>
+          <a :href="airsportsUrl">BASE Jump ({{ t('footer.multiplayer') }})</a>
+        </nav>
+
+        <nav
+          :aria-label="t('footer.community')"
+          class="flex flex-col gap-3"
+        >
+          <div class="mavon-footer-label">
+            {{ t('footer.community').toUpperCase() }}
+          </div>
+          <a href="/community">{{ t('footer.forum') }}</a>
+          <a
+            href="https://github.com/mavonengine"
+            target="_blank"
+            rel="noopener"
+          >GitHub</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="mavon-footer-wrap flex flex-wrap justify-between gap-3 pt-5 pb-7 border-t border-[rgba(137,180,250,0.08)] font-mono text-xs text-[#9399b2]">
+      <span>© {{ year }} MavonEngine</span>
+      <NuxtLink
+        :to="localePath('/impressum')"
+        class="!text-[#9399b2]"
+      >
+        Impressum
+      </NuxtLink>
+    </div>
   </footer>
 </template>

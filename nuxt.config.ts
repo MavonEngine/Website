@@ -149,6 +149,7 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Inter', weights: [400, 500, 600, 700], preload: true, display: 'swap' },
+      { name: 'Space Grotesk', weights: [500, 600, 700], display: 'swap' },
       { name: 'JetBrains Mono', weights: [400, 500], display: 'swap' }
     ]
   },
