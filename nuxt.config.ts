@@ -168,6 +168,13 @@ export default defineNuxtConfig({
     provider: 'iconify'
   },
 
+  image: {
+    // `none` passes the src through untouched, for the /static/ images Caddy serves (see components/content/ProseImg.vue)
+    providers: {
+      none: { provider: 'none' }
+    }
+  },
+
   linkChecker: {
     enabled: false
   },
