@@ -32,7 +32,7 @@
     "minimark": "^0.2.0",
     "nuxt": "4.7.0",
     "nuxt-llms": "0.3.2",
-    "nuxt-og-image": "7.1.1",
+    "nuxt-og-image": "7.2.0",
     "nuxt-umami": "3.2.1",
     "tailwindcss": "4.3.5",
     "ufo": "^1.6.3",
