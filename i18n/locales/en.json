@@ -33,6 +33,9 @@
     "prev": "Previous slide",
     "next": "Next slide",
     "showSlide": "Show slide {n}: {title}",
-    "slideOf": "{n} of {total}: {title}"
+    "slideOf": "{n} of {total}: {title}",
+    "communityEmpty": "Nothing posted yet — be the first.",
+    "communityError": "Couldn't load the latest posts right now.",
+    "communityVisit": "Visit the forum →"
   }
 }

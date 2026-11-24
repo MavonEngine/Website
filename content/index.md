@@ -297,6 +297,21 @@ Frequently Asked Questions
   :::
 ::
 
+::home-section{id="community" index="09" label="COMMUNITY"}
+#title
+Latest from the forum
+
+#description
+Questions, showcases and announcements from people building with MavonEngine.
+
+#aside
+:home-button[Visit the forum]{to="/community" variant="outline" icon="i-lucide-arrow-right"}
+
+#default
+  :::home-community-posts
+  :::
+::
+
 ::home-cta{eyebrow="// READY PLAYER ONE"}
 #title
 Build Multiplayer 3D Games [Faster]{.accent}

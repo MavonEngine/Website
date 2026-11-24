@@ -384,6 +384,21 @@ Häufig gestellte Fragen
   :::
 ::
 
+::home-section{id="community" index="09" label="COMMUNITY"}
+#title
+Neu im Forum
+
+#description
+Fragen, Showcases und Ankündigungen von Leuten, die mit MavonEngine bauen.
+
+#aside
+:home-button[Zum Forum]{to="/community" variant="outline" icon="i-lucide-arrow-right"}
+
+#default
+  :::home-community-posts
+  :::
+::
+
 ::home-cta{eyebrow="// READY PLAYER ONE"}
 #title
 Multiplayer-3D-Spiele [schneller]{.accent} bauen

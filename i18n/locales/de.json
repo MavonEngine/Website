@@ -33,6 +33,9 @@
     "prev": "Vorherige Folie",
     "next": "Nächste Folie",
     "showSlide": "Folie {n} zeigen: {title}",
-    "slideOf": "{n} von {total}: {title}"
+    "slideOf": "{n} von {total}: {title}",
+    "communityEmpty": "Noch keine Beiträge – sei der Erste.",
+    "communityError": "Die neuesten Beiträge konnten gerade nicht geladen werden.",
+    "communityVisit": "Zum Forum →"
   }
 }
