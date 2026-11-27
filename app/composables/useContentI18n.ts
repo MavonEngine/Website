@@ -17,6 +17,7 @@ const EN_TO_DE: Record<string, string> = {
   'level-editor': 'level-editor',
   'physics': 'physik',
   'scenes': 'szenen',
+  'vr': 'vr',
   'tooling': 'werkzeuge',
   'cli': 'cli',
   'plugins': 'plugins',

@@ -7,7 +7,7 @@ seo:
 ---
 badge: OPEN SOURCE · ALL TYPESCRIPT
 command: npx @mavonengine/cli create my-game
-tags: [TypeScript, Three.js, Rapier Physics, WebRTC, GLTF / Draco]
+tags: [TypeScript, Three.js, Rapier Physics, WebRTC, WebXR, GLTF / Draco]
 ---
 #title
 Three.js [Game Engine]{.accent} for Single & Multiplayer
@@ -79,11 +79,11 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
     ::::
 
     ::::home-feature{icon="i-lucide-puzzle" title="Engine Plugins"}
-    Official plugins for chat, accounts, a database, mail, notifications and monitoring, installed with `mavonengine install` or from the dashboard and the editor. `mavonengine build` ships only the assets your game uses.
+    Official plugins for chat, accounts, a database, mail, notifications and monitoring, installed with `mavonengine install` or from the dashboard and the editor. `mavonengine build` ships only the assets your game uses. Plugins can add editor tooling and tools for AI assistants.
     ::::
 
-    ::::home-feature{icon="i-lucide-gamepad-2" title="Gamepad Support"}
-    Xbox, PlayStation and generic controllers out of the box — radial deadzones, layout-aware button labels, analog triggers and rumble.
+    ::::home-feature{icon="i-lucide-glasses" title="VR & Gamepad Support"}
+    Play in a VR headset through WebXR with `game.enableXR()` — controllers, thumbstick movement, a camera rig for third person and labels and menus in VR. Xbox, PlayStation and generic gamepads out of the box, with deadzones, button labels and rumble.
     ::::
 
     ::::home-feature{icon="i-lucide-activity" title="Live Server Monitoring"}
@@ -91,7 +91,7 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
     ::::
 
     ::::home-feature{icon="i-lucide-bot" title="AI Assistant Support (MCP)"}
-    `mavonengine mcp` lets any AI coding assistant inspect your running game: server metrics, scenes and entities, renderer stats, console, screenshots and frame traces — and read these docs.
+    `mavonengine mcp` lets any AI coding assistant inspect your running game: server metrics, scenes and entities, renderer stats, console, screenshots and frame traces — and read these docs. Plugins add their own tools, like the dev inbox, so an assistant can follow a sign-up to its confirmation mail.
     ::::
 
     ::::home-feature{icon="i-lucide-signal" title="Latency Simulation"}
@@ -291,6 +291,10 @@ Frequently Asked Questions
     With MavonEngine, yes. `player.notify(new LevelUp())` reaches the player in the game, by mail and in an inbox. Mail goes on the server's job queue and is retried when the mail server is down.
     ::::
 
+    ::::home-faq-item{label="Can I build VR games with Three.js?"}
+    Yes. MavonEngine plays your game in a VR headset through WebXR, in a Quest's browser or desktop Chrome with a PC headset. The same game runs on desktop and in VR, and the multiplayer template turns it on wherever the browser can. [VR docs](/core-concepts/vr).
+    ::::
+
     ::::home-faq-item{label="How do I start building a 3D browser game with Three.js?"}
     Scaffold a project with `npx @mavonengine/cli create my-game` — a working project with physics and multiplayer in under a minute. Then follow the [Getting Started guide](/getting-started).
     ::::
@@ -317,7 +321,7 @@ Questions, showcases and announcements from people building with MavonEngine.
 Build Multiplayer 3D Games [Faster]{.accent}
 
 #description
-Server + Client + Physics + Networking + Rendering + Scenes + Animation + Particles + Accounts + Database + Queue + Mail + Plugins + Tooling. **All in one package. All working together. All TypeScript.**
+Server + Client + Physics + Networking + Rendering + VR + Scenes + Animation + Particles + Accounts + Database + Queue + Mail + Plugins + Tooling. **All in one package. All working together. All TypeScript.**
 
 #links
 :home-button[Join the community]{to="/community" icon="i-lucide-arrow-right"}

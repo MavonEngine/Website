@@ -7,7 +7,7 @@ seo:
 ---
 badge: OPEN SOURCE · KOMPLETT TYPESCRIPT
 command: npx @mavonengine/cli create my-game
-tags: [TypeScript, Three.js, Rapier-Physik, WebRTC, GLTF / Draco]
+tags: [TypeScript, Three.js, Rapier-Physik, WebRTC, WebXR, GLTF / Draco]
 ---
 #title
 Three.js-[Spieleengine]{.accent} für Single- & Multiplayer
@@ -90,11 +90,11 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
     ::::
 
     ::::home-feature{icon="i-lucide-puzzle" title="Engine-Plugins"}
-    Offizielle Plugins für Chat, Accounts, eine Datenbank, Mail, Benachrichtigungen und Monitoring, installiert mit `mavonengine install` oder aus dem Dashboard und dem Editor. `mavonengine build` liefert nur die Assets aus, die dein Spiel nutzt.
+    Offizielle Plugins für Chat, Accounts, eine Datenbank, Mail, Benachrichtigungen und Monitoring, installiert mit `mavonengine install` oder aus dem Dashboard und dem Editor. `mavonengine build` liefert nur die Assets aus, die dein Spiel nutzt. Plugins können Werkzeuge für den Editor und Tools für KI-Assistenten mitbringen.
     ::::
 
-    ::::home-feature{icon="i-lucide-gamepad-2" title="Gamepad-Unterstützung"}
-    Xbox-, PlayStation- und generische Controller direkt nutzbar — radiale Deadzones, passende Tastenbeschriftungen, analoge Trigger und Vibration.
+    ::::home-feature{icon="i-lucide-glasses" title="VR- & Gamepad-Unterstützung"}
+    Spiele mit `game.enableXR()` über WebXR in einem VR-Headset — Controller, Fortbewegung mit dem Thumbstick, ein Kamera-Rig für Third Person und Labels und Menüs in VR. Xbox-, PlayStation- und generische Gamepads direkt nutzbar, mit Deadzones, Tastenbeschriftungen und Vibration.
     ::::
 
     ::::home-feature{icon="i-lucide-activity" title="Live-Server-Monitoring"}
@@ -102,7 +102,7 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
     ::::
 
     ::::home-feature{icon="i-lucide-bot" title="KI-Assistenten-Unterstützung (MCP)"}
-    `mavonengine mcp` lässt jeden KI-Coding-Assistenten dein laufendes Spiel untersuchen: Server-Metriken, Szenen und Entities, Renderer-Statistiken, Konsole, Screenshots und Frame-Traces — und diese Doku lesen.
+    `mavonengine mcp` lässt jeden KI-Coding-Assistenten dein laufendes Spiel untersuchen: Server-Metriken, Szenen und Entities, Renderer-Statistiken, Konsole, Screenshots und Frame-Traces — und diese Doku lesen. Plugins bringen eigene Tools mit, etwa den Dev-Posteingang, sodass ein Assistent eine Registrierung bis zur Bestätigungsmail verfolgen kann.
     ::::
 
     ::::home-feature{icon="i-lucide-signal" title="Latenzsimulation"}
@@ -378,6 +378,10 @@ Häufig gestellte Fragen
     Mit MavonEngine ja. `player.notify(new LevelUp())` erreicht den Spieler im Spiel, per Mail und in einem Posteingang. Mails kommen auf die Job-Warteschlange des Servers und werden erneut versucht, wenn der Mailserver nicht erreichbar ist.
     ::::
 
+    ::::home-faq-item{label="Kann ich mit Three.js VR-Spiele bauen?"}
+    Ja. MavonEngine spielt dein Spiel über WebXR in einem VR-Headset, im Browser einer Quest oder in Desktop-Chrome mit einem PC-Headset. Dasselbe Spiel läuft auf dem Desktop und in VR, und das Multiplayer-Template schaltet es überall ein, wo der Browser es kann. [VR-Doku](/de/kernkonzepte/vr).
+    ::::
+
     ::::home-faq-item{label="Wie starte ich mit dem Bau eines 3D-Browserspiels mit Three.js?"}
     Erstelle ein Projekt mit `npx @mavonengine/cli create my-game` — ein funktionierendes Projekt mit Physik und Multiplayer in unter einer Minute. Folge dann dem [Erste-Schritte-Leitfaden](/de/erste-schritte).
     ::::
@@ -404,7 +408,7 @@ Fragen, Showcases und Ankündigungen von Leuten, die mit MavonEngine bauen.
 Multiplayer-3D-Spiele [schneller]{.accent} bauen
 
 #description
-Server + Client + Physik + Netzwerk + Rendering + Szenen + Animation + Partikel + Accounts + Datenbank + Warteschlange + Mail + Plugins + Tooling. **Alles in einem Paket. Alles zusammenarbeitend. Alles TypeScript.**
+Server + Client + Physik + Netzwerk + Rendering + VR + Szenen + Animation + Partikel + Accounts + Datenbank + Warteschlange + Mail + Plugins + Tooling. **Alles in einem Paket. Alles zusammenarbeitend. Alles TypeScript.**
 
 #links
 :home-button[Community beitreten]{to="/community" icon="i-lucide-arrow-right"}
