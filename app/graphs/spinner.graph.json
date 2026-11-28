@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "kind": "logic",
+  "name": "spinner",
+  "nodes": [
+    { "id": "about", "type": "graph.comment", "position": [0, -110], "values": { "text": "Every tick: turn around y by spin × delta, then set the scale to 1 + 0.15 × sin(time × pulse). spin and pulse are this graph's parameters.", "width": 760, "height": 80 } },
+    { "id": "tick", "type": "event.tick", "position": [0, 0] },
+    { "id": "rotate", "type": "entity.addRotation", "position": [560, 0] },
+    { "id": "scale", "type": "entity.setScale", "position": [800, 0] },
+    { "id": "spin", "type": "input.parameter", "position": [0, 150], "values": { "name": "spin" } },
+    { "id": "turn", "type": "math.multiply", "position": [210, 110] },
+    { "id": "turn_vec", "type": "vector.combine3", "position": [390, 140] },
+    { "id": "time", "type": "input.time", "position": [0, 330] },
+    { "id": "pulse", "type": "input.parameter", "position": [0, 420], "values": { "name": "pulse" } },
+    { "id": "speedup", "type": "math.multiply", "position": [210, 330] },
+    { "id": "wave", "type": "math.sin", "position": [390, 330] },
+    { "id": "amplitude", "type": "math.multiply", "position": [570, 330], "values": { "b": 0.15 } },
+    { "id": "grow", "type": "math.add", "position": [750, 330], "values": { "b": 1 } }
+  ],
+  "edges": [
+    { "from": { "node": "tick", "port": "then" }, "to": { "node": "rotate", "port": "run" } },
+    { "from": { "node": "rotate", "port": "then" }, "to": { "node": "scale", "port": "run" } },
+    { "from": { "node": "tick", "port": "delta" }, "to": { "node": "turn", "port": "a" } },
+    { "from": { "node": "spin", "port": "value" }, "to": { "node": "turn", "port": "b" } },
+    { "from": { "node": "turn", "port": "result" }, "to": { "node": "turn_vec", "port": "y" } },
+    { "from": { "node": "turn_vec", "port": "vector" }, "to": { "node": "rotate", "port": "amount" } },
+    { "from": { "node": "time", "port": "seconds" }, "to": { "node": "speedup", "port": "a" } },
+    { "from": { "node": "pulse", "port": "value" }, "to": { "node": "speedup", "port": "b" } },
+    { "from": { "node": "speedup", "port": "result" }, "to": { "node": "wave", "port": "x" } },
+    { "from": { "node": "wave", "port": "result" }, "to": { "node": "amplitude", "port": "a" } },
+    { "from": { "node": "amplitude", "port": "result" }, "to": { "node": "grow", "port": "a" } },
+    { "from": { "node": "grow", "port": "result" }, "to": { "node": "scale", "port": "scale" } }
+  ],
+  "parameters": [
+    { "name": "spin", "type": "float", "default": 1.5 },
+    { "name": "pulse", "type": "float", "default": 4 }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "kind": "logic",
+  "name": "lamp",
+  "nodes": [
+    { "id": "about", "type": "graph.comment", "position": [0, -110], "values": { "text": "On `toggle`: flip lit, then grow the lamp when it's on and shrink it back when it's off. Get Variable is read fresh for each step, so Branch sees the new value.", "width": 960, "height": 80 } },
+    { "id": "toggle", "type": "event.message", "position": [0, 0], "values": { "name": "toggle" } },
+    { "id": "lit", "type": "variable.get", "position": [0, 170], "values": { "name": "lit" } },
+    { "id": "flipped", "type": "logic.not", "position": [220, 200] },
+    { "id": "flip", "type": "variable.set", "position": [250, 0], "values": { "name": "lit" } },
+    { "id": "branch", "type": "flow.branch", "position": [490, 0] },
+    { "id": "grow", "type": "entity.setScale", "position": [720, -10], "values": { "scale": [1.6, 1.6, 1.6] } },
+    { "id": "on", "type": "action.log", "position": [960, -10], "values": { "value": "Lamp on" } },
+    { "id": "shrink", "type": "entity.setScale", "position": [720, 150], "values": { "scale": [1, 1, 1] } },
+    { "id": "off", "type": "action.log", "position": [960, 150], "values": { "value": "Lamp off" } }
+  ],
+  "edges": [
+    { "from": { "node": "toggle", "port": "then" }, "to": { "node": "flip", "port": "run" } },
+    { "from": { "node": "flip", "port": "then" }, "to": { "node": "branch", "port": "run" } },
+    { "from": { "node": "branch", "port": "true" }, "to": { "node": "grow", "port": "run" } },
+    { "from": { "node": "branch", "port": "false" }, "to": { "node": "shrink", "port": "run" } },
+    { "from": { "node": "grow", "port": "then" }, "to": { "node": "on", "port": "run" } },
+    { "from": { "node": "shrink", "port": "then" }, "to": { "node": "off", "port": "run" } },
+    { "from": { "node": "lit", "port": "value" }, "to": { "node": "flipped", "port": "value" } },
+    { "from": { "node": "flipped", "port": "result" }, "to": { "node": "flip", "port": "value" } },
+    { "from": { "node": "lit", "port": "value" }, "to": { "node": "branch", "port": "condition" } }
+  ],
+  "parameters": [
+    { "name": "lit", "type": "bool", "default": false }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "kind": "logic",
+  "name": "switch",
+  "nodes": [
+    { "id": "about", "type": "graph.comment", "position": [0, -110], "values": { "text": "Space sends `toggle` to every graph on this side. Cooldown lets it through at most twice a second; presses sooner go to Blocked.", "width": 700, "height": 80 } },
+    { "id": "key", "type": "event.key", "position": [0, 0], "values": { "key": "Space" } },
+    { "id": "cooldown", "type": "flow.cooldown", "position": [230, 0], "values": { "seconds": 0.5 } },
+    { "id": "send", "type": "action.send", "position": [470, 0], "values": { "name": "toggle", "value": 1 } },
+    { "id": "too_soon", "type": "action.log", "position": [470, 150], "values": { "value": "Too soon, cooling down" } }
+  ],
+  "edges": [
+    { "from": { "node": "key", "port": "then" }, "to": { "node": "cooldown", "port": "run" } },
+    { "from": { "node": "cooldown", "port": "then" }, "to": { "node": "send", "port": "run" } },
+    { "from": { "node": "cooldown", "port": "blocked" }, "to": { "node": "too_soon", "port": "run" } }
+  ],
+  "parameters": []
+}

@@ -19,11 +19,16 @@ export default defineContentConfig({
       type: 'page',
       source: 'de/index.md'
     }),
+    // Standalone landing pages (campaigns), each with its own route in app/pages
+    pages: defineCollection({
+      type: 'page',
+      source: 'pages/*.md'
+    }),
     docs: defineCollection({
       type: 'page',
       source: {
         include: '**',
-        exclude: ['index.md', 'de/**']
+        exclude: ['index.md', 'de/**', 'pages/**']
       },
       schema: docSchema
     }),

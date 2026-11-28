@@ -69,6 +69,12 @@ export default defineNuxtConfig({
     '/material-graphs': { redirect: { to: '/core-concepts/material-graphs', statusCode: 301 } }
   },
 
+  build: {
+    // Core's dist imports without file extensions, which Node can't resolve: bundle it (the logic graph demos
+    // render on the server too)
+    transpile: ['@mavonengine/core']
+  },
+
   sourcemap: {
     server: false,
     client: false
@@ -84,7 +90,8 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     prerender: {
       routes: [
-        '/'
+        '/',
+        '/unreal-blueprints-alternative'
       ],
       ignore: [
         '/community',
@@ -96,7 +103,9 @@ export default defineNuxtConfig({
         /^\/de\/prefabs\/(grass|water|creating-a-prefab)(\/.*)?$/,
         /^\/prefabs\/(gras|wasser|prefab-erstellen)(\/.*)?$/,
         '/demo',
-        '/demo/paper-train'
+        '/demo/paper-train',
+        // English-only landing page, linked from the language switcher
+        '/de/unreal-blueprints-alternative'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false

@@ -46,6 +46,10 @@ const { airsportsUrl } = useRuntimeConfig().public
           <NuxtLink :to="localePath('/') + '#usecases'">
             {{ t('footer.usecases') }}
           </NuxtLink>
+          <!-- English only, so not localePath -->
+          <NuxtLink to="/unreal-blueprints-alternative">
+            {{ t('footer.blueprints') }}
+          </NuxtLink>
           <a
             href="https://github.com/MavonEngine/Core"
             target="_blank"

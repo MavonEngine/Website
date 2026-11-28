@@ -17,7 +17,7 @@
     "@iconify-json/lucide": "^1.2.90",
     "@iconify-json/simple-icons": "^1.2.70",
     "@iconify-json/vscode-icons": "^1.2.42",
-    "@mavonengine/core": "0.0.26",
+    "@mavonengine/core": "0.0.28",
     "@nuxt/content": "3.17.0",
     "@nuxt/fonts": "^1.2.0",
     "@nuxt/image": "2.2.1",
@@ -42,7 +42,7 @@
   "devDependencies": {
     "@nuxt/eslint": "1.17.0",
     "eslint": "10.15.0",
-    "three": "0.184.0",
+    "three": "0.187.0",
     "typescript": "6.0.3",
     "vite-plugin-glsl": "1.5.6",
     "vue-tsc": "3.2.6"
