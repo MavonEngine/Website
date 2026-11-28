@@ -70,7 +70,7 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
     ::::
 
     ::::home-feature{icon="i-lucide-monitor" title="Erweitertes 3D-Rendering mit Three.js"}
-    Die volle Leistung von Three.js mit Unterstützung für eigene GLSL-Shader und Debug-Rendering-Modi wie Wireframe-, Armatur- und Physik-Overlays.
+    Die volle Leistung von Three.js auf seinem WebGPU-Renderer (standardmäßig WebGL 2), mit TSL-Node-Materialien, im Editor gebauten [Material-Graphen](/de/kernkonzepte/material-graphen), Post-Processing-Effekten, dem three.js-Inspector und Debug-Modi wie Wireframe-, Armatur- und Physik-Overlays.
     ::::
 
     ::::home-feature{icon="i-lucide-wifi" title="Echtzeit-Multiplayer-Netzwerk"}
@@ -86,7 +86,7 @@ Kein Zusammenstückeln mehr von Bibliotheken. MavonEngine liefert Rendering, Phy
     ::::
 
     ::::home-feature{icon="i-lucide-map" title="Szenen für Client & Server"}
-    Eine JSON-Szenendatei für beide Seiten — der Client baut, was gerendert wird, der Server Collider und Spiellogik. Im Editor speichern und der Server lädt die Karte für alle verbundenen Spieler neu.
+    Eine JSON-Szenendatei für beide Seiten — der Client baut, was gerendert wird, der Server Collider und Spiellogik. Im Editor speichern und der Server lädt die Karte für alle verbundenen Spieler neu. [Logik-Graphen](/de/kernkonzepte/logik-graphen) bringen Spiellogik ohne Code, auf dem Client oder dem Server.
     ::::
 
     ::::home-feature{icon="i-lucide-puzzle" title="Engine-Plugins"}

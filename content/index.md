@@ -59,7 +59,7 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
     ::::
 
     ::::home-feature{icon="i-lucide-monitor" title="Advanced 3D Rendering with Three.js"}
-    The full power of Three.js with custom GLSL shader support and debug rendering modes including wireframe, armature, and physics overlays.
+    The full power of Three.js on its WebGPU renderer (WebGL 2 by default), with TSL node materials, [material graphs](/core-concepts/material-graphs) made in the editor, post-processing effects, the three.js inspector and debug modes including wireframe, armature and physics overlays.
     ::::
 
     ::::home-feature{icon="i-lucide-wifi" title="Real-Time Multiplayer Networking"}
@@ -75,7 +75,7 @@ No more piecing together libraries. MavonEngine ships rendering, physics, networ
     ::::
 
     ::::home-feature{icon="i-lucide-map" title="Scenes Shared by Client & Server"}
-    One JSON scene file for both sides — the client builds what is rendered, the server builds colliders and game logic. Save in the editor and the server reloads the map for every connected player.
+    One JSON scene file for both sides — the client builds what is rendered, the server builds colliders and game logic. Save in the editor and the server reloads the map for every connected player. [Logic graphs](/core-concepts/logic-graphs) add game logic without code, on the client or the server.
     ::::
 
     ::::home-feature{icon="i-lucide-puzzle" title="Engine Plugins"}

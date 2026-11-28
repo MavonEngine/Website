@@ -18,6 +18,8 @@ const EN_TO_DE: Record<string, string> = {
   'physics': 'physik',
   'scenes': 'szenen',
   'vr': 'vr',
+  'logic-graphs': 'logik-graphen',
+  'material-graphs': 'material-graphen',
   'tooling': 'werkzeuge',
   'cli': 'cli',
   'plugins': 'plugins',

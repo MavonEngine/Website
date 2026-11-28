@@ -63,7 +63,10 @@ export default defineNuxtConfig({
     // the demo used to be a page here
     '/demo/BASEJumpGame': { redirect: { to: airsportsUrl, statusCode: 301 } },
     // The forum lives outside the app at /community; Nuxt UI localizes links to it on German pages
-    '/de/community': { redirect: { to: '/community', statusCode: 301 } }
+    '/de/community': { redirect: { to: '/community', statusCode: 301 } },
+    // Short links, e.g. from the multiplayer template's NPC
+    '/logic-graphs': { redirect: { to: '/core-concepts/logic-graphs', statusCode: 301 } },
+    '/material-graphs': { redirect: { to: '/core-concepts/material-graphs', statusCode: 301 } }
   },
 
   sourcemap: {
